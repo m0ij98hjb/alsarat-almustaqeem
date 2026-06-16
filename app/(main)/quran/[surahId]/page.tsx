@@ -1,17 +1,43 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { prisma } from '@/lib/prisma'
+import Link from 'next/link'
 import { toArabicNum } from '@/utils'
 
 interface Props { params: Promise<{ surahId: string }> }
 
-async function getSurah(id: number) {
+interface Ayah {
+  number: number
+  text: string
+  numberInSurah: number
+  page: number
+  juz: number
+}
+
+interface SurahData {
+  number: number
+  name: string
+  englishName: string
+  englishNameTranslation: string
+  revelationType: string
+  numberOfAyahs: number
+  ayahs: Ayah[]
+}
+
+const REVELATION_AR: Record<string, string> = { Meccan: 'مكية', Medinan: 'مدنية' }
+
+function cleanName(name: string) {
+  return name.replace(/^سُورَةُ\s*/, '').replace(/^سورة\s*/, '').trim()
+}
+
+async function getSurahData(id: number): Promise<SurahData | null> {
   try {
-    const surah = await prisma.surah.findUnique({
-      where: { id },
-      include: { ayahs: { orderBy: { numberInSurah: 'asc' } } },
+    const res = await fetch(`https://api.alquran.cloud/v1/surah/${id}/ar.uthmani`, {
+      next: { revalidate: 86400 },
     })
-    return surah
+    if (!res.ok) throw new Error()
+    const data = await res.json()
+    if (data.code === 200) return data.data
+    throw new Error()
   } catch {
     return null
   }
@@ -20,63 +46,63 @@ async function getSurah(id: number) {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { surahId } = await params
   const id = parseInt(surahId)
-  const surah = await getSurah(id)
-  if (!surah) return { title: 'سورة غير موجودة' }
+  if (isNaN(id) || id < 1 || id > 114) return { title: 'سورة غير موجودة' }
+  const surah = await getSurahData(id)
+  if (!surah) return { title: `السورة ${id} — القرآن الكريم` }
+  const name = cleanName(surah.name)
   return {
-    title: `سورة ${surah.nameArabic}`,
-    description: `سورة ${surah.nameArabic} — ${surah.ayahCount} آية — ${surah.revelation}`,
+    title: `سورة ${name} — القرآن الكريم`,
+    description: `${name} — ${REVELATION_AR[surah.revelationType] || surah.revelationType} — ${surah.numberOfAyahs} آية`,
   }
 }
-
-// Demo ayahs for Al-Fatiha when DB is empty
-const FATIHA_AYAHS = [
-  { numberInSurah: 1, textUthmani: 'بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ', page: 1 },
-  { numberInSurah: 2, textUthmani: 'ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ', page: 1 },
-  { numberInSurah: 3, textUthmani: 'ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ', page: 1 },
-  { numberInSurah: 4, textUthmani: 'مَٰلِكِ يَوۡمِ ٱلدِّينِ', page: 1 },
-  { numberInSurah: 5, textUthmani: 'إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ', page: 1 },
-  { numberInSurah: 6, textUthmani: 'ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ', page: 1 },
-  { numberInSurah: 7, textUthmani: 'صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ', page: 1 },
-]
 
 export default async function SurahPage({ params }: Props) {
   const { surahId } = await params
   const id = parseInt(surahId)
   if (isNaN(id) || id < 1 || id > 114) notFound()
 
-  const surah = await getSurah(id)
-  const ayahs = surah?.ayahs.length ? surah.ayahs : (id === 1 ? FATIHA_AYAHS : [])
-  const surahName = surah?.nameArabic || `السورة ${id}`
-  const revelation = surah?.revelation || 'مكية'
-  const ayahCount = surah?.ayahCount || ayahs.length
+  const surah = await getSurahData(id)
 
+  if (!surah) {
+    return (
+      <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy flex items-center justify-center">
+        <div className="text-center p-8">
+          <div className="text-5xl mb-4">⚠️</div>
+          <p className="font-arabic text-xl text-gray-600 dark:text-gray-300 mb-6">
+            تعذّر تحميل السورة، يرجى المحاولة مرة أخرى
+          </p>
+          <Link href="/quran" className="btn-outline-gold px-6 py-2">
+            العودة لقائمة السور
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
+  const surahName = cleanName(surah.name)
   const hasBismillah = id !== 1 && id !== 9
 
   return (
     <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy">
-      {/* Surah header */}
+      {/* Header */}
       <div className="bg-hero-gradient py-16 relative overflow-hidden">
         <div className="absolute inset-0 pattern-overlay opacity-20" />
         <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
           <div className="text-sm text-gold-400 mb-2">السورة {toArabicNum(id)}</div>
           <h1 className="font-arabic text-white text-5xl md:text-6xl font-bold mb-4">{surahName}</h1>
-          <div className="flex items-center justify-center gap-6 text-gray-300 text-sm">
-            <span>📍 {revelation}</span>
-            <span>📖 {toArabicNum(ayahCount)} آية</span>
-            <span>📄 صفحة {toArabicNum(surah?.page || 1)}</span>
+          <p className="text-gray-300 text-sm mb-1 font-latin">{surah.englishName}</p>
+          <div className="flex items-center justify-center gap-6 text-gray-300 text-sm mt-3">
+            <span>📍 {REVELATION_AR[surah.revelationType] || surah.revelationType}</span>
+            <span>📖 {toArabicNum(surah.numberOfAyahs)} آية</span>
           </div>
           {/* Navigation */}
           <div className="flex items-center justify-center gap-4 mt-6">
             {id > 1 && (
-              <a href={`/quran/${id - 1}`} className="btn-outline-gold text-sm px-4 py-2">
-                ← السابقة
-              </a>
+              <Link href={`/quran/${id - 1}`} className="btn-outline-gold text-sm px-4 py-2">← السابقة</Link>
             )}
-            <a href="/quran" className="btn-outline-gold text-sm px-4 py-2">القائمة</a>
+            <Link href="/quran" className="btn-outline-gold text-sm px-4 py-2">القائمة</Link>
             {id < 114 && (
-              <a href={`/quran/${id + 1}`} className="btn-outline-gold text-sm px-4 py-2">
-                التالية →
-              </a>
+              <Link href={`/quran/${id + 1}`} className="btn-outline-gold text-sm px-4 py-2">التالية →</Link>
             )}
           </div>
         </div>
@@ -93,49 +119,46 @@ export default async function SurahPage({ params }: Props) {
 
       {/* Ayahs */}
       <div className="max-w-4xl mx-auto px-4 py-12">
-        {ayahs.length === 0 ? (
-          <div className="text-center py-20 text-gray-400">
-            <div className="text-5xl mb-4">📖</div>
-            <p className="font-arabic text-xl">سيتم تحميل الآيات بعد إعداد قاعدة البيانات</p>
-            <p className="text-sm mt-2">قم بتشغيل: <code className="bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">npm run db:seed</code></p>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {ayahs.map((ayah: any) => (
-              <div
-                key={ayah.numberInSurah}
-                id={`ayah-${ayah.numberInSurah}`}
-                className="card-islamic p-6 group"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  {/* Ayah actions */}
-                  <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="p-1.5 rounded-lg bg-gold-100 dark:bg-gold-900/20 text-gold-600 dark:text-gold-400 hover:bg-gold-200 transition-colors text-xs" title="نسخ">
-                      📋
-                    </button>
-                    <button className="p-1.5 rounded-lg bg-gold-100 dark:bg-gold-900/20 text-gold-600 dark:text-gold-400 hover:bg-gold-200 transition-colors text-xs" title="مشاركة">
-                      🔗
-                    </button>
-                    <a
-                      href={`/quran/${id}/${ayah.numberInSurah}`}
-                      className="p-1.5 rounded-lg bg-gold-100 dark:bg-gold-900/20 text-gold-600 dark:text-gold-400 hover:bg-gold-200 transition-colors text-xs"
-                      title="تفسير"
-                    >
-                      📚
-                    </a>
-                  </div>
-
-                  {/* Ayah text */}
-                  <p className="quran-text flex-1 text-gray-900 dark:text-gray-100">
-                    {ayah.textUthmani}
-                    {' '}
-                    <span className="ayah-num">{toArabicNum(ayah.numberInSurah)}</span>
-                  </p>
+        <div className="space-y-6">
+          {surah.ayahs.map(ayah => (
+            <div
+              key={ayah.numberInSurah}
+              id={`ayah-${ayah.numberInSurah}`}
+              className="card-islamic p-6 group"
+            >
+              <div className="flex items-start justify-between gap-4">
+                {/* Actions */}
+                <div className="flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity pt-1">
+                  <Link
+                    href={`/quran/${id}/${ayah.numberInSurah}`}
+                    className="p-1.5 rounded-lg bg-gold-100 dark:bg-gold-900/20 text-gold-600 dark:text-gold-400 hover:bg-gold-200 transition-colors text-xs"
+                    title="تفسير الآية"
+                  >
+                    📚
+                  </Link>
+                  <div className="text-xs text-gray-400 text-center">ص {ayah.page}</div>
                 </div>
+
+                {/* Ayah text */}
+                <p className="quran-text flex-1 text-gray-900 dark:text-gray-100 leading-loose text-right">
+                  {ayah.text}
+                  {' '}
+                  <span className="ayah-num">{toArabicNum(ayah.numberInSurah)}</span>
+                </p>
               </div>
-            ))}
-          </div>
-        )}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom navigation */}
+        <div className="flex justify-between mt-10 pt-6 border-t border-gold-200/30 dark:border-gold-800/20">
+          {id > 1 ? (
+            <Link href={`/quran/${id - 1}`} className="btn-outline-gold text-sm px-5 py-2">← السورة السابقة</Link>
+          ) : <div />}
+          {id < 114 && (
+            <Link href={`/quran/${id + 1}`} className="btn-outline-gold text-sm px-5 py-2">السورة التالية →</Link>
+          )}
+        </div>
       </div>
     </div>
   )
