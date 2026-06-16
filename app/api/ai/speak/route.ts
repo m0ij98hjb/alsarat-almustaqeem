@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { MsEdgeTTS, OUTPUT_FORMAT } from 'msedge-tts'
 
 // Male Arabic neural voices via Microsoft Edge TTS (no API key required)
 const VOICE = 'ar-SA-HamedNeural' // Saudi Arabic — male, clear, natural
@@ -34,9 +35,6 @@ export async function GET(req: NextRequest) {
   if (!text) return NextResponse.json({ error: 'empty text' }, { status: 400 })
 
   try {
-    // Dynamic import — msedge-tts uses Node.js WebSocket, must stay server-side
-    const { MsEdgeTTS, OUTPUT_FORMAT } = await import('msedge-tts')
-
     const tts = new MsEdgeTTS()
     await tts.setMetadata(VOICE, OUTPUT_FORMAT.AUDIO_24KHZ_96KBITRATE_MONO_MP3)
 

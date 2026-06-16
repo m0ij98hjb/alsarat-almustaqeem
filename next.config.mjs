@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Exclude native Node.js packages from bundling so they run as-is on the server
+  serverExternalPackages: ['msedge-tts', 'ws'],
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '**' }
