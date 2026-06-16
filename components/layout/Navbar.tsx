@@ -3,8 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useSession, signOut } from 'next-auth/react'
-import { Moon, Sun, Search, Menu, X, User, LogOut, Settings, BookOpen } from 'lucide-react'
+import { Moon, Sun, Search, Menu, X } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { cn } from '@/utils'
 
@@ -21,7 +20,6 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname()
-  const { data: session } = useSession()
   const { theme, setTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -87,39 +85,9 @@ export function Navbar() {
             </button>
 
             {/* Auth */}
-            {session ? (
-              <div className="relative group">
-                <button className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white/5 transition-colors">
-                  <div className="w-8 h-8 rounded-full bg-gold-400/20 flex items-center justify-center">
-                    <User size={16} className="text-gold-300" />
-                  </div>
-                </button>
-                <div className="absolute left-0 top-full mt-2 w-48 bg-islamic-navy-mid border border-gold-400/20 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 py-2">
-                  <div className="px-4 py-2 border-b border-gold-400/10">
-                    <p className="text-white text-sm font-medium">{session.user?.name}</p>
-                    <p className="text-gray-400 text-xs">{session.user?.email}</p>
-                  </div>
-                  <Link href="/profile" className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-gold-300 hover:bg-white/5 text-sm transition-colors">
-                    <BookOpen size={14} /> الملف الشخصي
-                  </Link>
-                  {(session.user as any)?.role === 'ADMIN' && (
-                    <Link href="/admin" className="flex items-center gap-2 px-4 py-2 text-gray-300 hover:text-gold-300 hover:bg-white/5 text-sm transition-colors">
-                      <Settings size={14} /> لوحة التحكم
-                    </Link>
-                  )}
-                  <button
-                    onClick={() => signOut()}
-                    className="flex items-center gap-2 w-full px-4 py-2 text-red-400 hover:bg-red-400/10 text-sm transition-colors"
-                  >
-                    <LogOut size={14} /> تسجيل الخروج
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <Link href="/auth/login" className="btn-gold text-xs px-3 py-1.5">
-                دخول
-              </Link>
-            )}
+            <Link href="/auth/login" className="btn-gold text-xs px-3 py-1.5">
+              دخول
+            </Link>
 
             {/* Mobile menu */}
             <button

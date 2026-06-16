@@ -1,16 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
-async function isAdmin(session: any) {
-  return session && ['ADMIN', 'SUPER_ADMIN'].includes(session.user?.role)
-}
-
 export async function GET(req: NextRequest) {
-  const session = await getServerSession(authOptions)
-  if (!await isAdmin(session)) return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
-
   const { searchParams } = new URL(req.url)
   const page  = parseInt(searchParams.get('page')  || '1')
   const limit = parseInt(searchParams.get('limit') || '20')

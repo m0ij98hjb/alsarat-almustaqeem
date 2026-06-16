@@ -1,26 +1,17 @@
-import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
-import { authOptions } from '@/lib/auth'
 import Link from 'next/link'
 
-export default async function AdminLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession(authOptions)
+const navItems = [
+  { href: '/admin',            label: 'لوحة التحكم', icon: '📊' },
+  { href: '/admin/users',      label: 'المستخدمون',   icon: '👥' },
+  { href: '/admin/content',    label: 'المحتوى',       icon: '📝' },
+  { href: '/admin/hadiths',    label: 'الأحاديث',      icon: '📜' },
+  { href: '/admin/adhkar',     label: 'الأذكار',        icon: '📿' },
+  { href: '/admin/fatwas',     label: 'الفتاوى',        icon: '⚖️' },
+  { href: '/admin/analytics',  label: 'الإحصائيات',    icon: '📈' },
+  { href: '/admin/settings',   label: 'الإعدادات',     icon: '⚙️' },
+]
 
-  if (!session || !['ADMIN', 'SUPER_ADMIN'].includes((session.user as any)?.role)) {
-    redirect('/auth/login?callbackUrl=/admin')
-  }
-
-  const navItems = [
-    { href: '/admin',            label: 'لوحة التحكم', icon: '📊' },
-    { href: '/admin/users',      label: 'المستخدمون',   icon: '👥' },
-    { href: '/admin/content',    label: 'المحتوى',       icon: '📝' },
-    { href: '/admin/hadiths',    label: 'الأحاديث',      icon: '📜' },
-    { href: '/admin/adhkar',     label: 'الأذكار',        icon: '📿' },
-    { href: '/admin/fatwas',     label: 'الفتاوى',        icon: '⚖️' },
-    { href: '/admin/analytics',  label: 'الإحصائيات',    icon: '📈' },
-    { href: '/admin/settings',   label: 'الإعدادات',     icon: '⚙️' },
-  ]
-
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex" dir="rtl">
       {/* Sidebar */}
@@ -30,7 +21,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
             <span className="text-gold-400 text-xl">✦</span>
             <span className="font-arabic text-gold-300 font-bold">لوحة التحكم</span>
           </Link>
-          <p className="text-gray-500 text-xs mt-1">{session.user?.name}</p>
+          <p className="text-gray-500 text-xs mt-1">المدير</p>
         </div>
         <nav className="flex-1 p-4 space-y-1">
           {navItems.map(item => (

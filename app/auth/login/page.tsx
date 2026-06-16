@@ -1,45 +1,29 @@
 'use client'
 
 import { Suspense, useState } from 'react'
-import { signIn } from 'next-auth/react'
-import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Loader2 } from 'lucide-react'
 
 function LoginForm() {
-  const router = useRouter()
-  const params = useSearchParams()
-  const callbackUrl = params.get('callbackUrl') || '/'
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [message, setMessage] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    setError('')
-
-    const result = await signIn('credentials', {
-      email,
-      password,
-      redirect: false,
-    })
-
-    if (result?.error) {
-      setError('البريد الإلكتروني أو كلمة المرور غير صحيحة')
+    setTimeout(() => {
+      setMessage('نظام تسجيل الدخول قيد التطوير، يرجى المتابعة قريباً')
       setLoading(false)
-    } else {
-      router.push(callbackUrl)
-    }
+    }, 600)
   }
 
   return (
     <div className="bg-islamic-navy-mid/90 backdrop-blur border border-gold-400/20 rounded-2xl p-8">
-      {error && (
-        <div className="bg-red-900/30 border border-red-500/30 text-red-400 text-sm p-3 rounded-xl mb-6 text-center">
-          {error}
+      {message && (
+        <div className="bg-amber-900/30 border border-amber-500/30 text-amber-400 text-sm p-3 rounded-xl mb-6 text-center font-arabic">
+          {message}
         </div>
       )}
 

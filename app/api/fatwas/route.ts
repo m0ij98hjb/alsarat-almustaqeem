@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 
@@ -41,18 +39,6 @@ export async function GET(req: NextRequest) {
   }
 }
 
-export async function POST(req: NextRequest) {
-  const session = await getServerSession(authOptions)
-  if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
-
-  try {
-    const body = schema.parse(await req.json())
-    const fatwa = await prisma.fatwa.create({
-      data: { ...body, authorId: (session.user as any).id, tags: body.tags || [] },
-    })
-    return NextResponse.json({ success: true, data: fatwa }, { status: 201 })
-  } catch (e: any) {
-    if (e.errors) return NextResponse.json({ error: e.errors[0]?.message }, { status: 400 })
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
-  }
+export async function POST(_req: NextRequest) {
+  return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
 }
