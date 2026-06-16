@@ -140,3 +140,8 @@
   .font-arabic { font-family: var(--font-amiri), 'Amiri', serif; }
   .font-naskh  { font-family: var(--font-noto), 'Noto Naskh Arabic', serif; }
 }
+
+@keyframes soundBar {
+  0%   { transform: scaleY(0.25); opacity: 0.5; }
+  100% { transform: scaleY(1);    opacity: 1; }
+}
