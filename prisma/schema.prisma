@@ -1,0 +1,431 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ===================== USERS & AUTH =====================
+
+enum Role {
+  USER
+  EDITOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  password      String?
+  image         String?
+  role          Role      @default(USER)
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  accounts      Account[]
+  sessions      Session[]
+  bookmarks     Bookmark[]
+  readingProgress ReadingProgress[]
+  fatwas        Fatwa[]
+  questions     Question[]
+  answers       Answer[]
+
+  @@map("users")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// ===================== QURAN =====================
+
+model Surah {
+  id              Int      @id
+  nameArabic      String
+  nameEnglish     String
+  namePronunciation String
+  revelation      String   // Meccan | Medinan
+  ayahCount       Int
+  orderRevealed   Int
+  page            Int
+  juz             Int
+  ruku            Int
+  createdAt       DateTime @default(now())
+
+  ayahs           Ayah[]
+  tafseers        Tafseer[]
+  bookmarks       Bookmark[]
+  readingProgress ReadingProgress[]
+
+  @@map("surahs")
+}
+
+model Ayah {
+  id              Int     @id @default(autoincrement())
+  surahId         Int
+  numberInSurah   Int
+  numberInQuran   Int
+  textArabic      String  @db.Text
+  textSimple      String  @db.Text
+  textUthmani     String  @db.Text
+  page            Int
+  juz             Int
+  hizb            Int
+  ruku            Int
+  manzil          Int
+  sajda           Boolean @default(false)
+  createdAt       DateTime @default(now())
+
+  surah           Surah    @relation(fields: [surahId], references: [id])
+  tafseers        Tafseer[]
+  bookmarks       Bookmark[]
+  wordByWord      WordByWord[]
+
+  @@unique([surahId, numberInSurah])
+  @@map("ayahs")
+}
+
+model WordByWord {
+  id          Int    @id @default(autoincrement())
+  ayahId      Int
+  position    Int
+  arabic      String
+  translation String
+  transliteration String?
+
+  ayah Ayah @relation(fields: [ayahId], references: [id])
+
+  @@map("word_by_word")
+}
+
+model Tafseer {
+  id          Int    @id @default(autoincrement())
+  surahId     Int
+  ayahId      Int?
+  source      String // ibn-kathir | tabari | sa3di | etc
+  text        String @db.Text
+  shortText   String @db.Text
+  createdAt   DateTime @default(now())
+
+  surah Surah @relation(fields: [surahId], references: [id])
+  ayah  Ayah? @relation(fields: [ayahId], references: [id])
+
+  @@map("tafseers")
+}
+
+// ===================== HADITH =====================
+
+enum HadithGrade {
+  SAHIH
+  HASAN
+  DAIF
+  MAWDU
+}
+
+model HadithBook {
+  id          Int     @id @default(autoincrement())
+  nameArabic  String
+  nameEnglish String
+  author      String
+  authorBio   String? @db.Text
+  totalHadiths Int
+  slug        String  @unique
+  createdAt   DateTime @default(now())
+
+  chapters    HadithChapter[]
+  hadiths     Hadith[]
+
+  @@map("hadith_books")
+}
+
+model HadithChapter {
+  id          Int    @id @default(autoincrement())
+  bookId      Int
+  nameArabic  String
+  nameEnglish String
+  chapterNum  Int
+
+  book    HadithBook @relation(fields: [bookId], references: [id])
+  hadiths Hadith[]
+
+  @@map("hadith_chapters")
+}
+
+model Hadith {
+  id          Int         @id @default(autoincrement())
+  bookId      Int
+  chapterId   Int?
+  hadithNum   Int
+  textArabic  String      @db.Text
+  textEnglish String?     @db.Text
+  narrator    String
+  grade       HadithGrade @default(SAHIH)
+  explanation String?     @db.Text
+  tags        String[]
+  createdAt   DateTime    @default(now())
+
+  book      HadithBook    @relation(fields: [bookId], references: [id])
+  chapter   HadithChapter? @relation(fields: [chapterId], references: [id])
+  bookmarks Bookmark[]
+
+  @@map("hadiths")
+}
+
+// ===================== ADHKAR / DUAS =====================
+
+enum AdhkarCategory {
+  MORNING
+  EVENING
+  SLEEP
+  WAKE_UP
+  PRAYER
+  TRAVEL
+  FOOD
+  GENERAL
+  QURAN
+  SUNNAH
+  OCCASIONS
+}
+
+model Dhikr {
+  id          Int            @id @default(autoincrement())
+  category    AdhkarCategory
+  textArabic  String         @db.Text
+  textEnglish String?        @db.Text
+  translation String?        @db.Text
+  count       Int            @default(1)
+  source      String?
+  reference   String?
+  virtue      String?        @db.Text
+  orderNum    Int            @default(0)
+  isActive    Boolean        @default(true)
+  createdAt   DateTime       @default(now())
+
+  bookmarks   Bookmark[]
+
+  @@map("adhkar")
+}
+
+model Dua {
+  id          Int      @id @default(autoincrement())
+  category    String
+  title       String
+  textArabic  String   @db.Text
+  textEnglish String?  @db.Text
+  translation String?  @db.Text
+  source      String?
+  occasion    String?
+  virtue      String?  @db.Text
+  tags        String[]
+  createdAt   DateTime @default(now())
+
+  @@map("duas")
+}
+
+// ===================== PROPHETS =====================
+
+model Prophet {
+  id              Int      @id @default(autoincrement())
+  nameArabic      String
+  nameEnglish     String
+  title           String?
+  period          String?
+  nation          String?
+  miracles        String[]
+  quranMentions   Int      @default(0)
+  orderChronological Int
+  story           String   @db.Text
+  summary         String   @db.Text
+  lessons         String[]
+  imageUrl        String?
+  slug            String   @unique
+  createdAt       DateTime @default(now())
+
+  @@map("prophets")
+}
+
+// ===================== SEERAH =====================
+
+model SeerahEvent {
+  id          Int      @id @default(autoincrement())
+  title       String
+  date        String
+  hijriDate   String?
+  category    String   // birth | revelation | hijra | battle | treaty | death
+  description String   @db.Text
+  importance  String?  @db.Text
+  orderNum    Int
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+
+  @@map("seerah_events")
+}
+
+// ===================== FATWAS =====================
+
+model Fatwa {
+  id          Int      @id @default(autoincrement())
+  question    String   @db.Text
+  answer      String   @db.Text
+  category    String
+  scholar     String?
+  source      String?
+  tags        String[]
+  isVerified  Boolean  @default(false)
+  views       Int      @default(0)
+  authorId    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author      User?    @relation(fields: [authorId], references: [id])
+  bookmarks   Bookmark[]
+
+  @@map("fatwas")
+}
+
+// ===================== Q&A =====================
+
+model Question {
+  id          Int      @id @default(autoincrement())
+  title       String
+  body        String   @db.Text
+  category    String
+  tags        String[]
+  views       Int      @default(0)
+  isAnswered  Boolean  @default(false)
+  isPinned    Boolean  @default(false)
+  authorId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  author      User     @relation(fields: [authorId], references: [id])
+  answers     Answer[]
+
+  @@map("questions")
+}
+
+model Answer {
+  id          Int      @id @default(autoincrement())
+  questionId  Int
+  body        String   @db.Text
+  isAccepted  Boolean  @default(false)
+  votes       Int      @default(0)
+  authorId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  question    Question @relation(fields: [questionId], references: [id])
+  author      User     @relation(fields: [authorId], references: [id])
+
+  @@map("answers")
+}
+
+// ===================== ASMA ALLAH =====================
+
+model AsmaAllah {
+  id          Int      @id @default(autoincrement())
+  number      Int      @unique
+  nameArabic  String
+  nameEnglish String
+  meaning     String
+  explanation String   @db.Text
+  quranRef    String?
+  hadithRef   String?
+  benefits    String?  @db.Text
+  createdAt   DateTime @default(now())
+
+  @@map("asma_allah")
+}
+
+// ===================== BOOKMARKS =====================
+
+model Bookmark {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // ayah | hadith | dhikr | fatwa | dua
+  surahId   Int?
+  ayahId    Int?
+  hadithId  Int?
+  dhikrId   Int?
+  fatwaId   Int?
+  note      String?
+  createdAt DateTime @default(now())
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  surah  Surah?  @relation(fields: [surahId], references: [id])
+  ayah   Ayah?   @relation(fields: [ayahId], references: [id])
+  hadith Hadith? @relation(fields: [hadithId], references: [id])
+  dhikr  Dhikr?  @relation(fields: [dhikrId], references: [id])
+  fatwa  Fatwa?  @relation(fields: [fatwaId], references: [id])
+
+  @@map("bookmarks")
+}
+
+// ===================== READING PROGRESS =====================
+
+model ReadingProgress {
+  id        String   @id @default(cuid())
+  userId    String
+  surahId   Int
+  lastAyah  Int
+  updatedAt DateTime @updatedAt
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  surah Surah @relation(fields: [surahId], references: [id])
+
+  @@unique([userId, surahId])
+  @@map("reading_progress")
+}
+
+// ===================== SITE SETTINGS =====================
+
+model SiteSettings {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+
+  @@map("site_settings")
+}

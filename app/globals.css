@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --gold-primary: #C9A227;
+    --gold-light: #F0D060;
+    --gold-pale: #FBF3DC;
+    --green-dark: #1B4332;
+    --green-mid: #2D6A4F;
+    --navy: #0A1628;
+    --cream: #F8F6F0;
+    --cream-dark: #EDE8DA;
+  }
+
+ 
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply bg-islamic-cream text-gray-900 dark:bg-islamic-navy dark:text-gray-100;
+    font-family: var(--font-noto), 'Noto Naskh Arabic', serif;
+  }
+
+  /* Arabic text rendering */
+  .arabic-text {
+    font-family: var(--font-amiri), 'Amiri', serif;
+    direction: rtl;
+    text-align: right;
+    line-height: 2.2;
+    letter-spacing: 0.02em;
+  }
+
+  .quran-text {
+    font-family: var(--font-amiri), 'Amiri', serif;
+    font-size: 1.5rem;
+    line-height: 2.5;
+    direction: rtl;
+    text-align: justify;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-gray-100 dark:bg-gray-900; }
+  ::-webkit-scrollbar-thumb { @apply bg-gold-400 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-gold-500; }
+}
+
+@layer components {
+  /* Islamic decorative divider */
+  .divider-islamic {
+    @apply flex items-center gap-4 my-8;
+  }
+  .divider-islamic::before,
+  .divider-islamic::after {
+    content: '';
+    @apply flex-1 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent;
+  }
+  .divider-islamic span {
+    @apply text-gold-400 text-xl;
+  }
+
+  /* Islamic pattern overlay */
+  .pattern-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23C9A227' stroke-width='0.5' opacity='0.15'%3E%3Cpolygon points='30,2 38,15 52,15 42,24 46,38 30,30 14,38 18,24 8,15 22,15'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+
+  /* Card variants */
+  .card-islamic {
+    @apply bg-white dark:bg-islamic-navy-mid border border-gold-200/50 dark:border-gold-800/30 rounded-2xl shadow-sm hover:shadow-gold-200/30 dark:hover:shadow-gold-900/20 hover:shadow-md transition-all duration-300;
+  }
+
+  .card-hadith {
+    @apply bg-white dark:bg-gray-900 border-r-4 border-gold-400 rounded-xl p-6 shadow-sm;
+  }
+
+  /* Button variants */
+  .btn-gold {
+    @apply bg-gold-400 hover:bg-gold-300 active:bg-gold-500 text-islamic-navy font-bold py-2.5 px-6 rounded-xl transition-all duration-200 shadow-md hover:shadow-gold-300/40 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2;
+  }
+
+  .btn-outline-gold {
+    @apply border-2 border-gold-400 text-gold-500 dark:text-gold-300 hover:bg-gold-400/10 py-2.5 px-6 rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gold-400 focus:ring-offset-2;
+  }
+
+  .btn-green {
+    @apply bg-islamic-green hover:bg-islamic-green-mid text-white font-bold py-2.5 px-6 rounded-xl transition-all duration-200 shadow-md;
+  }
+
+  /* Ayah number badge */
+  .ayah-num {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-full bg-gold-400/20 text-gold-600 dark:text-gold-300 text-sm font-bold font-arabic;
+  }
+
+  /* Section header */
+  .section-header {
+    @apply text-center mb-12;
+  }
+  .section-header h2 {
+    @apply font-arabic text-3xl md:text-4xl font-bold text-islamic-green dark:text-gold-300 mb-3;
+  }
+  .section-header p {
+    @apply text-gray-600 dark:text-gray-400 text-lg;
+  }
+
+  /* Search input */
+  .search-input {
+    @apply w-full bg-white dark:bg-gray-900 border border-gold-200 dark:border-gold-800/50 rounded-xl px-5 py-3.5 text-right placeholder:text-gray-400 focus:outline-none focus:border-gold-400 focus:ring-2 focus:ring-gold-400/20 transition-all;
+  }
+
+  /* Nav link */
+  .nav-link {
+    @apply text-gray-300 hover:text-gold-300 transition-colors duration-200 text-sm font-medium py-1 px-2 rounded-lg hover:bg-white/5;
+  }
+  .nav-link.active {
+    @apply text-gold-300 bg-gold-400/10;
+  }
+
+  /* Grade badge */
+  .grade-sahih  { @apply bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300 text-xs px-2.5 py-0.5 rounded-full font-bold; }
+  .grade-hasan  { @apply bg-blue-100  text-blue-800  dark:bg-blue-900/30  dark:text-blue-300  text-xs px-2.5 py-0.5 rounded-full font-bold; }
+  .grade-daif   { @apply bg-red-100   text-red-800   dark:bg-red-900/30   dark:text-red-300   text-xs px-2.5 py-0.5 rounded-full font-bold; }
+
+  /* Dhikr counter */
+  .counter-btn {
+    @apply w-16 h-16 rounded-full bg-gold-400 hover:bg-gold-300 active:scale-95 text-islamic-navy font-bold text-2xl transition-all duration-150 shadow-lg hover:shadow-gold-300/50 focus:outline-none;
+  }
+
+  /* Islamic star decoration */
+  .islamic-star::before { content: '✦'; }
+  .islamic-star::after  { content: '✦'; }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .rtl { direction: rtl; }
+  .ltr { direction: ltr; }
+  .font-arabic { font-family: var(--font-amiri), 'Amiri', serif; }
+  .font-naskh  { font-family: var(--font-noto), 'Noto Naskh Arabic', serif; }
+}
