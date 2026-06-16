@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect, useCallback } from 'react'
-import { Send, Loader2, Volume2, VolumeX, Square } from 'lucide-react'
+import { Send, Loader2, Volume2, VolumeX, Square, Wifi, WifiOff } from 'lucide-react'
 
 // ── SVG Avatar ────────────────────────────────────────────────────────────────
 function RashidAvatar({ isSpeaking, size = 'lg' }: { isSpeaking: boolean; size?: 'lg' | 'sm' }) {
@@ -168,80 +168,126 @@ export default function AIPage() {
   const [loading, setLoading] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [speechEnabled, setSpeechEnabled] = useState(true)
+  const [useServerTTS, setUseServerTTS] = useState(true) // tracks if server TTS works
 
   const bottomRef = useRef<HTMLDivElement>(null)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // Cancel speech on unmount
+  // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (typeof window !== 'undefined' && window.speechSynthesis) {
-        window.speechSynthesis.cancel()
-      }
+      audioRef.current?.pause()
+      if (typeof window !== 'undefined') window.speechSynthesis?.cancel()
     }
   }, [])
 
   const stopSpeech = useCallback(() => {
-    if (typeof window !== 'undefined' && window.speechSynthesis) {
-      window.speechSynthesis.cancel()
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      audioRef.current = null
     }
+    if (typeof window !== 'undefined') window.speechSynthesis?.cancel()
     setIsSpeaking(false)
   }, [])
 
-  const speak = useCallback(
-    (text: string) => {
-      if (typeof window === 'undefined' || !window.speechSynthesis || !speechEnabled) return
-
-      window.speechSynthesis.cancel()
+  // Fallback: browser Web Speech API with male voice priority
+  const browserSpeak = useCallback((text: string) => {
+    if (typeof window === 'undefined' || !window.speechSynthesis) {
       setIsSpeaking(false)
+      return
+    }
+    const utt = new SpeechSynthesisUtterance(text)
+    utt.lang = 'ar-SA'
+    utt.rate = 0.82
+    utt.pitch = 0.8 // lower pitch = more masculine
+    utt.volume = 1.0
 
-      // Strip emojis and markdown symbols for cleaner audio
-      const clean = text
-        .replace(/[\u{1F300}-\u{1FFFF}]/gu, '')
-        .replace(/\*\*/g, '')
-        .replace(/#+\s/g, '')
-        .trim()
-
-      if (!clean) return
-
-      const utt = new SpeechSynthesisUtterance(clean)
-      utt.lang = 'ar-SA'
-      utt.rate = 0.88
-      utt.pitch = 1.0
-      utt.volume = 1.0
-
-      const pickVoice = () => {
-        const voices = window.speechSynthesis.getVoices()
-        return (
-          voices.find(v => v.lang === 'ar-SA') ||
-          voices.find(v => v.lang === 'ar-EG') ||
-          voices.find(v => v.lang.startsWith('ar')) ||
-          null
-        )
-      }
-
-      const voice = pickVoice()
-      if (voice) {
-        utt.voice = voice
-      } else {
-        // Chrome loads voices asynchronously on first call
-        window.speechSynthesis.onvoiceschanged = () => {
-          const v = pickVoice()
-          if (v) utt.voice = v
-          window.speechSynthesis.onvoiceschanged = null
-        }
-      }
-
+    const applyVoice = () => {
+      const voices = window.speechSynthesis.getVoices()
+      // Prefer known male Arabic voice names
+      const pick =
+        voices.find(v => /naayf|maged|hamed|shakir|hamdan|bassel|ali|fahed|moaz|laith|hedi|saleh|jamal|omar/i.test(v.name)) ||
+        voices.find(v => v.lang === 'ar-SA') ||
+        voices.find(v => v.lang.startsWith('ar')) ||
+        null
+      if (pick) utt.voice = pick
       utt.onstart = () => setIsSpeaking(true)
       utt.onend = () => setIsSpeaking(false)
       utt.onerror = () => setIsSpeaking(false)
-
       window.speechSynthesis.speak(utt)
+    }
+
+    const voices = window.speechSynthesis.getVoices()
+    if (voices.length) {
+      applyVoice()
+    } else {
+      window.speechSynthesis.onvoiceschanged = () => {
+        window.speechSynthesis.onvoiceschanged = null
+        applyVoice()
+      }
+    }
+  }, [])
+
+  const speak = useCallback(
+    async (text: string) => {
+      if (!speechEnabled) return
+      stopSpeech()
+
+      const clean = text
+        .replace(/[\u{1F300}-\u{1FFFF}]/gu, '')
+        .replace(/[📖📜📿🕌✨🌟🤲🌙]/g, '')
+        .replace(/\*\*/g, '')
+        .replace(/#+\s/g, '')
+        .replace(/\n+/g, ' ')
+        .trim()
+        .substring(0, 800)
+
+      if (!clean) return
+
+      // ── Server TTS: Microsoft Edge Neural Voice (ar-SA-HamedNeural) ──
+      if (useServerTTS) {
+        try {
+          setIsSpeaking(true)
+          const res = await fetch(`/api/ai/speak?text=${encodeURIComponent(clean)}`)
+
+          if (res.ok) {
+            const blob = await res.blob()
+            const url = URL.createObjectURL(blob)
+            const audio = new Audio(url)
+            audioRef.current = audio
+
+            audio.onended = () => {
+              setIsSpeaking(false)
+              URL.revokeObjectURL(url)
+              if (audioRef.current === audio) audioRef.current = null
+            }
+            audio.onerror = () => {
+              setIsSpeaking(false)
+              URL.revokeObjectURL(url)
+              if (audioRef.current === audio) audioRef.current = null
+            }
+            await audio.play()
+            return
+          } else {
+            // Server TTS returned error — switch to browser fallback
+            setUseServerTTS(false)
+            setIsSpeaking(false)
+          }
+        } catch {
+          setUseServerTTS(false)
+          setIsSpeaking(false)
+        }
+      }
+
+      // ── Browser fallback ──
+      browserSpeak(clean)
     },
-    [speechEnabled],
+    [speechEnabled, stopSpeech, browserSpeak, useServerTTS],
   )
 
   const send = async (text?: string) => {
@@ -308,6 +354,17 @@ export default function AIPage() {
               {speechEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
               <span>{speechEnabled ? 'الصوت مفعّل' : 'الصوت مكتوم'}</span>
             </button>
+
+            {/* TTS engine indicator */}
+            {speechEnabled && (
+              <span
+                title={useServerTTS ? 'صوت ذكر عربي عالي الجودة (Microsoft Neural)' : 'صوت المتصفح المحلي'}
+                className={`flex items-center gap-1 text-xs px-2 py-0.5 rounded ${useServerTTS ? 'text-emerald-400/80' : 'text-gray-500'}`}
+              >
+                {useServerTTS ? <Wifi size={11} /> : <WifiOff size={11} />}
+                {useServerTTS ? 'HamedNeural' : 'متصفح'}
+              </span>
+            )}
 
             {/* Stop button — visible only while speaking */}
             {isSpeaking && (
