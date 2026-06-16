@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
 import { HADITH_GRADE_LABELS } from '@/utils'
 
 interface Props { params: Promise<{ book: string }> }
@@ -18,8 +17,8 @@ const BOOKS_META: Record<string, { name: string; author: string; desc: string; i
 const SAMPLE_HADITHS: Record<string, any[]> = {
   bukhari: [
     { id: 1,    num: 1,    text: 'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى', narrator: 'عمر بن الخطاب', grade: 'SAHIH', chapter: 'كتاب بدء الوحي' },
-    { id: 8,    num: 8,    text: 'بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ، وَإِقَامِ الصَّلاَةِ، وَإِيتَاءِ الزَّكَاةِ، وَصَوْمِ رَمَضَانَ، وَحَجِّ الْبَيْتِ', narrator: 'ابن عمر', grade: 'SAHIH', chapter: 'كتاب الإيمان' },
-    { id: 52,   num: 52,   text: 'سَمِعْتُ رَسُولَ اللَّهِ ﷺ يَقُولُ: الحَلاَلُ بَيِّنٌ وَالحَرَامُ بَيِّنٌ', narrator: 'النعمان بن بشير', grade: 'SAHIH', chapter: 'كتاب الإيمان' },
+    { id: 8,    num: 8,    text: 'بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ وَأَنَّ مُحَمَّدًا رَسُولُ اللَّهِ', narrator: 'ابن عمر', grade: 'SAHIH', chapter: 'كتاب الإيمان' },
+    { id: 52,   num: 52,   text: 'الحَلاَلُ بَيِّنٌ وَالحَرَامُ بَيِّنٌ', narrator: 'النعمان بن بشير', grade: 'SAHIH', chapter: 'كتاب الإيمان' },
     { id: 6018, num: 6018, text: 'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ', narrator: 'أبو هريرة', grade: 'SAHIH', chapter: 'كتاب الأدب' },
     { id: 5027, num: 5027, text: 'خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ', narrator: 'عثمان بن عفان', grade: 'SAHIH', chapter: 'كتاب فضائل القرآن' },
   ],
@@ -28,16 +27,6 @@ const SAMPLE_HADITHS: Record<string, any[]> = {
     { id: 2699, num: 70,  text: 'الدِّينُ النَّصِيحَةُ', narrator: 'تميم الداري', grade: 'SAHIH', chapter: 'كتاب الإيمان' },
     { id: 2742, num: 113, text: 'إِنَّ اللَّهَ لاَ يَنْظُرُ إِلَى أَجْسَامِكُمْ وَلاَ إِلَى صُوَرِكُمْ، وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ', narrator: 'أبو هريرة', grade: 'SAHIH', chapter: 'كتاب البر والصلة' },
   ],
-}
-
-async function getBookData(slug: string) {
-  try {
-    const book = await prisma.hadithBook.findUnique({
-      where: { slug },
-      include: { hadiths: { take: 20, include: { chapter: true } } },
-    })
-    return book
-  } catch { return null }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -49,16 +38,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function HadithBookPage({ params }: Props) {
   const { book } = await params
-  const slug = book
-  const meta = BOOKS_META[slug]
+  const meta = BOOKS_META[book]
   if (!meta) notFound()
 
-  const dbBook = await getBookData(slug)
-  const hadiths = dbBook?.hadiths?.length ? dbBook.hadiths : (SAMPLE_HADITHS[slug] || SAMPLE_HADITHS.bukhari)
+  const hadiths = SAMPLE_HADITHS[book] || SAMPLE_HADITHS.bukhari
 
   return (
     <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy">
-      {/* Header */}
       <div className="bg-hero-gradient py-20 relative overflow-hidden">
         <div className="absolute inset-0 pattern-overlay opacity-20" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
@@ -73,21 +59,15 @@ export default async function HadithBookPage({ params }: Props) {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-12">
-        {/* Search within book */}
         <div className="relative mb-10">
-          <input
-            type="text"
-            placeholder={`ابحث في ${meta.name}...`}
-            className="search-input"
-          />
+          <input type="text" placeholder={`ابحث في ${meta.name}...`} className="search-input" />
         </div>
 
-        {/* Hadiths list */}
         <div className="space-y-4">
           {hadiths.map((h: any, i: number) => (
             <Link
               key={i}
-              href={`/hadith/${slug}/${h.id || i + 1}`}
+              href={`/hadith/${book}/${h.id || i + 1}`}
               className="card-hadith block group hover:shadow-lg transition-all"
             >
               <div className="flex items-start justify-between gap-4 mb-3">
@@ -96,13 +76,13 @@ export default async function HadithBookPage({ params }: Props) {
                     {HADITH_GRADE_LABELS[h.grade || 'SAHIH']}
                   </span>
                   {h.chapter && (
-                    <span className="text-xs text-gray-400 hidden sm:inline">{h.chapter?.nameArabic || h.chapter}</span>
+                    <span className="text-xs text-gray-400 hidden sm:inline">{h.chapter}</span>
                   )}
                 </div>
-                <span className="text-xs text-gray-400 font-arabic">#{h.hadithNum || h.num || i + 1}</span>
+                <span className="text-xs text-gray-400 font-arabic">#{h.num || i + 1}</span>
               </div>
               <p className="font-arabic text-xl leading-loose text-gray-900 dark:text-gray-100 mb-3 group-hover:text-islamic-green dark:group-hover:text-gold-300 transition-colors">
-                «{h.textArabic || h.text}»
+                «{h.text}»
               </p>
               <p className="text-sm text-gray-500">
                 رواه: {h.narrator} — {meta.name}
@@ -111,7 +91,6 @@ export default async function HadithBookPage({ params }: Props) {
           ))}
         </div>
 
-        {/* Pagination placeholder */}
         <div className="flex justify-center gap-2 mt-10">
           {[1,2,3,4,5].map(p => (
             <button key={p} className={`w-10 h-10 rounded-xl text-sm font-medium transition-all ${p === 1 ? 'bg-gold-400 text-islamic-navy' : 'bg-white dark:bg-gray-900 border border-gold-200 dark:border-gold-800/50 text-gray-600 dark:text-gray-300 hover:border-gold-400'}`}>

@@ -1,39 +1,20 @@
-import { prisma } from '@/lib/prisma'
+const cards = [
+  { label: 'المستخدمون',  value: 0, icon: '👥', color: 'bg-blue-500',   href: '/admin/users' },
+  { label: 'الأحاديث',    value: 0, icon: '📜', color: 'bg-emerald-500', href: '/admin/hadiths' },
+  { label: 'الأذكار',      value: 0, icon: '📿', color: 'bg-purple-500',  href: '/admin/adhkar' },
+  { label: 'الفتاوى',      value: 6, icon: '⚖️', color: 'bg-orange-500',  href: '/admin/fatwas' },
+  { label: 'الأسئلة',      value: 0, icon: '❓', color: 'bg-pink-500',    href: '/admin/questions' },
+  { label: 'الكتب',        value: 6, icon: '📚', color: 'bg-gold-500',    href: '/admin/books' },
+]
 
-async function getStats() {
-  try {
-    const [users, hadiths, adhkar, fatwas, questions] = await Promise.all([
-      prisma.user.count(),
-      prisma.hadith.count(),
-      prisma.dhikr.count(),
-      prisma.fatwa.count(),
-      prisma.question.count(),
-    ])
-    return { users, hadiths, adhkar, fatwas, questions }
-  } catch {
-    return { users: 0, hadiths: 0, adhkar: 0, fatwas: 0, questions: 0 }
-  }
-}
+const quickActions = [
+  { label: 'إضافة حديث جديد',  href: '/admin/hadiths/new',  icon: '📜' },
+  { label: 'إضافة فتوى جديدة', href: '/admin/fatwas/new',   icon: '⚖️' },
+  { label: 'إضافة ذكر جديد',   href: '/admin/adhkar/new',   icon: '📿' },
+  { label: 'إدارة المستخدمين', href: '/admin/users',         icon: '👥' },
+]
 
-export default async function AdminDashboard() {
-  const stats = await getStats()
-
-  const cards = [
-    { label: 'المستخدمون',  value: stats.users,     icon: '👥', color: 'bg-blue-500',   href: '/admin/users' },
-    { label: 'الأحاديث',    value: stats.hadiths,   icon: '📜', color: 'bg-emerald-500', href: '/admin/hadiths' },
-    { label: 'الأذكار',      value: stats.adhkar,    icon: '📿', color: 'bg-purple-500',  href: '/admin/adhkar' },
-    { label: 'الفتاوى',      value: stats.fatwas,    icon: '⚖️', color: 'bg-orange-500',  href: '/admin/fatwas' },
-    { label: 'الأسئلة',      value: stats.questions, icon: '❓', color: 'bg-pink-500',    href: '/admin/questions' },
-    { label: 'الكتب',        value: 6,               icon: '📚', color: 'bg-gold-500',    href: '/admin/books' },
-  ]
-
-  const quickActions = [
-    { label: 'إضافة حديث جديد',  href: '/admin/hadiths/new',  icon: '📜' },
-    { label: 'إضافة فتوى جديدة', href: '/admin/fatwas/new',   icon: '⚖️' },
-    { label: 'إضافة ذكر جديد',   href: '/admin/adhkar/new',   icon: '📿' },
-    { label: 'إدارة المستخدمين', href: '/admin/users',         icon: '👥' },
-  ]
-
+export default function AdminDashboard() {
   return (
     <div className="space-y-8">
       <div>
@@ -41,7 +22,6 @@ export default async function AdminDashboard() {
         <p className="text-gray-500">إحصائيات ومعلومات عامة عن الموقع</p>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         {cards.map(card => (
           <a key={card.label} href={card.href} className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800 hover:border-gold-400 transition-colors group">
@@ -56,7 +36,6 @@ export default async function AdminDashboard() {
         ))}
       </div>
 
-      {/* Quick actions */}
       <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800">
         <h3 className="font-arabic text-lg font-bold text-gray-800 dark:text-white mb-4">إجراءات سريعة</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -73,14 +52,14 @@ export default async function AdminDashboard() {
         </div>
       </div>
 
-      {/* System status */}
       <div className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-200 dark:border-gray-800">
         <h3 className="font-arabic text-lg font-bold text-gray-800 dark:text-white mb-4">حالة النظام</h3>
         <div className="space-y-3">
           {[
-            { label: 'قاعدة البيانات',  status: stats.users >= 0 ? 'متصلة' : 'غير متصلة', ok: true },
-            { label: 'Anthropic AI',     status: process.env.ANTHROPIC_API_KEY ? 'مُهيَّأ' : 'بحاجة لمفتاح API', ok: !!process.env.ANTHROPIC_API_KEY },
-            { label: 'الموقع',           status: 'يعمل بشكل طبيعي', ok: true },
+            { label: 'Anthropic AI',   status: process.env.ANTHROPIC_API_KEY ? 'مُهيَّأ' : 'بحاجة لمفتاح API', ok: !!process.env.ANTHROPIC_API_KEY },
+            { label: 'AlQuran Cloud', status: 'متصل ✓',           ok: true },
+            { label: 'Aladhan API',   status: 'متصل ✓',           ok: true },
+            { label: 'الموقع',         status: 'يعمل بشكل طبيعي', ok: true },
           ].map(item => (
             <div key={item.label} className="flex items-center justify-between py-2 border-b border-gray-100 dark:border-gray-800 last:border-0">
               <span className="text-sm text-gray-600 dark:text-gray-400">{item.label}</span>

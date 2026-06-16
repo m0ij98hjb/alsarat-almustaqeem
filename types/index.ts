@@ -1,5 +1,3 @@
-export type { Surah, Ayah, Hadith, HadithBook, Dhikr, Dua, Prophet, Fatwa, Question, Answer, AsmaAllah, User, Bookmark } from '@prisma/client'
-
 export interface SurahWithAyahs {
   id: number
   nameArabic: string

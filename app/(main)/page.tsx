@@ -1,24 +1,9 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
 
 export const metadata: Metadata = {
   title: 'الصراط المستقيم — منصة إسلامية شاملة',
   description: 'منصة إسلامية شاملة للقرآن الكريم والسنة النبوية والأذكار والفتاوى',
-}
-
-async function getStats() {
-  try {
-    const [surahCount, hadithCount, dhikrCount, prophetCount] = await Promise.all([
-      prisma.surah.count(),
-      prisma.hadith.count(),
-      prisma.dhikr.count(),
-      prisma.prophet.count(),
-    ])
-    return { surahCount, hadithCount, dhikrCount, prophetCount }
-  } catch {
-    return { surahCount: 114, hadithCount: 30000, dhikrCount: 200, prophetCount: 25 }
-  }
 }
 
 const features = [
@@ -34,23 +19,19 @@ const features = [
 ]
 
 const stats_static = [
-  { num: '6,236',   label: 'آية قرآنية' },
+  { num: '6,236',    label: 'آية قرآنية' },
   { num: '100,000+', label: 'حديث نبوي' },
   { num: '25',       label: 'قصة نبي' },
   { num: '99',       label: 'اسم لله الحسنى' },
 ]
 
-export default async function HomePage() {
-  const stats = await getStats()
-
+export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* ===== HERO ===== */}
       <section className="relative min-h-[90vh] flex items-center justify-center bg-hero-gradient overflow-hidden">
-        {/* Islamic pattern background */}
         <div className="absolute inset-0 pattern-overlay opacity-30" />
 
-        {/* Decorative geometric SVG */}
         <div className="absolute inset-0 flex items-center justify-center opacity-10">
           <svg viewBox="0 0 600 600" className="w-full max-w-2xl" xmlns="http://www.w3.org/2000/svg">
             <g stroke="#C9A227" strokeWidth="0.8" fill="none">
@@ -63,12 +44,10 @@ export default async function HomePage() {
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          {/* Bismillah */}
           <div className="font-arabic text-gold-300 text-3xl md:text-4xl mb-6 opacity-90">
             بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
           </div>
 
-          {/* Title */}
           <h1 className="font-arabic text-white text-5xl md:text-7xl font-bold mb-4 leading-tight">
             <span className="text-gold-400">✦</span>{' '}
             الصراط <span className="text-gold-300">المستقيم</span>{' '}
@@ -79,7 +58,6 @@ export default async function HomePage() {
             منصة إسلامية شاملة للقرآن الكريم والسنة النبوية والعلوم الإسلامية
           </p>
 
-          {/* Ayah */}
           <div className="inline-block border-x-2 border-gold-400 px-8 py-4 mb-10">
             <p className="font-arabic text-gold-200 text-xl md:text-2xl">
               ﴿ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴾
@@ -87,7 +65,6 @@ export default async function HomePage() {
             <p className="text-gray-400 text-sm mt-1">سورة الفاتحة — الآية 6</p>
           </div>
 
-          {/* CTAs */}
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/quran"  className="btn-gold text-base px-8 py-3">📖 القرآن الكريم</Link>
             <Link href="/adhkar" className="btn-outline-gold text-base px-8 py-3">📿 الأذكار</Link>
@@ -95,7 +72,6 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-gold-400 animate-bounce">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />

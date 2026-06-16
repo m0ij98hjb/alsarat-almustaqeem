@@ -1,51 +1,16 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
+import { NextResponse } from 'next/server'
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url)
-  const page  = parseInt(searchParams.get('page')  || '1')
-  const limit = parseInt(searchParams.get('limit') || '20')
-  const book  = searchParams.get('book')
-  const grade = searchParams.get('grade')
+const SAMPLE_HADITHS = [
+  { id: 1,    hadithNum: 1,    textArabic: 'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى', narrator: 'عمر بن الخطاب', grade: 'SAHIH', book: { nameArabic: 'صحيح البخاري', slug: 'bukhari' } },
+  { id: 2,    hadithNum: 8,    textArabic: 'بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ', narrator: 'ابن عمر', grade: 'SAHIH', book: { nameArabic: 'صحيح البخاري', slug: 'bukhari' } },
+  { id: 3,    hadithNum: 6018, textArabic: 'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ', narrator: 'أبو هريرة', grade: 'SAHIH', book: { nameArabic: 'صحيح البخاري', slug: 'bukhari' } },
+  { id: 4,    hadithNum: 45,   textArabic: 'لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ', narrator: 'أنس بن مالك', grade: 'SAHIH', book: { nameArabic: 'صحيح مسلم', slug: 'muslim' } },
+]
 
-  const where: any = {}
-  if (book) {
-    const bookRecord = await prisma.hadithBook.findUnique({ where: { slug: book } })
-    if (bookRecord) where.bookId = bookRecord.id
-  }
-  if (grade) where.grade = grade
-
-  try {
-    const [hadiths, total] = await Promise.all([
-      prisma.hadith.findMany({
-        where,
-        include: { book: true, chapter: true },
-        orderBy: { hadithNum: 'asc' },
-        skip: (page - 1) * limit,
-        take: limit,
-      }),
-      prisma.hadith.count({ where }),
-    ])
-
-    return NextResponse.json({
-      success: true,
-      data: hadiths,
-      total,
-      page,
-      limit,
-      totalPages: Math.ceil(total / limit),
-    })
-  } catch {
-    return NextResponse.json({ success: false, error: 'Server error' }, { status: 500 })
-  }
+export async function GET() {
+  return NextResponse.json({ success: true, data: SAMPLE_HADITHS, total: SAMPLE_HADITHS.length, page: 1, totalPages: 1 })
 }
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json()
-    const hadith = await prisma.hadith.create({ data: body })
-    return NextResponse.json({ success: true, data: hadith }, { status: 201 })
-  } catch {
-    return NextResponse.json({ success: false, error: 'Failed to create' }, { status: 500 })
-  }
+export async function POST() {
+  return NextResponse.json({ success: false, error: 'Not implemented' }, { status: 501 })
 }

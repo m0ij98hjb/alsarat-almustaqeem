@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
-import { prisma } from '@/lib/prisma'
 import { HADITH_GRADE_LABELS } from '@/utils'
 
 export const metadata: Metadata = {
@@ -8,7 +7,7 @@ export const metadata: Metadata = {
   description: 'صحيح البخاري ومسلم والسنن الكبرى كاملةً مع البحث والتصنيف',
 }
 
-const BOOKS_FALLBACK = [
+const BOOKS = [
   { id: 1, slug: 'bukhari',  nameArabic: 'صحيح البخاري', nameEnglish: 'Sahih al-Bukhari', author: 'الإمام البخاري',     totalHadiths: 7563, icon: '📗' },
   { id: 2, slug: 'muslim',   nameArabic: 'صحيح مسلم',    nameEnglish: 'Sahih Muslim',      author: 'الإمام مسلم',       totalHadiths: 5362, icon: '📘' },
   { id: 3, slug: 'abudawud', nameArabic: 'سنن أبي داود', nameEnglish: 'Sunan Abu Dawud',   author: 'الإمام أبو داود',   totalHadiths: 5274, icon: '📕' },
@@ -24,21 +23,9 @@ const SAMPLE_HADITHS = [
   { id: 4, textArabic: 'اتَّقِ اللَّهَ حَيْثُمَا كُنْتَ، وَأَتْبِعِ السَّيِّئَةَ الْحَسَنَةَ تَمْحُهَا، وَخَالِقِ النَّاسَ بِخُلُقٍ حَسَنٍ', narrator: 'أبو ذر الغفاري', grade: 'HASAN', book: 'جامع الترمذي', hadithNum: 1987 },
 ]
 
-async function getBooks() {
-  try {
-    const books = await prisma.hadithBook.findMany({ orderBy: { id: 'asc' } })
-    return books.length ? books.map(b => ({ ...b, icon: '📗' })) : BOOKS_FALLBACK
-  } catch {
-    return BOOKS_FALLBACK
-  }
-}
-
-export default async function HadithPage() {
-  const books = await getBooks()
-
+export default function HadithPage() {
   return (
     <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy">
-      {/* Header */}
       <div className="bg-hero-gradient py-20 relative overflow-hidden">
         <div className="absolute inset-0 pattern-overlay opacity-20" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
@@ -48,10 +35,9 @@ export default async function HadithPage() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-12">
-        {/* Books */}
         <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-6 text-center">كتب الحديث</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-14">
-          {books.map((book: any) => (
+          {BOOKS.map(book => (
             <Link
               key={book.id}
               href={`/hadith/${book.slug}`}
@@ -67,7 +53,6 @@ export default async function HadithPage() {
           ))}
         </div>
 
-        {/* Featured Hadiths */}
         <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-6 text-center">أحاديث مختارة</h2>
         <div className="space-y-4 max-w-4xl mx-auto">
           {SAMPLE_HADITHS.map(h => (
