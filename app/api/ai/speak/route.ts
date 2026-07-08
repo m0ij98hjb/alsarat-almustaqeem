@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { MsEdgeTTS, OUTPUT_FORMAT } from 'msedge-tts'
 
-// Male Arabic neural voices via Microsoft Edge TTS (no API key required)
-const VOICE = 'ar-SA-HamedNeural' // Saudi Arabic — male, clear, natural
+import { ttVoices } from '@/i18n/config'
+
+function getVoice(lang: string): string {
+  return ttVoices[lang as keyof typeof ttVoices] ?? ttVoices.ar
+}
 
 function truncateAtSentence(text: string, maxLen: number): string {
   if (text.length <= maxLen) return text
@@ -18,6 +21,8 @@ function truncateAtSentence(text: string, maxLen: number): string {
 
 export async function GET(req: NextRequest) {
   const raw = req.nextUrl.searchParams.get('text')?.trim() ?? ''
+  const lang = req.nextUrl.searchParams.get('lang') ?? 'ar'
+  const VOICE = getVoice(lang)
   if (!raw) return NextResponse.json({ error: 'text required' }, { status: 400 })
 
   // Clean markdown symbols and emojis

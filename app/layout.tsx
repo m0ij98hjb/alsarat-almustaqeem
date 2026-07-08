@@ -3,6 +3,8 @@ import { Amiri, Noto_Naskh_Arabic, Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import { SessionProvider } from '@/components/providers/SessionProvider'
 import { Toaster } from 'sonner'
+import { getLocale } from 'next-intl/server'
+import { isRTL, type Locale } from '@/i18n/config'
 import './globals.css'
 
 const amiri = Amiri({
@@ -20,49 +22,33 @@ const notoNaskh = Noto_Naskh_Arabic({
 })
 
 const inter = Inter({
-  subsets: ['latin'],
+  subsets: ['latin', 'cyrillic'],
   weight: ['400', '500', '600', '700'],
   variable: '--font-inter',
   display: 'swap',
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: 'الصراط المستقيم — منصة إسلامية شاملة',
-    template: '%s | الصراط المستقيم',
-  },
-  description: 'منصة إسلامية شاملة تضم القرآن الكريم بتفسيره، والأحاديث النبوية الصحيحة، والأذكار، وقصص الأنبياء، والسيرة النبوية',
-  keywords: ['القرآن الكريم', 'الأحاديث النبوية', 'الإسلام', 'الأذكار', 'الأدعية', 'قصص الأنبياء', 'السيرة النبوية'],
-  authors: [{ name: 'الصراط المستقيم' }],
-  creator: 'الصراط المستقيم',
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
-  alternates: { canonical: '/' },
-  openGraph: {
-    type: 'website',
-    locale: 'ar_SA',
-    url: '/',
-    siteName: 'الصراط المستقيم',
-    title: 'الصراط المستقيم — منصة إسلامية شاملة',
-    description: 'منصة إسلامية شاملة تضم القرآن الكريم بتفسيره والأحاديث النبوية والأذكار وقصص الأنبياء',
-    images: [{ url: '/images/og.png', width: 1200, height: 630, alt: 'الصراط المستقيم' }],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'الصراط المستقيم',
-    description: 'منصة إسلامية شاملة للقرآن والسنة النبوية',
-    images: ['/images/og.png'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: { index: true, follow: true },
-  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  let locale = 'ar'
+  let rtl = true
+  try {
+    locale = await getLocale()
+    rtl = isRTL(locale as Locale)
+  } catch {}
+
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
-      <body className={`${amiri.variable} ${notoNaskh.variable} ${inter.variable} font-naskh antialiased`}>
+    <html
+      lang={locale}
+      dir={rtl ? 'rtl' : 'ltr'}
+      suppressHydrationWarning
+      className={`${amiri.variable} ${notoNaskh.variable} ${inter.variable}`}
+    >
+      <body className={`${rtl ? 'font-naskh' : 'font-sans'} antialiased`}>
         <SessionProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {children}

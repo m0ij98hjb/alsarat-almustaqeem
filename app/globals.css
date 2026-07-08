@@ -141,6 +141,20 @@
   .font-naskh  { font-family: var(--font-noto), 'Noto Naskh Arabic', serif; }
 }
 
+/* LTR locales: override Arabic font classes to use Inter */
+html[dir="ltr"] .section-header h2,
+html[dir="ltr"] .font-arabic {
+  font-family: var(--font-inter), sans-serif;
+}
+
+html[dir="ltr"] body {
+  font-family: var(--font-inter), sans-serif;
+}
+
+/* Logical properties for RTL/LTR button padding */
+html[dir="rtl"] .ms-auto { margin-right: auto; margin-left: 0; }
+html[dir="ltr"] .ms-auto { margin-left: auto; margin-right: 0; }
+
 @keyframes soundBar {
   0%   { transform: scaleY(0.25); opacity: 0.5; }
   100% { transform: scaleY(1);    opacity: 1; }

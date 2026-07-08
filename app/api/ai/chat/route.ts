@@ -238,9 +238,12 @@ function matchKnowledge(msg: string): string | null {
 // ── Route handler ──────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
   try {
-    const { message } = await req.json()
-    if (!message?.trim()) {
-      return NextResponse.json({ error: 'الرسالة مطلوبة' }, { status: 400 })
+    const body = await req.json()
+    const message: string = body.message ?? ''
+    const language: string = body.language ?? 'ar'
+
+    if (!message.trim()) {
+      return NextResponse.json({ error: 'message required' }, { status: 400 })
     }
 
     const type = detectType(message)
@@ -260,7 +263,23 @@ export async function POST(req: NextRequest) {
         `جزاك الله خيراً على سؤالك الكريم.\n\nللإجابة الدقيقة أنصحك بـ:\n\n• موسوعة الدرر السنية: dorar.net\n• موقع إسلام ويب: islamweb.net\n• الرجوع لعالم ثقة في بلدك\n\nوالله أعلم، وصلى الله على نبينا محمد وآله وصحبه أجمعين. 🌙`
     }
 
-    return NextResponse.json({ reply })
+    // Prefix a non-Arabic language note so users know the source is Arabic
+    const LANG_NOTES: Record<string, string> = {
+      en: '🌙 Answer based on the Quran and Sunnah:\n\n',
+      zh: '🌙 来自《古兰经》和圣训的回答：\n\n',
+      es: '🌙 Respuesta basada en el Corán y la Sunnah:\n\n',
+      fr: '🌙 Réponse basée sur le Coran et la Sunnah :\n\n',
+      de: '🌙 Antwort basierend auf Quran und Sunnah:\n\n',
+      tr: '🌙 Kuran ve Sünnete dayalı cevap:\n\n',
+      ur: '🌙 قرآن و سنت سے جواب:\n\n',
+      ru: '🌙 Ответ на основе Корана и Сунны:\n\n',
+    }
+
+    const finalReply = language !== 'ar' && LANG_NOTES[language]
+      ? LANG_NOTES[language] + reply
+      : reply
+
+    return NextResponse.json({ reply: finalReply })
   } catch (error) {
     console.error('AI chat error:', error)
     return NextResponse.json(

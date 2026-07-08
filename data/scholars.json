@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "الشيخ أحمد بن محمد",
+    "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
+    "about": "متخصص في التفسير وشرح الأحكام، يقدم دروسًا مبسطة للمسلمين في مختلف الفروع.",
+    "specialty": "التفسير والأحكام",
+    "country": "السعودية",
+    "website": "https://example.com",
+    "contact": "mailto:info@example.com"
+  },
+  {
+    "id": 2,
+    "name": "الدكتور سليم الزهراني",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
+    "about": "يُشارك في قضايا الأسرة والتربية الإسلامية ويفضّل التحدث بلغة واضحة وميسرة.",
+    "specialty": "الأسرة والتربية",
+    "country": "السعودية",
+    "website": "https://example.com",
+    "contact": ""
+  },
+  {
+    "id": 3,
+    "name": "الشيخ يوسف النجار",
+    "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+    "about": "يهتم بالشرح المختصر للأحاديث والآداب اليومية مع إبراز التطبيقات العملية.",
+    "specialty": "الحديث والآداب",
+    "country": "مصر",
+    "website": "https://example.com",
+    "contact": "https://wa.me/123456789"
+  }
+]

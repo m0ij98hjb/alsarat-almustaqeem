@@ -1,0 +1,268 @@
+﻿{
+    "meta":  {
+                 "siteName":  "正道",
+                 "siteDesc":  "综合伊斯兰平台，包含古兰经、圣训和伊斯兰科学"
+             },
+    "nav":  {
+                "quran":  "古兰经",
+                "hadith":  "圣训",
+                "adhkar":  "念诵",
+                "prophets":  "先知",
+                "seerah":  "先知传记",
+                "fatawa":  "法特瓦",
+                "asmaAllah":  "真主名号",
+                "prayerTimes":  "礼拜时间",
+                "search":  "搜索",
+                "login":  "登录",
+                "toggleTheme":  "切换主题",
+                "openMenu":  "打开菜单",
+                "closeMenu":  "关闭菜单",
+                "language":  "语言"
+            },
+    "footer":  {
+                   "siteName":  "正道",
+                   "siteDesc":  "综合伊斯兰平台，包含古兰经、圣训和伊斯兰科学",
+                   "sections":  {
+                                    "quranHadith":  "古兰经与圣训",
+                                    "adhkarDua":  "念诵与祈祷",
+                                    "islamicSciences":  "伊斯兰科学",
+                                    "services":  "服务"
+                                },
+                   "links":  {
+                                 "quran":  "古兰经",
+                                 "tafsir":  "注释",
+                                 "bukhari":  "布哈里圣训",
+                                 "muslim":  "穆斯林圣训",
+                                 "morningAdhkar":  "晨间念诵",
+                                 "eveningAdhkar":  "晚间念诵",
+                                 "hisnMuslim":  "穆斯林堡垒",
+                                 "travelAdhkar":  "旅行念诵",
+                                 "prophetsStories":  "先知故事",
+                                 "seerah":  "先知传记",
+                                 "asmaAllah":  "真主99名号",
+                                 "fatawa":  "法特瓦",
+                                 "prayerTimes":  "礼拜时间",
+                                 "search":  "综合搜索",
+                                 "aiAssistant":  "伊斯兰助手",
+                                 "profile":  "我的主页"
+                             },
+                   "privacy":  "隐私政策",
+                   "terms":  "条款与条件",
+                   "contact":  "联系我们",
+                   "copyright":  "版权所有"
+               },
+    "home":  {
+                 "bismillah":  "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+                 "title":  "正道",
+                 "subtitle":  "综合伊斯兰平台，包含古兰经、先知圣训和伊斯兰科学",
+                 "ayah":  "﴿ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴾",
+                 "surahRef":  "法提哈章 — 第6节",
+                 "btnQuran":  "📖 古兰经",
+                 "btnAdhkar":  "📿 念诵",
+                 "btnAI":  "🤖 AI助手",
+                 "stats":  {
+                               "verses":  "古兰经节",
+                               "hadiths":  "圣训",
+                               "prophets":  "先知故事",
+                               "names":  "真主名号"
+                           },
+                 "sectionTitle":  "网站栏目",
+                 "sectionDesc":  "穆斯林所需的一切",
+                 "features":  {
+                                  "quran":  {
+                                                "title":  "古兰经",
+                                                "desc":  "完整古兰经，含注释和节搜索",
+                                                "badge":  "114章"
+                                            },
+                                  "hadith":  {
+                                                 "title":  "先知圣训",
+                                                 "desc":  "布哈里、穆斯林及主要圣训集",
+                                                 "badge":  "6册"
+                                             },
+                                  "adhkar":  {
+                                                 "title":  "念诵与祈祷",
+                                                 "desc":  "完整穆斯林堡垒——晨、晚、睡前念诵",
+                                                 "badge":  "200+念诵"
+                                             },
+                                  "prophets":  {
+                                                   "title":  "先知故事",
+                                                   "desc":  "古兰经中所有先知的故事",
+                                                   "badge":  "25位先知"
+                                               },
+                                  "seerah":  {
+                                                 "title":  "先知传记",
+                                                 "desc":  "先知ﷺ的完整生平——从诞生到归真",
+                                                 "badge":  "完整"
+                                             },
+                                  "asmaAllah":  {
+                                                    "title":  "真主99名号",
+                                                    "desc":  "99个名号的含义和美德解释",
+                                                    "badge":  "99名号"
+                                                },
+                                  "fatawa":  {
+                                                 "title":  "伊斯兰法特瓦",
+                                                 "desc":  "法特瓦数据库，带智能搜索引擎",
+                                                 "badge":  "有据可查"
+                                             },
+                                  "prayerTimes":  {
+                                                      "title":  "礼拜时间",
+                                                      "desc":  "全球所有城市的准确礼拜时间",
+                                                      "badge":  "精确"
+                                                  },
+                                  "ai":  {
+                                             "title":  "AI伊斯兰助手",
+                                             "desc":  "提问任何问题——从古兰经和圣训中回答",
+                                             "badge":  "AI"
+                                         }
+                              },
+                 "dailyAyah":  "每日经文",
+                 "dailyAyahRef":  "离婚章 — 第2-3节",
+                 "readFullSurah":  "阅读完整章节",
+                 "aiTitle":  "AI伊斯兰助手「拉西德」",
+                 "aiDesc":  "提问任何伊斯兰问题，助手将从神圣古兰经和真实先知圣训中回答",
+                 "aiBtn":  "开始对话"
+             },
+    "quran":  {
+                  "title":  "古兰经",
+                  "subtitle":  "真主降示给先知穆罕默德ﷺ的启示 — 114章 — 6236节",
+                  "searchPlaceholder":  "按名称或编号搜索章节...",
+                  "resultsCount":  "{count} 个结果",
+                  "noResults":  "未找到该名称的章节",
+                  "clearSearch":  "清除搜索",
+                  "surahsLabel":  "章",
+                  "versesLabel":  "节",
+                  "ajzaLabel":  "部",
+                  "ayahsCount":  "节",
+                  "meccan":  "麦加章",
+                  "medinan":  "麦地那章",
+                  "backToList":  "返回苏拉列表",
+                  "copy":  "复制",
+                  "showTranslation":  "显示翻译",
+                  "modeList":  "逐节",
+                  "modeReading":  "流式阅读",
+                  "page":  "页码",
+                  "copied":  "已复制",
+                  "prevSurah":  "上一章",
+                  "juz":  "茹兹",
+                  "nextSurah":  "下一章"
+              },
+    "hadith":  {
+                   "title":  "高贵的先知圣训",
+                   "subtitle":  "قَالَ رَسُولُ اللَّهِ ﷺ",
+                   "booksTitle":  "圣训册",
+                   "selectedTitle":  "精选圣训",
+                   "hadithsUnit":  "圣训",
+                   "narrator":  "传述者",
+                   "grades":  {
+                                  "SAHIH":  "正确",
+                                  "HASAN":  "良好",
+                                  "DAIF":  "薄弱",
+                                  "MAWDU":  "伪造"
+                              }
+               },
+    "adhkar":  {
+                   "title":  "念诵与祈祷",
+                   "subtitle":  "穆斯林堡垒——先知ﷺ传承的念诵",
+                   "source":  "来源",
+                   "of":  "/",
+                   "categories":  {
+                                      "MORNING":  "晨间念诵",
+                                      "EVENING":  "晚间念诵",
+                                      "SLEEP":  "睡前念诵",
+                                      "WAKE_UP":  "醒后念诵",
+                                      "PRAYER":  "礼拜念诵",
+                                      "TRAVEL":  "旅行念诵",
+                                      "FOOD":  "饮食念诵",
+                                      "GENERAL":  "一般念诵"
+                                  }
+               },
+    "prophets":  {
+                     "title":  "先知与使者的故事",
+                     "ayah":  "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
+                     "inQuran":  "× 在古兰经中"
+                 },
+    "seerah":  {
+                   "title":  "先知传记",
+                   "subtitle":  "真主的使者穆罕默德ﷺ",
+                   "period":  "公元570年 — 632年 | 23年先知使命",
+                   "age":  "年享年ﷺ",
+                   "prophethood":  "年先知使命",
+                   "battles":  "次战役",
+                   "closingAyahRef":  "盟军章 — 第21节"
+               },
+    "ai":  {
+               "title":  "拉西德",
+               "subtitle":  "AI伊斯兰助手——从古兰经和圣训中回答",
+               "online":  "在线",
+               "soundOn":  "声音已开",
+               "soundOff":  "声音已关",
+               "serverTTS":  "神经语音",
+               "browserTTS":  "浏览器",
+               "stop":  "停止",
+               "listen":  "🔊 收听",
+               "placeholder":  "在此输入您的伊斯兰问题...",
+               "disclaimer":  "助手基于古兰经和先知圣训回答——请始终核实来源",
+               "greeting":  "和平be upon you（赛俩目）🌙\n\n我是「拉西德」，您的AI伊斯兰助手。我从神圣古兰经和真实先知圣训中回答您的问题。\n\n今天我可以如何帮助您？",
+               "errorGeneral":  "抱歉，发生了错误。请重试。",
+               "errorConnection":  "抱歉，发生了连接错误。请确保API密钥已配置。",
+               "userAvatar":  "我",
+               "quickQuestions":  [
+                                      "伊斯兰的五大支柱是什么？",
+                                      "诵读古兰经有何美德？",
+                                      "信仰的六大支柱是什么？",
+                                      "解释认主独一的含义",
+                                      "伊斯兰中礼拜的规定是什么？",
+                                      "求饶恕有何美德？"
+                                  ]
+           },
+    "auth":  {
+                 "loginTitle":  "登录",
+                 "loginSubtitle":  "登录您的账户",
+                 "registerTitle":  "创建新账户",
+                 "email":  "电子邮件",
+                 "password":  "密码",
+                 "confirmPassword":  "确认密码",
+                 "name":  "全名",
+                 "namePlaceholder":  "您的姓名",
+                 "passwordPlaceholder":  "至少8个字符",
+                 "confirmPlaceholder":  "重新输入密码",
+                 "loginBtn":  "登录",
+                 "registerBtn":  "创建账户",
+                 "loggingIn":  "登录中...",
+                 "registering":  "创建中...",
+                 "noAccount":  "还没有账户？",
+                 "registerLink":  "创建新账户",
+                 "hasAccount":  "已有账户？",
+                 "loginLink":  "登录",
+                 "loginMsg":  "登录系统正在开发中，请稍后再试",
+                 "loading":  "加载中...",
+                 "passwordMismatch":  "密码不匹配",
+                 "registerError":  "创建账户时发生错误",
+                 "connectionError":  "连接错误"
+             },
+    "common":  {
+                   "siteName":  "正道",
+                   "loading":  "加载中...",
+                   "error":  "发生错误",
+                   "retry":  "重试",
+                   "back":  "返回",
+                   "backToSite":  "返回网站",
+                   "admin":  "管理员",
+                   "dashboard":  "仪表板"
+               },
+    "admin":  {
+                  "title":  "正道管理",
+                  "panel":  "控制面板",
+                  "nav":  {
+                              "dashboard":  "仪表板",
+                              "users":  "用户",
+                              "content":  "内容",
+                              "hadiths":  "圣训",
+                              "adhkar":  "念诵",
+                              "fatwas":  "法特瓦",
+                              "analytics":  "分析",
+                              "settings":  "设置"
+                          },
+                  "backToSite":  "返回网站"
+              }
+}

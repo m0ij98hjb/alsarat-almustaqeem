@@ -1,0 +1,268 @@
+﻿{
+    "meta":  {
+                 "siteName":  "As-Sirat Al-Mustaqeem",
+                 "siteDesc":  "Kutsal Kuran, Peygamber Sünneti ve İslam ilimleri için kapsamlı bir İslam platformu"
+             },
+    "nav":  {
+                "quran":  "Kutsal Kuran",
+                "hadith":  "Hadisler",
+                "adhkar":  "Zikirler",
+                "prophets":  "Peygamberler",
+                "seerah":  "Siyer",
+                "fatawa":  "Fetvalar",
+                "asmaAllah":  "Allah\u0027ın İsimleri",
+                "prayerTimes":  "Namaz Vakitleri",
+                "search":  "Ara",
+                "login":  "Giriş",
+                "toggleTheme":  "Tema Değiştir",
+                "openMenu":  "Menüyü aç",
+                "closeMenu":  "Menüyü kapat",
+                "language":  "Dil"
+            },
+    "footer":  {
+                   "siteName":  "As-Sirat Al-Mustaqeem",
+                   "siteDesc":  "Kutsal Kuran, Peygamber Sünneti ve İslam ilimleri için kapsamlı bir İslam platformu",
+                   "sections":  {
+                                    "quranHadith":  "Kuran ve Hadis",
+                                    "adhkarDua":  "Zikirler ve Dualar",
+                                    "islamicSciences":  "İslam İlimleri",
+                                    "services":  "Hizmetler"
+                                },
+                   "links":  {
+                                 "quran":  "Kutsal Kuran",
+                                 "tafsir":  "Tefsir",
+                                 "bukhari":  "Sahih Buhari",
+                                 "muslim":  "Sahih Müslim",
+                                 "morningAdhkar":  "Sabah Zikirleri",
+                                 "eveningAdhkar":  "Akşam Zikirleri",
+                                 "hisnMuslim":  "Hisnu\u0027l-Müslim",
+                                 "travelAdhkar":  "Yolculuk Zikirleri",
+                                 "prophetsStories":  "Peygamber Kıssaları",
+                                 "seerah":  "Peygamber Biyografisi",
+                                 "asmaAllah":  "Allah\u0027ın 99 İsmi",
+                                 "fatawa":  "Fetvalar",
+                                 "prayerTimes":  "Namaz Vakitleri",
+                                 "search":  "Kapsamlı Arama",
+                                 "aiAssistant":  "İslam Asistanı",
+                                 "profile":  "Profilim"
+                             },
+                   "privacy":  "Gizlilik Politikası",
+                   "terms":  "Kullanım Şartları",
+                   "contact":  "İletişim",
+                   "copyright":  "Tüm hakları saklıdır"
+               },
+    "home":  {
+                 "bismillah":  "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+                 "title":  "As-Sirat Al-Mustaqeem",
+                 "subtitle":  "Kutsal Kuran, Peygamber Sünneti ve İslam ilimleri için kapsamlı bir İslam platformu",
+                 "ayah":  "﴿ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴾",
+                 "surahRef":  "Fatiha Suresi — 6. Ayet",
+                 "btnQuran":  "📖 Kutsal Kuran",
+                 "btnAdhkar":  "📿 Zikirler",
+                 "btnAI":  "🤖 YZ Asistanı",
+                 "stats":  {
+                               "verses":  "Kuran Ayeti",
+                               "hadiths":  "Hadis",
+                               "prophets":  "Peygamber Kıssası",
+                               "names":  "Allah\u0027ın İsmi"
+                           },
+                 "sectionTitle":  "Site Bölümleri",
+                 "sectionDesc":  "Bir Müslümanın ihtiyaç duyduğu her şey tek bir yerde",
+                 "features":  {
+                                  "quran":  {
+                                                "title":  "Kutsal Kuran",
+                                                "desc":  "Tefsir ve ayet aramasıyla tam Kuran",
+                                                "badge":  "114 Sure"
+                                            },
+                                  "hadith":  {
+                                                 "title":  "Peygamber Hadisleri",
+                                                 "desc":  "Buhari, Müslim ve büyük Sünenler sınıflandırmalı",
+                                                 "badge":  "6 Kitap"
+                                             },
+                                  "adhkar":  {
+                                                 "title":  "Zikirler ve Dualar",
+                                                 "desc":  "Tam Hisnu\u0027l-Müslim — sabah, akşam ve uyku zikirleri",
+                                                 "badge":  "200+ Zikir"
+                                             },
+                                  "prophets":  {
+                                                   "title":  "Peygamber Kıssaları",
+                                                   "desc":  "Kuran\u0027da geçen tüm peygamberlerin kıssaları",
+                                                   "badge":  "25 Peygamber"
+                                               },
+                                  "seerah":  {
+                                                 "title":  "Peygamber Biyografisi",
+                                                 "desc":  "Hz. Peygamber\u0027in ﷺ doğumdan vefata tam hayatı",
+                                                 "badge":  "Tam"
+                                             },
+                                  "asmaAllah":  {
+                                                    "title":  "Allah\u0027ın 99 İsmi",
+                                                    "desc":  "99 ismin anlam ve faziletleriyle açıklaması",
+                                                    "badge":  "99 İsim"
+                                                },
+                                  "fatawa":  {
+                                                 "title":  "İslami Fetvalar",
+                                                 "desc":  "Akıllı arama motoruyla fetva veritabanı",
+                                                 "badge":  "Belgelenmiş"
+                                             },
+                                  "prayerTimes":  {
+                                                      "title":  "Namaz Vakitleri",
+                                                      "desc":  "Dünyanın tüm şehirleri için doğru namaz vakitleri",
+                                                      "badge":  "Doğru"
+                                                  },
+                                  "ai":  {
+                                             "title":  "YZ İslam Asistanı",
+                                             "desc":  "Her soruyu sor — Kuran ve Sünnet\u0027ten cevaplar",
+                                             "badge":  "YZ"
+                                         }
+                              },
+                 "dailyAyah":  "Günün Ayeti",
+                 "dailyAyahRef":  "Talak Suresi — 2-3. Ayetler",
+                 "readFullSurah":  "Tam Sureyi oku",
+                 "aiTitle":  "YZ İslam Asistanı \"Er-Reşid\"",
+                 "aiDesc":  "Her İslami soruyu sor, asistan Kutsal Kuran ve sahih Peygamber Sünneti\u0027nden cevap verir",
+                 "aiBtn":  "Konuşmayı Başlat"
+             },
+    "quran":  {
+                  "title":  "Kutsal Kuran",
+                  "subtitle":  "Allah\u0027ın Hz. Muhammed\u0027e ﷺ indirdiği kelam — 114 Sure — 6.236 Ayet",
+                  "searchPlaceholder":  "Sure adı veya numarasıyla ara...",
+                  "resultsCount":  "{count} sonuç",
+                  "noResults":  "Bu isimde sure bulunamadı",
+                  "clearSearch":  "Aramayı temizle",
+                  "surahsLabel":  "Sure",
+                  "versesLabel":  "Ayet",
+                  "ajzaLabel":  "Cüz",
+                  "ayahsCount":  "ayet",
+                  "meccan":  "Mekki",
+                  "medinan":  "Medeni",
+                  "backToList":  "Listeye dön",
+                  "copy":  "Kopyala",
+                  "showTranslation":  "Çeviriyi göster",
+                  "modeList":  "Ayet ayet",
+                  "modeReading":  "Akıcı metin",
+                  "page":  "Sayfa",
+                  "copied":  "Kopyalandı",
+                  "prevSurah":  "Önceki sure",
+                  "juz":  "Cüz",
+                  "nextSurah":  "Sonraki sure"
+              },
+    "hadith":  {
+                   "title":  "Şerefli Peygamber Hadisleri",
+                   "subtitle":  "قَالَ رَسُولُ اللَّهِ ﷺ",
+                   "booksTitle":  "Hadis Kitapları",
+                   "selectedTitle":  "Seçilmiş Hadisler",
+                   "hadithsUnit":  "hadis",
+                   "narrator":  "Rivayet eden",
+                   "grades":  {
+                                  "SAHIH":  "Sahih",
+                                  "HASAN":  "Hasen",
+                                  "DAIF":  "Zayıf",
+                                  "MAWDU":  "Mevzu"
+                              }
+               },
+    "adhkar":  {
+                   "title":  "Zikirler ve Dualar",
+                   "subtitle":  "Hisnu\u0027l-Müslim — Hz. Peygamber\u0027den ﷺ nakledilen zikirler",
+                   "source":  "Kaynak",
+                   "of":  "/",
+                   "categories":  {
+                                      "MORNING":  "Sabah Zikirleri",
+                                      "EVENING":  "Akşam Zikirleri",
+                                      "SLEEP":  "Uyku Zikirleri",
+                                      "WAKE_UP":  "Uyanma Zikirleri",
+                                      "PRAYER":  "Namaz Zikirleri",
+                                      "TRAVEL":  "Yolculuk Zikirleri",
+                                      "FOOD":  "Yemek Zikirleri",
+                                      "GENERAL":  "Genel Zikirler"
+                                  }
+               },
+    "prophets":  {
+                     "title":  "Peygamberler ve Resuller\u0027in Kıssaları",
+                     "ayah":  "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
+                     "inQuran":  "× Kuran\u0027da"
+                 },
+    "seerah":  {
+                   "title":  "Şerefli Peygamber Biyografisi",
+                   "subtitle":  "Allah\u0027ın Elçisi Muhammed ﷺ",
+                   "period":  "M.S. 570 — 632 | 23 yıl nübüvvet",
+                   "age":  "yıl ömrü ﷺ",
+                   "prophethood":  "yıl nübüvvet",
+                   "battles":  "gazveler",
+                   "closingAyahRef":  "Ahzab Suresi — 21. Ayet"
+               },
+    "ai":  {
+               "title":  "Er-Reşid",
+               "subtitle":  "YZ İslam Asistanı — Kuran ve Sünnet\u0027ten Cevaplar",
+               "online":  "Çevrimiçi",
+               "soundOn":  "Ses Açık",
+               "soundOff":  "Ses Kapalı",
+               "serverTTS":  "Sinir Sesi",
+               "browserTTS":  "Tarayıcı",
+               "stop":  "Durdur",
+               "listen":  "🔊 Dinle",
+               "placeholder":  "İslami sorunuzu buraya yazın...",
+               "disclaimer":  "Asistan Kuran ve Peygamber Sünneti\u0027ne dayanarak cevap verir — kaynakları her zaman doğrulayın",
+               "greeting":  "Esselamu Aleykum (Selam üzerinize olsun) 🌙\n\nBen \"Er-Reşid\", YZ İslam asistanınızım. Sorularınızı Kutsal Kuran ve sahih Peygamber Sünneti\u0027nden cevaplıyorum.\n\nBugün size nasıl yardımcı olabilirim?",
+               "errorGeneral":  "Üzgünüm, bir hata oluştu. Lütfen tekrar deneyin.",
+               "errorConnection":  "Üzgünüm, bir bağlantı hatası oluştu. API anahtarının yapılandırıldığından emin olun.",
+               "userAvatar":  "S",
+               "quickQuestions":  [
+                                      "İslam\u0027ın Beş Şartı nelerdir?",
+                                      "Kuran okumanın fazileti nedir?",
+                                      "İmanın Altı Şartı nelerdir?",
+                                      "Tevhidin anlamını açıkla",
+                                      "İslam\u0027da namazın hükmü nedir?",
+                                      "İstiğfarın (tövbenin) fazileti nedir?"
+                                  ]
+           },
+    "auth":  {
+                 "loginTitle":  "Giriş Yap",
+                 "loginSubtitle":  "Hesabınıza giriş yapın",
+                 "registerTitle":  "Yeni Hesap Oluştur",
+                 "email":  "E-posta Adresi",
+                 "password":  "Şifre",
+                 "confirmPassword":  "Şifreyi Onayla",
+                 "name":  "Tam Ad",
+                 "namePlaceholder":  "Adınız",
+                 "passwordPlaceholder":  "En az 8 karakter",
+                 "confirmPlaceholder":  "Şifrenizi tekrar girin",
+                 "loginBtn":  "Giriş Yap",
+                 "registerBtn":  "Hesap Oluştur",
+                 "loggingIn":  "Giriş yapılıyor...",
+                 "registering":  "Oluşturuluyor...",
+                 "noAccount":  "Hesabınız yok mu?",
+                 "registerLink":  "Yeni hesap oluştur",
+                 "hasAccount":  "Zaten hesabınız var mı?",
+                 "loginLink":  "Giriş yap",
+                 "loginMsg":  "Giriş sistemi geliştirme aşamasındadır, yakında tekrar kontrol edin",
+                 "loading":  "Yükleniyor...",
+                 "passwordMismatch":  "Şifreler eşleşmiyor",
+                 "registerError":  "Hesap oluşturulurken hata oluştu",
+                 "connectionError":  "Bağlantı hatası"
+             },
+    "common":  {
+                   "siteName":  "As-Sirat Al-Mustaqeem",
+                   "loading":  "Yükleniyor...",
+                   "error":  "Bir hata oluştu",
+                   "retry":  "Tekrar dene",
+                   "back":  "Geri",
+                   "backToSite":  "Siteye dön",
+                   "admin":  "Yönetici",
+                   "dashboard":  "Panel"
+               },
+    "admin":  {
+                  "title":  "As-Sirat Al-Mustaqeem Yönetimi",
+                  "panel":  "Kontrol Paneli",
+                  "nav":  {
+                              "dashboard":  "Panel",
+                              "users":  "Kullanıcılar",
+                              "content":  "İçerik",
+                              "hadiths":  "Hadisler",
+                              "adhkar":  "Zikirler",
+                              "fatwas":  "Fetvalar",
+                              "analytics":  "Analitik",
+                              "settings":  "Ayarlar"
+                          },
+                  "backToSite":  "Siteye dön"
+              }
+}

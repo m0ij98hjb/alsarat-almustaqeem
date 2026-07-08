@@ -1,6 +1,9 @@
+import createNextIntlPlugin from 'next-intl/plugin'
+
+const withNextIntl = createNextIntlPlugin('./i18n/request.ts')
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Exclude native Node.js packages from bundling so they run as-is on the server
   serverExternalPackages: ['msedge-tts', 'ws'],
   images: {
     remotePatterns: [
@@ -21,4 +24,4 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+export default withNextIntl(nextConfig)
