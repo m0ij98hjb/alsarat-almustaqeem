@@ -58,9 +58,21 @@ const gradeClass: Record<string, string> = {
 
 export function HadithPageContent() {
   const [query, setQuery] = useState('')
+  const [dorarQuery, setDorarQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('الكل')
   const [selectedAuthor, setSelectedAuthor] = useState('الكل')
   const [favorites, setFavorites] = useState<number[]>([])
+
+  const openDorarSearch = (event?: any) => {
+    if (event?.preventDefault) event.preventDefault()
+
+    const trimmed = dorarQuery.trim()
+    const url = trimmed
+      ? `https://dorar.net/site/search?q=${encodeURIComponent(trimmed)}`
+      : 'https://dorar.net/'
+
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
 
   const filteredHadiths = useMemo(() => {
     return hadiths.filter((item) => {
@@ -101,6 +113,73 @@ export function HadithPageContent() {
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-12">
+        <div className="card-islamic p-6 md:p-8 mb-8">
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <h2 className="font-arabic text-3xl md:text-4xl font-bold text-islamic-green dark:text-gold-300">البحث في موسوعة الدرر السنية</h2>
+              <p className="text-gray-600 dark:text-gray-300 text-lg max-w-3xl">
+                ابحث في ملايين الأحاديث والموضوعات من موقع الدرر السنية مباشرةً، مع رابط سريع للبحث والموسوعات المتخصصة.
+              </p>
+            </div>
+
+            <form onSubmit={openDorarSearch} className="grid gap-4 md:grid-cols-[1fr_auto]">
+              <div className="relative">
+                <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+                <input
+                  value={dorarQuery}
+                  onChange={(event) => setDorarQuery(event.target.value)}
+                  placeholder="اكتب كلمة البحث ثم اضغط بحث"
+                  className="search-input pr-10"
+                />
+              </div>
+              <button type="submit" className="btn-gold w-full md:w-auto">
+                بحث
+              </button>
+            </form>
+
+            <div className="flex flex-wrap gap-3 items-center">
+              <a
+                href="https://dorar.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-outline-gold inline-flex items-center justify-center text-sm px-6 py-3"
+              >
+                زيارة موسوعة الدرر السنية
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className="card-islamic p-6 md:p-8 mb-8">
+          <div className="space-y-3 mb-4">
+            <h2 className="font-arabic text-3xl md:text-4xl font-bold text-islamic-green dark:text-gold-300">خدمات الدرر السنية</h2>
+            <p className="text-gray-600 dark:text-gray-300 text-lg max-w-3xl">
+              روابط سريعة لأهم موسوعات الدرر السنية بحيث يمكنك الانتقال مباشرةً إلى الكتب والخدمات التي تبحث عنها.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: 'موسوعة الأحاديث', href: 'https://dorar.net/hadith' },
+              { title: 'الأذكار', href: 'https://dorar.net/site/search?q=%D8%A7%D9%84%D8%A3%D8%B0%D9%83%D8%A7%D8%B1' },
+              { title: 'الأدعية', href: 'https://dorar.net/site/search?q=%D8%A7%D9%84%D8%A3%D8%AF%D8%B9%D9%8A%D8%A9' },
+              { title: 'الموسوعة العلمية', href: 'https://dorar.net/gsearch' },
+              { title: 'الموسوعة الفقهية', href: 'https://dorar.net/feqhia' },
+            ].map((service) => (
+              <a
+                key={service.title}
+                href={service.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-islamic p-5 hover:border-gold-400 transition-all"
+              >
+                <p className="font-arabic text-xl font-bold text-islamic-navy dark:text-white mb-2">{service.title}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">فتح القسم المناسب في موقع الدرر السنية.</p>
+              </a>
+            ))}
+          </div>
+        </div>
+
         <div className="card-islamic p-6 md:p-8 mb-8">
           <div className="relative mb-5">
             <Search className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
