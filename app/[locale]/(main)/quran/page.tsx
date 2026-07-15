@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import QuranList from './QuranList'
 import { fallbackSurahs } from './fallback-data'
+import { SURAH_QURAN_HOME_URL, SURAH_QURAN_REFERENCE_URL } from '@/constants/externalLinks'
 
 export async function generateMetadata({
   params,
@@ -54,6 +55,57 @@ export default async function QuranPage({
           </div>
         </div>
       </div>
+
+      <section className="max-w-7xl mx-auto px-4 py-12">
+        <div className="card-islamic p-6 md:p-8 mb-8">
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <h2 className="font-arabic text-3xl md:text-4xl font-bold text-islamic-green dark:text-gold-300">مرجع القرآن الكريم</h2>
+              <p className="text-gray-600 dark:text-gray-300 text-lg max-w-3xl">
+                هذا المرجع الخارجي يتيح للمستخدم قراءة القرآن الكريم بالرسم العثماني، والاستماع إلى التلاوات، وقراءة التفاسير، والبحث في الآيات، وتصفح السور بسهولة.
+                الموقع الحالي لا يعرض محتوى المرجع وإنما يوفر وصولًا سريعًا إليه.
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              <a
+                href={SURAH_QURAN_REFERENCE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gold inline-flex items-center justify-center px-8 py-3 text-base"
+              >
+                الانتقال إلى مرجع القرآن الكريم
+              </a>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                { title: '📖 قراءة القرآن الكريم', description: 'انتقل مباشرةً إلى قراءة القرآن الكريم بخط عثماني واضح.' },
+                { title: '🎧 الاستماع إلى التلاوات', description: 'استمع إلى التلاوات من مصادر موثوقة في المرجع الخارجي.' },
+                { title: '📚 تفسير القرآن الكريم', description: 'اطلع على تفاسير متعددة للآيات بسهولة.' },
+                { title: '🔍 البحث في القرآن الكريم', description: 'ابحث في الآيات والسور بسرعة ودقة.' },
+                { title: '⭐ تصفح جميع السور', description: 'استعرض السور كاملةً وتصفحها بمرونة.' },
+              ].map((item) => (
+                <a
+                  key={item.title}
+                  href={SURAH_QURAN_HOME_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-islamic p-5 hover:border-gold-400 transition-all"
+                >
+                  <p className="font-arabic text-xl font-bold text-islamic-navy dark:text-white mb-2">{item.title}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm">{item.description}</p>
+                </a>
+              ))}
+            </div>
+
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
+              سيتم فتح المرجع في نافذة جديدة حتى تتمكن من الاستفادة من جميع خدماته ثم العودة إلى موقعنا بسهولة.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <QuranList surahs={surahs} locale={locale} />
     </div>
   )

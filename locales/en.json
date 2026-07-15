@@ -218,6 +218,27 @@
                                       "What is the virtue of seeking forgiveness (Istighfar)?"
                                   ]
            },
+    "videos":  {
+                    "title":  "📺 Islamic Videos",
+                    "subtitle":  "A professional Islamic reference featuring lectures, lessons, and trusted dawah clips from renowned scholars and preachers, so you can learn and return to the truth with confidence.",
+                    "quickSearch":  "Quick and effective search",
+                    "searchPlaceholder":  "Search videos by title, channel, speaker, or category",
+                    "categoryFilter":  "Category",
+                    "channelAndSpeaker":  "Channel & Speaker",
+                    "statsAvailable":  "Videos available",
+                    "statsFeatured":  "Featured content",
+                    "statsFeaturedDesc":  "Trusted selections",
+                    "discover":  "Discover Islam",
+                    "discoverDesc":  "If you want to learn about Islam and the message of Prophet Muhammad ﷺ, you will find here a curated selection of introductory videos with reliable and clear information.",
+                    "sectionDesc":  "A curated collection of videos related to this Islamic field.",
+                    "referenceTitle":  "Professional Islamic Reference",
+                    "referenceDesc":  "All videos are presented as official YouTube links with search, filtering, favorites, and sharing support while preserving the site's visual identity and scholarly quality.",
+                    "watchNow":  "Watch now",
+                    "share":  "Share",
+                    "copyLink":  "Copy link",
+                    "saved":  "Saved",
+                    "addToFavorites":  "Add to favorites"
+                },
     "auth":  {
                  "loginTitle":  "Login",
                  "loginSubtitle":  "Log in to your account",

@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/adhkar',
     '/ai',
     '/search',
+    '/islamic-videos',
   ]
 
   return locales.flatMap((locale) =>

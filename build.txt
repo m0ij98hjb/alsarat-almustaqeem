@@ -1,0 +1,176 @@
+
+> alsarat-almustaqeem@1.0.0 build
+> next build
+
+   ▲ Next.js 15.3.9
+   - Environments: .env
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of D:\MNC\alsarat-almustaqeem\node_modules\next-intl\dist\esm\production\extractor\format\index.js for build dependencies failed at 'import(t)'.
+<w> Build dependencies behind this expression are ignored and might cause incorrect cache invalidation.
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of D:\MNC\alsarat-almustaqeem\node_modules\next-intl\dist\esm\production\extractor\format\index.js for build dependencies failed at 'import(t)'.
+<w> Build dependencies behind this expression are ignored and might cause incorrect cache invalidation.
+<w> [webpack.cache.PackFileCacheStrategy/webpack.FileSystemInfo] Parsing of D:\MNC\alsarat-almustaqeem\node_modules\next-intl\dist\esm\production\extractor\format\index.js for build dependencies failed at 'import(t)'.
+<w> Build dependencies behind this expression are ignored and might cause incorrect cache invalidation.
+ ✓ Compiled successfully in 10.0s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/1252) ...
+   Generating static pages (313/1252) 
+   Generating static pages (626/1252) 
+   Generating static pages (939/1252) 
+ ✓ Generating static pages (1252/1252)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /_not-found                            981 B         102 kB
+├ ● /[locale]                              209 B         105 kB
+├   ├ /ar
+├   ├ /en
+├   ├ /zh
+├   └ [+6 more paths]
+├ ● /[locale]/adhkar                     2.45 kB         116 kB
+├   ├ /ar/adhkar
+├   ├ /en/adhkar
+├   ├ /zh/adhkar
+├   └ [+6 more paths]
+├ ● /[locale]/ai                         2.81 kB         116 kB
+├   ├ /ar/ai
+├   ├ /en/ai
+├   ├ /zh/ai
+├   └ [+6 more paths]
+├ ● /[locale]/asma-allah                   209 B         105 kB
+├   ├ /ar/asma-allah
+├   ├ /en/asma-allah
+├   ├ /zh/asma-allah
+├   └ [+6 more paths]
+├ ● /[locale]/auth/login                 1.03 kB         118 kB
+├   ├ /ar/auth/login
+├   ├ /en/auth/login
+├   ├ /zh/auth/login
+├   └ [+6 more paths]
+├ ● /[locale]/auth/register              1.17 kB         118 kB
+├   ├ /ar/auth/register
+├   ├ /en/auth/register
+├   ├ /zh/auth/register
+├   └ [+6 more paths]
+├ ● /[locale]/fatawa                       209 B         105 kB
+├   ├ /ar/fatawa
+├   ├ /en/fatawa
+├   ├ /zh/fatawa
+├   └ [+6 more paths]
+├ ● /[locale]/hadith                      3.8 kB         105 kB
+├   ├ /ar/hadith
+├   ├ /en/hadith
+├   ├ /zh/hadith
+├   └ [+6 more paths]
+├ ● /[locale]/islamic-videos             7.65 kB         116 kB
+├   ├ /ar/islamic-videos
+├   ├ /en/islamic-videos
+├   ├ /zh/islamic-videos
+├   └ [+6 more paths]
+├ ● /[locale]/kids                         209 B         105 kB
+├   ├ /ar/kids
+├   ├ /en/kids
+├   ├ /zh/kids
+├   └ [+6 more paths]
+├ ● /[locale]/kids/hajj                    196 B         102 kB
+├   ├ /ar/kids/hajj
+├   ├ /en/kids/hajj
+├   ├ /zh/kids/hajj
+├   └ [+6 more paths]
+├ ● /[locale]/kids/learn                   196 B         102 kB
+├   ├ /ar/kids/learn
+├   ├ /en/kids/learn
+├   ├ /zh/kids/learn
+├   └ [+6 more paths]
+├ ● /[locale]/kids/prayer                  196 B         102 kB
+├   ├ /ar/kids/prayer
+├   ├ /en/kids/prayer
+├   ├ /zh/kids/prayer
+├   └ [+6 more paths]
+├ ● /[locale]/kids/umrah                   196 B         102 kB
+├   ├ /ar/kids/umrah
+├   ├ /en/kids/umrah
+├   ├ /zh/kids/umrah
+├   └ [+6 more paths]
+├ ● /[locale]/kids/wudu                    196 B         102 kB
+├   ├ /ar/kids/wudu
+├   ├ /en/kids/wudu
+├   ├ /zh/kids/wudu
+├   └ [+6 more paths]
+├ ● /[locale]/live                         209 B         105 kB
+├   ├ /ar/live
+├   ├ /en/live
+├   ├ /zh/live
+├   └ [+6 more paths]
+├ ● /[locale]/prayer-times                 209 B         105 kB
+├   ├ /ar/prayer-times
+├   ├ /en/prayer-times
+├   ├ /zh/prayer-times
+├   └ [+6 more paths]
+├ ● /[locale]/profile                      209 B         105 kB
+├   ├ /ar/profile
+├   ├ /en/profile
+├   ├ /zh/profile
+├   └ [+6 more paths]
+├ ● /[locale]/prophets                     196 B         102 kB
+├   ├ /ar/prophets
+├   ├ /en/prophets
+├   ├ /zh/prophets
+├   └ [+6 more paths]
+├ ● /[locale]/quran                      1.14 kB         118 kB
+├   ├ /ar/quran
+├   ├ /en/quran
+├   ├ /zh/quran
+├   └ [+6 more paths]
+├ ● /[locale]/quran/[surahId]            1.53 kB         118 kB
+├   ├ /ar/quran/1
+├   ├ /ar/quran/2
+├   ├ /ar/quran/3
+├   └ [+1023 more paths]
+├ ● /[locale]/scholars                    5.5 kB         110 kB
+├   ├ /ar/scholars
+├   ├ /en/scholars
+├   ├ /zh/scholars
+├   └ [+6 more paths]
+├ ● /[locale]/search                       209 B         105 kB
+├   ├ /ar/search
+├   ├ /en/search
+├   ├ /zh/search
+├   └ [+6 more paths]
+├ ● /[locale]/seerah                       196 B         102 kB
+├   ├ /ar/seerah
+├   ├ /en/seerah
+├   ├ /zh/seerah
+├   └ [+6 more paths]
+├ ƒ /admin                                 196 B         102 kB
+├ ƒ /admin/fatwas                          209 B         105 kB
+├ ƒ /admin/hadiths                         209 B         105 kB
+├ ƒ /admin/settings                        196 B         102 kB
+├ ƒ /admin/users                           196 B         102 kB
+├ ƒ /api/ai/chat                           196 B         102 kB
+├ ƒ /api/ai/speak                          196 B         102 kB
+├ ƒ /api/fatwas                            196 B         102 kB
+├ ƒ /api/hadith                            196 B         102 kB
+├ ƒ /api/quran                             196 B         102 kB
+├ ƒ /api/quran/[surahId]                   196 B         102 kB
+├ ƒ /api/search                            196 B         102 kB
+├ ƒ /api/users                             196 B         102 kB
+├ ƒ /auth/login                          1.92 kB         107 kB
+├ ƒ /auth/register                       2.21 kB         107 kB
+├ ○ /robots.txt                            196 B         102 kB
+└ ○ /sitemap.xml                           196 B         102 kB
++ First Load JS shared by all             101 kB
+  ├ chunks/1684-ed94aa3aa59c919a.js      46.1 kB
+  ├ chunks/4bd1b696-18bd83daf1da45b6.js  53.2 kB
+  └ other shared chunks (total)             2 kB
+
+
+ƒ Middleware                             44.8 kB
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+
