@@ -7,78 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ===================== USERS & AUTH =====================
-
-enum Role {
-  USER
-  EDITOR
-  ADMIN
-  SUPER_ADMIN
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String
-  email         String    @unique
-  emailVerified DateTime?
-  password      String?
-  image         String?
-  role          Role      @default(USER)
-  isActive      Boolean   @default(true)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  accounts      Account[]
-  sessions      Session[]
-  bookmarks     Bookmark[]
-  readingProgress ReadingProgress[]
-  fatwas        Fatwa[]
-  questions     Question[]
-  answers       Answer[]
-
-  @@map("users")
-}
-
-model Account {
-  id                String  @id @default(cuid())
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String? @db.Text
-  access_token      String? @db.Text
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String? @db.Text
-  session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@map("sessions")
-}
-
-model VerificationToken {
-  identifier String
-  token      String   @unique
-  expires    DateTime
-
-  @@unique([identifier, token])
-  @@map("verification_tokens")
-}
-
 // ===================== QURAN =====================
 
 model Surah {
@@ -96,8 +24,6 @@ model Surah {
 
   ayahs           Ayah[]
   tafseers        Tafseer[]
-  bookmarks       Bookmark[]
-  readingProgress ReadingProgress[]
 
   @@map("surahs")
 }
@@ -120,7 +46,6 @@ model Ayah {
 
   surah           Surah    @relation(fields: [surahId], references: [id])
   tafseers        Tafseer[]
-  bookmarks       Bookmark[]
   wordByWord      WordByWord[]
 
   @@unique([surahId, numberInSurah])
@@ -208,7 +133,6 @@ model Hadith {
 
   book      HadithBook    @relation(fields: [bookId], references: [id])
   chapter   HadithChapter? @relation(fields: [chapterId], references: [id])
-  bookmarks Bookmark[]
 
   @@map("hadiths")
 }
@@ -242,8 +166,6 @@ model Dhikr {
   orderNum    Int            @default(0)
   isActive    Boolean        @default(true)
   createdAt   DateTime       @default(now())
-
-  bookmarks   Bookmark[]
 
   @@map("adhkar")
 }
@@ -315,51 +237,10 @@ model Fatwa {
   tags        String[]
   isVerified  Boolean  @default(false)
   views       Int      @default(0)
-  authorId    String?
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
-
-  author      User?    @relation(fields: [authorId], references: [id])
-  bookmarks   Bookmark[]
 
   @@map("fatwas")
-}
-
-// ===================== Q&A =====================
-
-model Question {
-  id          Int      @id @default(autoincrement())
-  title       String
-  body        String   @db.Text
-  category    String
-  tags        String[]
-  views       Int      @default(0)
-  isAnswered  Boolean  @default(false)
-  isPinned    Boolean  @default(false)
-  authorId    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  author      User     @relation(fields: [authorId], references: [id])
-  answers     Answer[]
-
-  @@map("questions")
-}
-
-model Answer {
-  id          Int      @id @default(autoincrement())
-  questionId  Int
-  body        String   @db.Text
-  isAccepted  Boolean  @default(false)
-  votes       Int      @default(0)
-  authorId    String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  question    Question @relation(fields: [questionId], references: [id])
-  author      User     @relation(fields: [authorId], references: [id])
-
-  @@map("answers")
 }
 
 // ===================== ASMA ALLAH =====================
@@ -377,46 +258,6 @@ model AsmaAllah {
   createdAt   DateTime @default(now())
 
   @@map("asma_allah")
-}
-
-// ===================== BOOKMARKS =====================
-
-model Bookmark {
-  id        String   @id @default(cuid())
-  userId    String
-  type      String   // ayah | hadith | dhikr | fatwa | dua
-  surahId   Int?
-  ayahId    Int?
-  hadithId  Int?
-  dhikrId   Int?
-  fatwaId   Int?
-  note      String?
-  createdAt DateTime @default(now())
-
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  surah  Surah?  @relation(fields: [surahId], references: [id])
-  ayah   Ayah?   @relation(fields: [ayahId], references: [id])
-  hadith Hadith? @relation(fields: [hadithId], references: [id])
-  dhikr  Dhikr?  @relation(fields: [dhikrId], references: [id])
-  fatwa  Fatwa?  @relation(fields: [fatwaId], references: [id])
-
-  @@map("bookmarks")
-}
-
-// ===================== READING PROGRESS =====================
-
-model ReadingProgress {
-  id        String   @id @default(cuid())
-  userId    String
-  surahId   Int
-  lastAyah  Int
-  updatedAt DateTime @updatedAt
-
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  surah Surah @relation(fields: [surahId], references: [id])
-
-  @@unique([userId, surahId])
-  @@map("reading_progress")
 }
 
 // ===================== SITE SETTINGS =====================

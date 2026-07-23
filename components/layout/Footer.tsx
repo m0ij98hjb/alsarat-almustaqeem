@@ -39,7 +39,6 @@ export async function Footer() {
         { href: `/${locale}/prayer-times`, label: t('links.prayerTimes') },
         { href: `/${locale}/search`,       label: t('links.search') },
         { href: `/${locale}/ai`,           label: t('links.aiAssistant') },
-        { href: `/${locale}/profile`,      label: t('links.profile') },
       ],
     },
   ]

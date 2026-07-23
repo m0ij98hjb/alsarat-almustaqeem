@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Amiri, Noto_Naskh_Arabic, Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
-import { SessionProvider } from '@/components/providers/SessionProvider'
+import { AdminShortcut } from '@/components/providers/AdminShortcut'
 import { Toaster } from 'sonner'
 import { getLocale } from 'next-intl/server'
 import { isRTL, type Locale } from '@/i18n/config'
@@ -49,12 +49,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       className={`${amiri.variable} ${notoNaskh.variable} ${inter.variable}`}
     >
       <body className={`${rtl ? 'font-naskh' : 'font-sans'} antialiased`}>
-        <SessionProvider>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
-            {children}
-            <Toaster position="top-center" richColors />
-          </ThemeProvider>
-        </SessionProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+          {children}
+          <Toaster position="top-center" richColors />
+          <AdminShortcut />
+        </ThemeProvider>
       </body>
     </html>
   )

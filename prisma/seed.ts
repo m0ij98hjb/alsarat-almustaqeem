@@ -1,24 +1,9 @@
 import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
 async function main() {
   console.log('🌱 بدء تهيئة قاعدة البيانات...')
-
-  // ===== ADMIN USER =====
-  const adminPassword = await bcrypt.hash('admin123456', 12)
-  await prisma.user.upsert({
-    where: { email: 'admin@alsarat.com' },
-    update: {},
-    create: {
-      name: 'مدير الموقع',
-      email: 'admin@alsarat.com',
-      password: adminPassword,
-      role: 'SUPER_ADMIN',
-    },
-  })
-  console.log('✅ Admin user created: admin@alsarat.com / admin123456')
 
   // ===== HADITH BOOKS =====
   const books = [
@@ -106,8 +91,6 @@ async function main() {
   console.log('✅ Site settings created')
 
   console.log('\n✅ تمت تهيئة قاعدة البيانات بنجاح!')
-  console.log('📧 Admin: admin@alsarat.com')
-  console.log('🔑 Password: admin123456')
 }
 
 main()

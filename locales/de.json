@@ -1,268 +1,241 @@
 ﻿{
-    "meta":  {
-                 "siteName":  "As-Sirat Al-Mustaqeem",
-                 "siteDesc":  "Eine umfassende islamische Plattform für den Heiligen Koran, die prophetische Sunna und die islamischen Wissenschaften"
-             },
-    "nav":  {
-                "quran":  "Der Heilige Koran",
-                "hadith":  "Hadithe",
-                "adhkar":  "Adhkar",
-                "prophets":  "Propheten",
-                "seerah":  "Seerah",
-                "fatawa":  "Fatwas",
-                "asmaAllah":  "Allahs Namen",
-                "prayerTimes":  "Gebetszeiten",
-                "search":  "Suchen",
-                "login":  "Anmelden",
-                "toggleTheme":  "Design wechseln",
-                "openMenu":  "Menü öffnen",
-                "closeMenu":  "Menü schließen",
-                "language":  "Sprache"
-            },
-    "footer":  {
-                   "siteName":  "As-Sirat Al-Mustaqeem",
-                   "siteDesc":  "Eine umfassende islamische Plattform für den Heiligen Koran, die prophetische Sunna und die islamischen Wissenschaften",
-                   "sections":  {
-                                    "quranHadith":  "Koran \u0026 Hadith",
-                                    "adhkarDua":  "Adhkar \u0026 Dua",
-                                    "islamicSciences":  "Islamische Wissenschaften",
-                                    "services":  "Dienste"
-                                },
-                   "links":  {
-                                 "quran":  "Der Heilige Koran",
-                                 "tafsir":  "Tafsir",
-                                 "bukhari":  "Sahih al-Buchari",
-                                 "muslim":  "Sahih Muslim",
-                                 "morningAdhkar":  "Morgen-Adhkar",
-                                 "eveningAdhkar":  "Abend-Adhkar",
-                                 "hisnMuslim":  "Hisn al-Muslim",
-                                 "travelAdhkar":  "Reise-Adhkar",
-                                 "prophetsStories":  "Prophetengeschichten",
-                                 "seerah":  "Prophetische Biographie",
-                                 "asmaAllah":  "99 Namen Allahs",
-                                 "fatawa":  "Fatwas",
-                                 "prayerTimes":  "Gebetszeiten",
-                                 "search":  "Umfassende Suche",
-                                 "aiAssistant":  "Islamischer Assistent",
-                                 "profile":  "Mein Profil"
-                             },
-                   "privacy":  "Datenschutzrichtlinie",
-                   "terms":  "Nutzungsbedingungen",
-                   "contact":  "Kontakt",
-                   "copyright":  "Alle Rechte vorbehalten"
-               },
-    "home":  {
-                 "bismillah":  "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
-                 "title":  "As-Sirat Al-Mustaqeem",
-                 "subtitle":  "Eine umfassende islamische Plattform für den Heiligen Koran, die prophetische Sunna und die islamischen Wissenschaften",
-                 "ayah":  "﴿ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴾",
-                 "surahRef":  "Sure Al-Fatiha — Vers 6",
-                 "btnQuran":  "📖 Der Heilige Koran",
-                 "btnAdhkar":  "📿 Adhkar",
-                 "btnAI":  "🤖 KI-Assistent",
-                 "stats":  {
-                               "verses":  "Koranverse",
-                               "hadiths":  "Hadithe",
-                               "prophets":  "Prophetengeschichten",
-                               "names":  "Namen Allahs"
-                           },
-                 "sectionTitle":  "Webseitenbereiche",
-                 "sectionDesc":  "Alles, was ein Muslim an einem Ort braucht",
-                 "features":  {
-                                  "quran":  {
-                                                "title":  "Der Heilige Koran",
-                                                "desc":  "Vollständiger Koran mit Tafsir und Verssuche",
-                                                "badge":  "114 Suren"
-                                            },
-                                  "hadith":  {
-                                                 "title":  "Prophetische Hadithe",
-                                                 "desc":  "Sahih al-Buchari, Muslim und die wichtigsten Sunan mit Klassifizierung",
-                                                 "badge":  "6 Bücher"
-                                             },
-                                  "adhkar":  {
-                                                 "title":  "Adhkar \u0026 Dua",
-                                                 "desc":  "Vollständiges Hisn al-Muslim — Morgen-, Abend- und Schlaf-Adhkar",
-                                                 "badge":  "200+ Adhkar"
-                                             },
-                                  "prophets":  {
-                                                   "title":  "Prophetengeschichten",
-                                                   "desc":  "Geschichten aller im Koran genannten Propheten",
-                                                   "badge":  "25 Propheten"
-                                               },
-                                  "seerah":  {
-                                                 "title":  "Prophetische Biographie",
-                                                 "desc":  "Vollständiges Leben des Propheten ﷺ — von der Geburt bis zum Tod",
-                                                 "badge":  "Vollständig"
-                                             },
-                                  "asmaAllah":  {
-                                                    "title":  "99 Namen Allahs",
-                                                    "desc":  "Erklärung der 99 Namen mit Bedeutungen und Tugenden",
-                                                    "badge":  "99 Namen"
-                                                },
-                                  "fatawa":  {
-                                                 "title":  "Islamische Fatwas",
-                                                 "desc":  "Fatwa-Datenbank mit intelligentem Suchmodul",
-                                                 "badge":  "Dokumentiert"
-                                             },
-                                  "prayerTimes":  {
-                                                      "title":  "Gebetszeiten",
-                                                      "desc":  "Genaue Gebetszeiten für alle Städte der Welt",
-                                                      "badge":  "Genau"
-                                                  },
-                                  "ai":  {
-                                             "title":  "KI-Islamischer Assistent",
-                                             "desc":  "Stell jede Frage — Antworten aus Koran und Sunna",
-                                             "badge":  "KI"
-                                         }
-                              },
-                 "dailyAyah":  "Tagesvers",
-                 "dailyAyahRef":  "Sure At-Talaq — Verse 2-3",
-                 "readFullSurah":  "Vollständige Sure lesen",
-                 "aiTitle":  "Der KI-Islamische Assistent \"Al-Raschid\"",
-                 "aiDesc":  "Stelle jede islamische Frage und der Assistent antwortet aus dem Heiligen Koran und der authentischen prophetischen Sunna",
-                 "aiBtn":  "Gespräch beginnen"
-             },
-    "quran":  {
-                  "title":  "Der Heilige Koran",
-                  "subtitle":  "Wort Allahs, offenbart an den Propheten Muhammad ﷺ — 114 Suren — 6.236 Verse",
-                  "searchPlaceholder":  "Suche nach einer Sure nach Name oder Nummer...",
-                  "resultsCount":  "{count} Ergebnisse",
-                  "noResults":  "Keine Sure mit diesem Namen gefunden",
-                  "clearSearch":  "Suche löschen",
-                  "surahsLabel":  "Suren",
-                  "versesLabel":  "Verse",
-                  "ajzaLabel":  "Dschuz",
-                  "ayahsCount":  "Verse",
-                  "meccan":  "Mekkanisch",
-                  "medinan":  "Medinensisch",
-                  "backToList":  "Zurück zur Liste",
-                  "copy":  "Kopieren",
-                  "showTranslation":  "Übersetzung zeigen",
-                  "modeList":  "Vers für Vers",
-                  "modeReading":  "Fließtext",
-                  "page":  "Seite",
-                  "copied":  "Kopiert",
-                  "prevSurah":  "Vorherige Sure",
-                  "juz":  "Dschuz",
-                  "nextSurah":  "Nächste Sure"
-              },
-    "hadith":  {
-                   "title":  "Die Noblen Prophetischen Hadithe",
-                   "subtitle":  "قَالَ رَسُولُ اللَّهِ ﷺ",
-                   "booksTitle":  "Hadith-Bücher",
-                   "selectedTitle":  "Ausgewählte Hadithe",
-                   "hadithsUnit":  "Hadithe",
-                   "narrator":  "Überliefert von",
-                   "grades":  {
-                                  "SAHIH":  "Sahih",
-                                  "HASAN":  "Hasan",
-                                  "DAIF":  "Da\u0027if",
-                                  "MAWDU":  "Mawdu\u0027"
-                              }
-               },
-    "adhkar":  {
-                   "title":  "Adhkar \u0026 Dua",
-                   "subtitle":  "Hisn al-Muslim — vom Propheten ﷺ überlieferte Adhkar",
-                   "source":  "Quelle",
-                   "of":  "von",
-                   "categories":  {
-                                      "MORNING":  "Morgen-Adhkar",
-                                      "EVENING":  "Abend-Adhkar",
-                                      "SLEEP":  "Schlaf-Adhkar",
-                                      "WAKE_UP":  "Aufwach-Adhkar",
-                                      "PRAYER":  "Gebet-Adhkar",
-                                      "TRAVEL":  "Reise-Adhkar",
-                                      "FOOD":  "Essen-Adhkar",
-                                      "GENERAL":  "Allgemeine Adhkar"
-                                  }
-               },
-    "prophets":  {
-                     "title":  "Geschichten der Propheten und Gesandten",
-                     "ayah":  "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
-                     "inQuran":  "× im Koran"
-                 },
-    "seerah":  {
-                   "title":  "Die Prophetische Biographie",
-                   "subtitle":  "Muhammad, Gesandter Allahs ﷺ",
-                   "period":  "570 n. Chr. — 632 n. Chr. | 23 Jahre Prophetschaft",
-                   "age":  "Jahre seines Lebens ﷺ",
-                   "prophethood":  "Jahre Prophetschaft",
-                   "battles":  "Schlachten",
-                   "closingAyahRef":  "Sure Al-Ahzab — Vers 21"
-               },
-    "ai":  {
-               "title":  "Al-Raschid",
-               "subtitle":  "KI-Islamischer Assistent — Antworten aus Koran und Sunna",
-               "online":  "Online",
-               "soundOn":  "Ton Ein",
-               "soundOff":  "Ton Aus",
-               "serverTTS":  "Neurale Stimme",
-               "browserTTS":  "Browser",
-               "stop":  "Stopp",
-               "listen":  "🔊 Anhören",
-               "placeholder":  "Schreib deine islamische Frage hier...",
-               "disclaimer":  "Der Assistent antwortet basierend auf Koran und prophetischer Sunna — überprüfe immer die Quellen",
-               "greeting":  "As-salamu alaikum (Friede sei mit euch) 🌙\n\nIch bin \"Al-Raschid\", dein KI-Islamischer Assistent. Ich beantworte deine Fragen aus dem Heiligen Koran und der authentischen prophetischen Sunna.\n\nWie kann ich dir heute helfen?",
-               "errorGeneral":  "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuche es erneut.",
-               "errorConnection":  "Entschuldigung, ein Verbindungsfehler ist aufgetreten. Stelle sicher, dass der API-Schlüssel konfiguriert ist.",
-               "userAvatar":  "N",
-               "quickQuestions":  [
-                                      "Was sind die Fünf Säulen des Islams?",
-                                      "Was ist die Tugend des Koranlesens?",
-                                      "Was sind die Sechs Säulen des Glaubens?",
-                                      "Erkläre die Bedeutung des Tawhid",
-                                      "Was ist das Urteil über das Gebet im Islam?",
-                                      "Was ist die Tugend, Vergebung zu suchen (Istighfar)?"
-                                  ]
-           },
-    "auth":  {
-                 "loginTitle":  "Anmelden",
-                 "loginSubtitle":  "Melde dich bei deinem Konto an",
-                 "registerTitle":  "Neues Konto erstellen",
-                 "email":  "E-Mail-Adresse",
-                 "password":  "Passwort",
-                 "confirmPassword":  "Passwort bestätigen",
-                 "name":  "Vollständiger Name",
-                 "namePlaceholder":  "Dein Name",
-                 "passwordPlaceholder":  "Mindestens 8 Zeichen",
-                 "confirmPlaceholder":  "Passwort erneut eingeben",
-                 "loginBtn":  "Anmelden",
-                 "registerBtn":  "Konto erstellen",
-                 "loggingIn":  "Anmelden...",
-                 "registering":  "Erstellen...",
-                 "noAccount":  "Kein Konto?",
-                 "registerLink":  "Neues Konto erstellen",
-                 "hasAccount":  "Bereits ein Konto?",
-                 "loginLink":  "Anmelden",
-                 "loginMsg":  "Das Anmeldesystem wird gerade entwickelt, bitte schau bald wieder vorbei",
-                 "loading":  "Laden...",
-                 "passwordMismatch":  "Passwörter stimmen nicht überein",
-                 "registerError":  "Fehler beim Erstellen des Kontos",
-                 "connectionError":  "Verbindungsfehler"
-             },
-    "common":  {
-                   "siteName":  "As-Sirat Al-Mustaqeem",
-                   "loading":  "Laden...",
-                   "error":  "Ein Fehler ist aufgetreten",
-                   "retry":  "Erneut versuchen",
-                   "back":  "Zurück",
-                   "backToSite":  "Zurück zur Website",
-                   "admin":  "Administrator",
-                   "dashboard":  "Dashboard"
-               },
-    "admin":  {
-                  "title":  "As-Sirat Al-Mustaqeem Admin",
-                  "panel":  "Kontrollpanel",
-                  "nav":  {
-                              "dashboard":  "Dashboard",
-                              "users":  "Benutzer",
-                              "content":  "Inhalt",
-                              "hadiths":  "Hadithe",
-                              "adhkar":  "Adhkar",
-                              "fatwas":  "Fatwas",
-                              "analytics":  "Analysen",
-                              "settings":  "Einstellungen"
-                          },
-                  "backToSite":  "Zurück zur Website"
-              }
+  "meta": {
+    "siteName": "As-Sirat Al-Mustaqeem",
+    "siteDesc": "Eine umfassende islamische Plattform für den Heiligen Koran, die prophetische Sunna und die islamischen Wissenschaften"
+  },
+  "nav": {
+    "quran": "Der Heilige Koran",
+    "hadith": "Hadithe",
+    "adhkar": "Adhkar",
+    "prophets": "Propheten",
+    "seerah": "Seerah",
+    "fatawa": "Fatwas",
+    "asmaAllah": "Allahs Namen",
+    "prayerTimes": "Gebetszeiten",
+    "search": "Suchen",
+    "toggleTheme": "Design wechseln",
+    "openMenu": "Menü öffnen",
+    "closeMenu": "Menü schließen",
+    "language": "Sprache"
+  },
+  "footer": {
+    "siteName": "As-Sirat Al-Mustaqeem",
+    "siteDesc": "Eine umfassende islamische Plattform für den Heiligen Koran, die prophetische Sunna und die islamischen Wissenschaften",
+    "sections": {
+      "quranHadith": "Koran & Hadith",
+      "adhkarDua": "Adhkar & Dua",
+      "islamicSciences": "Islamische Wissenschaften",
+      "services": "Dienste"
+    },
+    "links": {
+      "quran": "Der Heilige Koran",
+      "tafsir": "Tafsir",
+      "bukhari": "Sahih al-Buchari",
+      "muslim": "Sahih Muslim",
+      "morningAdhkar": "Morgen-Adhkar",
+      "eveningAdhkar": "Abend-Adhkar",
+      "hisnMuslim": "Hisn al-Muslim",
+      "travelAdhkar": "Reise-Adhkar",
+      "prophetsStories": "Prophetengeschichten",
+      "seerah": "Prophetische Biographie",
+      "asmaAllah": "99 Namen Allahs",
+      "fatawa": "Fatwas",
+      "prayerTimes": "Gebetszeiten",
+      "search": "Umfassende Suche",
+      "aiAssistant": "Islamischer Assistent"
+    },
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "contact": "Kontakt",
+    "copyright": "Alle Rechte vorbehalten"
+  },
+  "home": {
+    "bismillah": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
+    "title": "As-Sirat Al-Mustaqeem",
+    "subtitle": "Eine umfassende islamische Plattform für den Heiligen Koran, die prophetische Sunna und die islamischen Wissenschaften",
+    "ayah": "﴿ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴾",
+    "surahRef": "Sure Al-Fatiha — Vers 6",
+    "btnQuran": "📖 Der Heilige Koran",
+    "btnAdhkar": "📿 Adhkar",
+    "btnAI": "🤖 KI-Assistent",
+    "stats": {
+      "verses": "Koranverse",
+      "hadiths": "Hadithe",
+      "prophets": "Prophetengeschichten",
+      "names": "Namen Allahs"
+    },
+    "sectionTitle": "Webseitenbereiche",
+    "sectionDesc": "Alles, was ein Muslim an einem Ort braucht",
+    "features": {
+      "quran": {
+        "title": "Der Heilige Koran",
+        "desc": "Vollständiger Koran mit Tafsir und Verssuche",
+        "badge": "114 Suren"
+      },
+      "hadith": {
+        "title": "Prophetische Hadithe",
+        "desc": "Sahih al-Buchari, Muslim und die wichtigsten Sunan mit Klassifizierung",
+        "badge": "6 Bücher"
+      },
+      "adhkar": {
+        "title": "Adhkar & Dua",
+        "desc": "Vollständiges Hisn al-Muslim — Morgen-, Abend- und Schlaf-Adhkar",
+        "badge": "200+ Adhkar"
+      },
+      "prophets": {
+        "title": "Prophetengeschichten",
+        "desc": "Geschichten aller im Koran genannten Propheten",
+        "badge": "25 Propheten"
+      },
+      "seerah": {
+        "title": "Prophetische Biographie",
+        "desc": "Vollständiges Leben des Propheten ﷺ — von der Geburt bis zum Tod",
+        "badge": "Vollständig"
+      },
+      "asmaAllah": {
+        "title": "99 Namen Allahs",
+        "desc": "Erklärung der 99 Namen mit Bedeutungen und Tugenden",
+        "badge": "99 Namen"
+      },
+      "fatawa": {
+        "title": "Islamische Fatwas",
+        "desc": "Fatwa-Datenbank mit intelligentem Suchmodul",
+        "badge": "Dokumentiert"
+      },
+      "prayerTimes": {
+        "title": "Gebetszeiten",
+        "desc": "Genaue Gebetszeiten für alle Städte der Welt",
+        "badge": "Genau"
+      },
+      "ai": {
+        "title": "KI-Islamischer Assistent",
+        "desc": "Stell jede Frage — Antworten aus Koran und Sunna",
+        "badge": "KI"
+      }
+    },
+    "dailyAyah": "Tagesvers",
+    "dailyAyahRef": "Sure At-Talaq — Verse 2-3",
+    "readFullSurah": "Vollständige Sure lesen",
+    "aiTitle": "Der KI-Islamische Assistent \"Al-Raschid\"",
+    "aiDesc": "Stelle jede islamische Frage und der Assistent antwortet aus dem Heiligen Koran und der authentischen prophetischen Sunna",
+    "aiBtn": "Gespräch beginnen"
+  },
+  "quran": {
+    "title": "Der Heilige Koran",
+    "subtitle": "Wort Allahs, offenbart an den Propheten Muhammad ﷺ — 114 Suren — 6.236 Verse",
+    "searchPlaceholder": "Suche nach einer Sure nach Name oder Nummer...",
+    "resultsCount": "{count} Ergebnisse",
+    "noResults": "Keine Sure mit diesem Namen gefunden",
+    "clearSearch": "Suche löschen",
+    "surahsLabel": "Suren",
+    "versesLabel": "Verse",
+    "ajzaLabel": "Dschuz",
+    "ayahsCount": "Verse",
+    "meccan": "Mekkanisch",
+    "medinan": "Medinensisch",
+    "backToList": "Zurück zur Liste",
+    "copy": "Kopieren",
+    "showTranslation": "Übersetzung zeigen",
+    "modeList": "Vers für Vers",
+    "modeReading": "Fließtext",
+    "page": "Seite",
+    "copied": "Kopiert",
+    "prevSurah": "Vorherige Sure",
+    "juz": "Dschuz",
+    "nextSurah": "Nächste Sure"
+  },
+  "hadith": {
+    "title": "Die Noblen Prophetischen Hadithe",
+    "subtitle": "قَالَ رَسُولُ اللَّهِ ﷺ",
+    "booksTitle": "Hadith-Bücher",
+    "selectedTitle": "Ausgewählte Hadithe",
+    "hadithsUnit": "Hadithe",
+    "narrator": "Überliefert von",
+    "grades": {
+      "SAHIH": "Sahih",
+      "HASAN": "Hasan",
+      "DAIF": "Da'if",
+      "MAWDU": "Mawdu'"
+    }
+  },
+  "adhkar": {
+    "title": "Adhkar & Dua",
+    "subtitle": "Hisn al-Muslim — vom Propheten ﷺ überlieferte Adhkar",
+    "source": "Quelle",
+    "of": "von",
+    "categories": {
+      "MORNING": "Morgen-Adhkar",
+      "EVENING": "Abend-Adhkar",
+      "SLEEP": "Schlaf-Adhkar",
+      "WAKE_UP": "Aufwach-Adhkar",
+      "PRAYER": "Gebet-Adhkar",
+      "TRAVEL": "Reise-Adhkar",
+      "FOOD": "Essen-Adhkar",
+      "GENERAL": "Allgemeine Adhkar"
+    }
+  },
+  "prophets": {
+    "title": "Geschichten der Propheten und Gesandten",
+    "ayah": "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
+    "inQuran": "× im Koran"
+  },
+  "seerah": {
+    "title": "Die Prophetische Biographie",
+    "subtitle": "Muhammad, Gesandter Allahs ﷺ",
+    "period": "570 n. Chr. — 632 n. Chr. | 23 Jahre Prophetschaft",
+    "age": "Jahre seines Lebens ﷺ",
+    "prophethood": "Jahre Prophetschaft",
+    "battles": "Schlachten",
+    "closingAyahRef": "Sure Al-Ahzab — Vers 21"
+  },
+  "ai": {
+    "title": "Al-Raschid",
+    "subtitle": "KI-Islamischer Assistent — Antworten aus Koran und Sunna",
+    "online": "Online",
+    "soundOn": "Ton Ein",
+    "soundOff": "Ton Aus",
+    "serverTTS": "Neurale Stimme",
+    "browserTTS": "Browser",
+    "stop": "Stopp",
+    "listen": "🔊 Anhören",
+    "placeholder": "Schreib deine islamische Frage hier...",
+    "disclaimer": "Der Assistent antwortet basierend auf Koran und prophetischer Sunna — überprüfe immer die Quellen",
+    "greeting": "As-salamu alaikum (Friede sei mit euch) 🌙\n\nIch bin \"Al-Raschid\", dein KI-Islamischer Assistent. Ich beantworte deine Fragen aus dem Heiligen Koran und der authentischen prophetischen Sunna.\n\nWie kann ich dir heute helfen?",
+    "errorGeneral": "Entschuldigung, ein Fehler ist aufgetreten. Bitte versuche es erneut.",
+    "errorConnection": "Entschuldigung, ein Verbindungsfehler ist aufgetreten. Stelle sicher, dass der API-Schlüssel konfiguriert ist.",
+    "userAvatar": "N",
+    "quickQuestions": [
+      "Was sind die Fünf Säulen des Islams?",
+      "Was ist die Tugend des Koranlesens?",
+      "Was sind die Sechs Säulen des Glaubens?",
+      "Erkläre die Bedeutung des Tawhid",
+      "Was ist das Urteil über das Gebet im Islam?",
+      "Was ist die Tugend, Vergebung zu suchen (Istighfar)?"
+    ]
+  },
+  "common": {
+    "siteName": "As-Sirat Al-Mustaqeem",
+    "loading": "Laden...",
+    "error": "Ein Fehler ist aufgetreten",
+    "retry": "Erneut versuchen",
+    "back": "Zurück",
+    "backToSite": "Zurück zur Website",
+    "admin": "Administrator",
+    "dashboard": "Dashboard"
+  },
+  "admin": {
+    "title": "As-Sirat Al-Mustaqeem Admin",
+    "panel": "Kontrollpanel",
+    "nav": {
+      "dashboard": "Dashboard",
+      "users": "Benutzer",
+      "content": "Inhalt",
+      "hadiths": "Hadithe",
+      "adhkar": "Adhkar",
+      "fatwas": "Fatwas",
+      "analytics": "Analysen",
+      "settings": "Einstellungen"
+    },
+    "backToSite": "Zurück zur Website"
+  }
 }

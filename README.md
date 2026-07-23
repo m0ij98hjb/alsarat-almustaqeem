@@ -44,8 +44,8 @@ cp .env.example .env
 ثم عدّل `.env`:
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5432/alsarat_db"
-NEXTAUTH_SECRET="اكتب-مفتاحاً-عشوائياً-طويلاً-هنا"
-NEXTAUTH_URL="http://localhost:3000"
+ADMIN_PASSWORD="اكتب-كلمة-مرور-قوية-هنا"
+ADMIN_SESSION_SECRET="اكتب-مفتاحاً-عشوائياً-طويلاً-هنا"
 ANTHROPIC_API_KEY="sk-ant-..."
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
@@ -71,11 +71,9 @@ npm run dev
 
 ---
 
-## بيانات الدخول الافتراضية
+## الدخول للوحة التحكم
 
-| البريد الإلكتروني | كلمة المرور | الصلاحيات |
-|-------------------|-------------|-----------|
-| admin@alsarat.com | admin123456 | Super Admin |
+الموقع محتوى للقراءة فقط بدون حسابات مستخدمين. لوحة التحكم (`/admin`) محمية بكلمة مرور واحدة يتم ضبطها عبر متغير `ADMIN_PASSWORD` في `.env`.
 
 ---
 
@@ -93,19 +91,19 @@ alsarat-almustaqeem/
 │   │   ├── asma-allah/      # أسماء الله الحسنى
 │   │   ├── prayer-times/    # مواقيت الصلاة
 │   │   ├── search/          # البحث الشامل
-│   │   ├── ai/              # المساعد الذكي
-│   │   └── profile/         # الملف الشخصي
-│   ├── admin/               # لوحة التحكم
-│   ├── auth/                # تسجيل الدخول والتسجيل
+│   │   └── ai/              # المساعد الذكي
+│   ├── admin/                # لوحة التحكم (محمية بكلمة مرور)
+│   │   ├── login/            # دخول الأدمن
+│   │   └── (protected)/      # صفحات الإدارة المحمية
 │   └── api/                 # API Routes
 │       ├── ai/chat/         # المساعد الذكي API
-│       └── auth/            # NextAuth + التسجيل
+│       └── admin/           # تسجيل دخول/خروج الأدمن
 ├── components/
 │   ├── layout/              # Navbar + Footer
-│   └── providers/           # Theme + Session
+│   └── providers/           # Theme
 ├── lib/
 │   ├── prisma.ts            # Prisma Client
-│   └── auth.ts              # NextAuth Config
+│   └── admin-auth.ts        # حماية لوحة التحكم بكلمة مرور
 ├── prisma/
 │   ├── schema.prisma        # Database Schema
 │   └── seed.ts              # Initial Data
@@ -129,9 +127,8 @@ alsarat-almustaqeem/
 | مواقيت الصلاة | /prayer-times |
 | البحث | /search |
 | المساعد الذكي | /ai |
-| تسجيل الدخول | /auth/login |
-| إنشاء حساب | /auth/register |
 | لوحة التحكم | /admin |
+| دخول لوحة التحكم | /admin/login |
 
 ---
 

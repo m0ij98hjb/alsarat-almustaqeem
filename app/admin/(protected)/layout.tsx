@@ -1,17 +1,22 @@
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
+import { isAdminAuthenticated } from '@/lib/admin-auth'
+import { LogoutButton } from '@/components/admin/LogoutButton'
 
 const navItems = [
   { href: '/admin',            label: 'لوحة التحكم', icon: '📊' },
-  { href: '/admin/users',      label: 'المستخدمون',   icon: '👥' },
-  { href: '/admin/content',    label: 'المحتوى',       icon: '📝' },
   { href: '/admin/hadiths',    label: 'الأحاديث',      icon: '📜' },
-  { href: '/admin/adhkar',     label: 'الأذكار',        icon: '📿' },
   { href: '/admin/fatwas',     label: 'الفتاوى',        icon: '⚖️' },
-  { href: '/admin/analytics',  label: 'الإحصائيات',    icon: '📈' },
   { href: '/admin/settings',   label: 'الإعدادات',     icon: '⚙️' },
 ]
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const authed = await isAdminAuthenticated()
+
+  if (!authed) {
+    redirect('/admin/login')
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950 flex" dir="rtl">
       {/* Sidebar */}
@@ -49,6 +54,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <h1 className="font-arabic text-xl font-bold text-gray-800 dark:text-white">إدارة الصراط المستقيم</h1>
           <div className="flex items-center gap-4">
             <span className="text-sm text-gray-500">{new Date().toLocaleDateString('ar-SA')}</span>
+            <LogoutButton />
           </div>
         </header>
         <div className="p-8">{children}</div>

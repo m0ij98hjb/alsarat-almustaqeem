@@ -139,10 +139,6 @@ export function Navbar() {
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
 
-            <Link href={`/${locale}/auth/login`} className="btn-gold text-xs px-3 py-1.5">
-              {t('login')}
-            </Link>
-
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="lg:hidden p-2 text-gray-300 hover:text-gold-300 rounded-lg"
