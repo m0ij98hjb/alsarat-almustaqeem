@@ -38,7 +38,7 @@ export function ScholarsPageContent() {
               <div className="relative h-56 w-full">
                 <Image
                   src={scholar.image}
-                  alt={scholar.name}
+                  alt={`صورة ${scholar.name}، ${scholar.specialty}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
                   className="object-cover"

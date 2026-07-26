@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { SEERAH_TIMELINE } from '@/data/seerah'
+import { buildAlternates, absoluteUrl } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
@@ -9,7 +10,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seerah' })
-  return { title: t('title'), description: t('subtitle') }
+  return { title: t('title'), description: t('subtitle'), alternates: buildAlternates(locale, 'seerah') }
 }
 
 export default async function SeerahPage({
@@ -20,8 +21,20 @@ export default async function SeerahPage({
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seerah' })
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: t('title'),
+    description: t('subtitle'),
+    inLanguage: locale,
+    mainEntityOfPage: absoluteUrl(`/${locale}/seerah`),
+    author: { '@type': 'Organization', name: 'الصراط المستقيم' },
+    publisher: { '@type': 'Organization', name: 'الصراط المستقيم' },
+  }
+
   return (
     <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="bg-hero-gradient py-20 relative overflow-hidden">
         <div className="absolute inset-0 pattern-overlay opacity-20" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">

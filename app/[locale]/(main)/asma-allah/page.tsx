@@ -1,5 +1,17 @@
+import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import AsmaAllahClient from './AsmaAllahClient'
+import { buildAlternates } from '@/lib/seo'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'nav' })
+  return {
+    title: t('asmaAllah'),
+    description: 'أسماء الله الحسنى التسعة والتسعون كاملة مع المعنى والشرح والمرجع القرآني لكل اسم.',
+    alternates: buildAlternates(locale, 'asma-allah'),
+  }
+}
 
 export default async function AsmaAllahPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params

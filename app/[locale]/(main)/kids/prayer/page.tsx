@@ -1,4 +1,15 @@
+import type { Metadata } from 'next'
 import { KidsLessonPage } from '@/components/kids/KidsLessonPage'
+import { buildAlternates } from '@/lib/seo'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
+    title: 'تعلم الصلاة للأطفال',
+    description: 'كيف نصلي بسلام وطمأنينة؟ خطوات الصلاة مبسطة للأطفال مع فيديو تعليمي.',
+    alternates: buildAlternates(locale, 'kids/prayer'),
+  }
+}
 
 export default function PrayerPage() {
   return (

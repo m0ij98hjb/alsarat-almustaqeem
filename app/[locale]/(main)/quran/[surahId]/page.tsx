@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import SurahViewer from './SurahViewer'
 import { fallbackSurahMap } from '../fallback-data'
+import { buildAlternates } from '@/lib/seo'
 
 interface Ayah {
   number: number
@@ -79,6 +80,7 @@ export async function generateMetadata({
   return {
     title: `${surah.name} — ${t('title')}`,
     description: `${surah.englishName} — ${surah.numberOfAyahs} ${t('ayahsCount')}`,
+    alternates: buildAlternates(locale, `quran/${surahId}`),
   }
 }
 

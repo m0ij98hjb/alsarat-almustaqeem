@@ -3,6 +3,7 @@ import { getTranslations } from 'next-intl/server'
 import QuranList from './QuranList'
 import { fallbackSurahs } from './fallback-data'
 import { SURAH_QURAN_HOME_URL, SURAH_QURAN_REFERENCE_URL } from '@/constants/externalLinks'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
@@ -11,7 +12,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'quran' })
-  return { title: t('title'), description: t('subtitle') }
+  return { title: t('title'), description: t('subtitle'), alternates: buildAlternates(locale, 'quran') }
 }
 
 interface Surah {

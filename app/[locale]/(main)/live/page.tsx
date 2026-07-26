@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import { LivePageContent } from '@/components/pages/LivePageContent'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
@@ -9,7 +10,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
-  return { title: `البث المباشر | ${t('siteName')}`, description: 'تابع القنوات الإسلامية المباشرة والاذاعة من خلال البث المباشر.' }
+  return {
+    title: `البث المباشر | ${t('siteName')}`,
+    description: 'تابع القنوات الإسلامية المباشرة والاذاعة من خلال البث المباشر.',
+    alternates: buildAlternates(locale, 'live'),
+  }
 }
 
 export default function LivePage() {

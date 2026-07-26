@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
@@ -12,6 +13,7 @@ export async function generateMetadata({
   return {
     title: t('title'),
     description: t('subtitle'),
+    alternates: buildAlternates(locale),
   }
 }
 

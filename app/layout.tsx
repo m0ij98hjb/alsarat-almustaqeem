@@ -5,6 +5,7 @@ import { AdminShortcut } from '@/components/providers/AdminShortcut'
 import { Toaster } from 'sonner'
 import { getLocale } from 'next-intl/server'
 import { isRTL, type Locale } from '@/i18n/config'
+import { SITE_URL } from '@/lib/seo'
 import './globals.css'
 
 const amiri = Amiri({
@@ -29,7 +30,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: new URL(SITE_URL),
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
   verification: { google: 'i09wG_Yi1lfk227f_bYjaFyAUZ1Xy815OShsPFbzCGY' },
 }

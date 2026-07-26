@@ -3,16 +3,21 @@ import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { PROPHETS } from '@/data/prophets'
+import { buildAlternates, absoluteUrl } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ locale: string; id: string }>
 }): Promise<Metadata> {
-  const { id } = await params
+  const { locale, id } = await params
   const prophet = PROPHETS.find((p) => p.id === parseInt(id))
   if (!prophet) return {}
-  return { title: prophet.nameAr, description: prophet.summary }
+  return {
+    title: prophet.nameAr,
+    description: prophet.summary,
+    alternates: buildAlternates(locale, `prophets/${id}`),
+  }
 }
 
 export default async function ProphetDetailPage({
@@ -30,8 +35,20 @@ export default async function ProphetDetailPage({
   const prevProphet = PROPHETS.find((p) => p.id === prophetId - 1)
   const nextProphet = PROPHETS.find((p) => p.id === prophetId + 1)
 
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: `قصة ${prophet.nameAr}`,
+    description: prophet.summary,
+    inLanguage: locale,
+    mainEntityOfPage: absoluteUrl(`/${locale}/prophets/${prophet.id}`),
+    author: { '@type': 'Organization', name: 'الصراط المستقيم' },
+    publisher: { '@type': 'Organization', name: 'الصراط المستقيم' },
+  }
+
   return (
     <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="bg-hero-gradient py-16 relative overflow-hidden">
         <div className="absolute inset-0 pattern-overlay opacity-20" />
         <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">

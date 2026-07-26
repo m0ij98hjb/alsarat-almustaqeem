@@ -131,7 +131,7 @@ export default function IslamicVideosClient() {
 
   const renderVideoCard = (video: (typeof islamicVideos)[number]) => (
     <article key={video.id} className="card-islamic p-6">
-      <img src={video.thumbnail} alt={video.title} className="w-full rounded-2xl object-cover mb-4 h-52" loading="lazy" />
+      <img src={video.thumbnail} alt={`صورة مصغرة لفيديو: ${video.title}`} className="w-full rounded-2xl object-cover mb-4 h-52" loading="lazy" />
       <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
         <span className="font-arabic text-lg font-bold text-islamic-navy dark:text-white">{video.title}</span>
         <span className="text-xs px-3 py-1 rounded-full bg-gold-100 text-gold-700">{video.category}</span>

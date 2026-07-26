@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { buildAlternates } from '@/lib/seo'
 
 const lessons = [
   { href: '/kids/wudu', title: 'تعلم الوضوء', icon: '🧼', desc: 'خطوات الوضوء وأهميته' },
@@ -17,7 +18,11 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
-  return { title: `قسم الأطفال | ${t('siteName')}`, description: 'محتوى تعليمي مبسط للأطفال عن الوضوء والصلاة والحج والعمرة والإسلام.' }
+  return {
+    title: `قسم الأطفال | ${t('siteName')}`,
+    description: 'محتوى تعليمي مبسط للأطفال عن الوضوء والصلاة والحج والعمرة والإسلام.',
+    alternates: buildAlternates(locale, 'kids'),
+  }
 }
 
 export default async function KidsPage({ params }: { params: Promise<{ locale: string }> }) {

@@ -1,4 +1,15 @@
+import type { Metadata } from 'next'
 import { KidsLessonPage } from '@/components/kids/KidsLessonPage'
+import { buildAlternates } from '@/lib/seo'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
+    title: 'تعلم الوضوء للأطفال',
+    description: 'خطوات الوضوء بشكل بسيط وممتع للأطفال مع فيديو تعليمي.',
+    alternates: buildAlternates(locale, 'kids/wudu'),
+  }
+}
 
 export default function WuduPage() {
   return (

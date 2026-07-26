@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { PROPHETS } from '@/data/prophets'
+import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata({
   params,
@@ -10,7 +11,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'prophets' })
-  return { title: t('title') }
+  return { title: t('title'), alternates: buildAlternates(locale, 'prophets') }
 }
 
 export default async function ProphetsPage({

@@ -1,4 +1,15 @@
+import type { Metadata } from 'next'
 import { KidsLessonPage } from '@/components/kids/KidsLessonPage'
+import { buildAlternates } from '@/lib/seo'
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params
+  return {
+    title: 'تعلم العمرة للأطفال',
+    description: 'خطوات العمرة بطريقة سهلة للأطفال مع فيديو تعليمي.',
+    alternates: buildAlternates(locale, 'kids/umrah'),
+  }
+}
 
 export default function UmrahPage() {
   return (
