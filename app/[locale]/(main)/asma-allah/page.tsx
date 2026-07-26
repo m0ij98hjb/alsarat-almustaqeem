@@ -1,17 +1,23 @@
 import { getTranslations } from 'next-intl/server'
-import Link from 'next/link'
+import AsmaAllahClient from './AsmaAllahClient'
 
 export default async function AsmaAllahPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'nav' })
+
   return (
-    <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy flex items-center justify-center">
-      <div className="text-center">
-        <div className="text-6xl mb-6">✨</div>
-        <h1 className="font-arabic text-4xl font-bold text-gold-400 mb-4">{t('asmaAllah')}</h1>
-        <p className="text-gray-400 mb-8">Coming soon / قريباً</p>
-        <Link href={`/${locale}`} className="btn-gold">← Back</Link>
+    <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy">
+      <div className="bg-hero-gradient py-16 relative overflow-hidden">
+        <div className="absolute inset-0 pattern-overlay opacity-20" />
+        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+          <div className="text-5xl mb-4">✨</div>
+          <h1 className="font-arabic text-white text-4xl md:text-5xl font-bold mb-3">{t('asmaAllah')}</h1>
+          <p className="font-arabic text-gold-300 text-lg">
+            ﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾
+          </p>
+        </div>
       </div>
+      <AsmaAllahClient />
     </div>
   )
 }

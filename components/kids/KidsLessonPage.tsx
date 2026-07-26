@@ -19,6 +19,8 @@ type KidsLessonPageProps = {
   subtitle: string
   icon: string
   intro: string
+  videoId?: string
+  videoTitle?: string
   steps: LessonStep[]
   sections: LessonSection[]
   quiz: QuizQuestion[]
@@ -29,6 +31,8 @@ export function KidsLessonPage({
   subtitle,
   icon,
   intro,
+  videoId,
+  videoTitle,
   steps,
   sections,
   quiz,
@@ -51,6 +55,22 @@ export function KidsLessonPage({
           <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-4">شرح مبسط</h2>
           <p className="text-gray-700 leading-relaxed">{intro}</p>
         </div>
+
+        {videoId && (
+          <div className="card-islamic p-8 md:p-10 mb-8">
+            <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-4">شاهد الفيديو</h2>
+            <div className="aspect-video rounded-2xl overflow-hidden">
+              <iframe
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${videoId}`}
+                title={videoTitle || title}
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        )}
 
         <div className="grid gap-6 md:grid-cols-2 mb-8">
           {steps.map((step, index) => (

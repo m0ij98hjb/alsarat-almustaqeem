@@ -1,0 +1,226 @@
+'use client'
+
+import { useEffect, useMemo, useState } from 'react'
+
+interface Timings {
+  Fajr: string
+  Sunrise: string
+  Dhuhr: string
+  Asr: string
+  Maghrib: string
+  Isha: string
+  Imsak: string
+  Midnight: string
+}
+
+interface Meta {
+  timezone: string
+}
+
+interface HijriDate {
+  day: string
+  month: { ar: string }
+  year: string
+  weekday: { ar: string }
+}
+
+const PRAYERS: { key: keyof Timings; label: string; icon: string }[] = [
+  { key: 'Imsak', label: 'الإمساك', icon: '🌌' },
+  { key: 'Fajr', label: 'الفجر', icon: '🌅' },
+  { key: 'Sunrise', label: 'الشروق', icon: '☀️' },
+  { key: 'Dhuhr', label: 'الظهر', icon: '🕛' },
+  { key: 'Asr', label: 'العصر', icon: '🌤️' },
+  { key: 'Maghrib', label: 'المغرب', icon: '🌇' },
+  { key: 'Isha', label: 'العشاء', icon: '🌙' },
+]
+
+const MAIN_PRAYER_KEYS: (keyof Timings)[] = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']
+
+function timeToMinutes(time: string): number {
+  const [h, m] = time.split(':').map((n) => parseInt(n, 10))
+  return h * 60 + m
+}
+
+function nowMinutesInTz(tz: string): number {
+  const parts = new Intl.DateTimeFormat('en-GB', {
+    timeZone: tz,
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).formatToParts(new Date())
+  const h = parseInt(parts.find((p) => p.type === 'hour')?.value || '0', 10)
+  const m = parseInt(parts.find((p) => p.type === 'minute')?.value || '0', 10)
+  return h * 60 + m
+}
+
+function formatCountdown(minutes: number): string {
+  const h = Math.floor(minutes / 60)
+  const m = minutes % 60
+  if (h > 0) return `${h} ساعة و ${m} دقيقة`
+  return `${m} دقيقة`
+}
+
+export default function PrayerTimesClient() {
+  const [city, setCity] = useState('Cairo')
+  const [country, setCountry] = useState('EG')
+  const [cityInput, setCityInput] = useState('Cairo')
+  const [countryInput, setCountryInput] = useState('EG')
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null)
+  const [timings, setTimings] = useState<Timings | null>(null)
+  const [meta, setMeta] = useState<Meta | null>(null)
+  const [hijri, setHijri] = useState<HijriDate | null>(null)
+  const [gregorian, setGregorian] = useState<string>('')
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+  const [tick, setTick] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => setTick((t) => t + 1), 30000)
+    return () => clearInterval(interval)
+  }, [])
+
+  useEffect(() => {
+    let cancelled = false
+    setLoading(true)
+    setError('')
+
+    const today = new Date()
+    const dateStr = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`
+    const url = coords
+      ? `https://api.aladhan.com/v1/timings/${dateStr}?latitude=${coords.lat}&longitude=${coords.lng}&method=5`
+      : `https://api.aladhan.com/v1/timingsByCity/${dateStr}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=5`
+
+    fetch(url)
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled) return
+        if (d.code === 200) {
+          setTimings(d.data.timings)
+          setMeta(d.data.meta)
+          setHijri(d.data.date.hijri)
+          setGregorian(d.data.date.readable)
+        } else {
+          setError('تعذّر جلب مواقيت الصلاة')
+        }
+      })
+      .catch(() => !cancelled && setError('تعذّر الاتصال بخدمة مواقيت الصلاة'))
+      .finally(() => !cancelled && setLoading(false))
+
+    return () => {
+      cancelled = true
+    }
+  }, [city, country, coords])
+
+  const useMyLocation = () => {
+    if (!navigator.geolocation) return
+    navigator.geolocation.getCurrentPosition(
+      (pos) => setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      () => setError('تعذّر الوصول إلى موقعك، يمكنك اختيار المدينة يدوياً')
+    )
+  }
+
+  const searchCity = (e: React.FormEvent) => {
+    e.preventDefault()
+    setCoords(null)
+    setCity(cityInput.trim() || 'Cairo')
+    setCountry(countryInput.trim() || 'EG')
+  }
+
+  const nextPrayer = useMemo(() => {
+    if (!timings || !meta) return null
+    const now = nowMinutesInTz(meta.timezone)
+    for (const key of MAIN_PRAYER_KEYS) {
+      const t = timeToMinutes(timings[key])
+      if (t > now) return { key, minutesLeft: t - now }
+    }
+    // after Isha: next is tomorrow's Fajr
+    const fajr = timeToMinutes(timings.Fajr)
+    return { key: 'Fajr' as const, minutesLeft: 24 * 60 - now + fajr }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [timings, meta, tick])
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-12">
+      {/* Location controls */}
+      <div className="card-islamic p-6 mb-8">
+        <form onSubmit={searchCity} className="flex flex-wrap gap-3 items-end justify-center">
+          <div>
+            <label className="block text-xs text-gray-400 mb-1">المدينة</label>
+            <input
+              value={cityInput}
+              onChange={(e) => setCityInput(e.target.value)}
+              className="px-4 py-2 rounded-xl border border-gold-200 dark:border-gold-800/50 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:border-gold-400"
+              placeholder="القاهرة"
+            />
+          </div>
+          <div>
+            <label className="block text-xs text-gray-400 mb-1">كود الدولة</label>
+            <input
+              value={countryInput}
+              onChange={(e) => setCountryInput(e.target.value)}
+              className="w-24 px-4 py-2 rounded-xl border border-gold-200 dark:border-gold-800/50 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:border-gold-400"
+              placeholder="EG"
+            />
+          </div>
+          <button type="submit" className="btn-gold px-5 py-2">بحث</button>
+          <button type="button" onClick={useMyLocation} className="btn-outline-gold px-5 py-2">
+            📍 استخدم موقعي الحالي
+          </button>
+        </form>
+      </div>
+
+      {loading && <p className="text-center text-gray-400">جارِ تحميل المواقيت...</p>}
+      {error && <p className="text-center text-red-500 mb-6">{error}</p>}
+
+      {timings && meta && !loading && (
+        <>
+          {/* Date + location */}
+          <div className="text-center mb-8">
+            <p className="text-gray-500 dark:text-gray-400 text-sm">
+              {coords ? 'موقعك الحالي' : `${city}, ${country}`} — {meta.timezone}
+            </p>
+            <p className="font-arabic text-islamic-green dark:text-gold-300 text-xl font-bold mt-1">
+              {gregorian}
+              {hijri && ` — ${hijri.day} ${hijri.month.ar} ${hijri.year}هـ (${hijri.weekday.ar})`}
+            </p>
+          </div>
+
+          {/* Next prayer countdown */}
+          {nextPrayer && (
+            <div className="bg-hero-gradient rounded-3xl p-8 text-center relative overflow-hidden mb-10">
+              <div className="absolute inset-0 pattern-overlay opacity-20" />
+              <div className="relative z-10">
+                <p className="text-gold-300 text-sm mb-2">الصلاة القادمة</p>
+                <p className="font-arabic text-white text-3xl font-bold mb-2">
+                  {PRAYERS.find((p) => p.key === nextPrayer.key)?.label}
+                </p>
+                <p className="text-gold-200">بعد {formatCountdown(nextPrayer.minutesLeft)}</p>
+              </div>
+            </div>
+          )}
+
+          {/* All timings */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {PRAYERS.map((p) => (
+              <div
+                key={p.key}
+                className={`card-islamic p-5 text-center ${
+                  nextPrayer?.key === p.key ? 'border-gold-400 bg-gold-50/50 dark:bg-gold-900/10' : ''
+                }`}
+              >
+                <div className="text-2xl mb-2">{p.icon}</div>
+                <div className="font-arabic text-islamic-green dark:text-gold-300 font-bold mb-1">{p.label}</div>
+                <div className="text-lg text-gray-700 dark:text-gray-300 font-mono">{timings[p.key]}</div>
+              </div>
+            ))}
+            <div className="card-islamic p-5 text-center">
+              <div className="text-2xl mb-2">🌃</div>
+              <div className="font-arabic text-islamic-green dark:text-gold-300 font-bold mb-1">منتصف الليل</div>
+              <div className="text-lg text-gray-700 dark:text-gray-300 font-mono">{timings.Midnight}</div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}

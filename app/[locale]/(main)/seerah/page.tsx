@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
+import { SEERAH_TIMELINE } from '@/data/seerah'
 
 export async function generateMetadata({
   params,
@@ -10,37 +11,6 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'seerah' })
   return { title: t('title'), description: t('subtitle') }
 }
-
-const SEERAH_TIMELINE = [
-  {
-    era: 'قبل البعثة',
-    color: 'bg-blue-500',
-    events: [
-      { year: '570م', title: 'عام الفيل — مولد النبي ﷺ', desc: 'وُلد محمد بن عبدالله ﷺ في مكة المكرمة في شهر ربيع الأول', icon: '🌟' },
-      { year: '595م', title: 'الزواج من خديجة', desc: 'تزوج من أم المؤمنين خديجة بنت خويلد رضي الله عنها، أول من آمن به', icon: '💍' },
-      { year: '605م', title: 'إصلاح الكعبة والحَكَم', desc: 'حكم بين القبائل في وضع الحجر الأسود بعبقرية', icon: '🕌' },
-    ],
-  },
-  {
-    era: 'العهد المكي (610—622م)',
-    color: 'bg-gold-500',
-    events: [
-      { year: '610م', title: 'نزول الوحي في غار حراء', desc: 'نزل جبريل عليه السلام بأول آيات سورة العلق: ﴿اقرأ باسم ربك الذي خلق﴾', icon: '📖' },
-      { year: '613م', title: 'الدعوة العلنية', desc: 'أُمر النبي ﷺ بالجهر بالدعوة بعد ثلاث سنين من الدعوة السرية', icon: '📣' },
-      { year: '621م', title: 'الإسراء والمعراج', desc: 'أُسري بالنبي ﷺ ليلاً من المسجد الحرام إلى المسجد الأقصى وفُرضت الصلاة', icon: '🌙' },
-    ],
-  },
-  {
-    era: 'العهد المدني (622—632م)',
-    color: 'bg-emerald-500',
-    events: [
-      { year: '622م', title: 'الهجرة النبوية إلى المدينة', desc: 'الهجرة المباركة التي أُرّخ بها التاريخ الإسلامي', icon: '🌴' },
-      { year: '624م', title: 'غزوة بدر الكبرى', desc: 'أول المعارك الفاصلة، انتصر فيها 313 من المسلمين', icon: '⚔️' },
-      { year: '630م', title: 'فتح مكة المكرمة', desc: 'دخل النبي ﷺ مكة فاتحاً في رمضان بعشرة آلاف', icon: '🕌' },
-      { year: '632م', title: 'حجة الوداع ووفاته ﷺ', desc: 'أدّى النبي ﷺ حجة الوداع وخطب خطبته الخالدة ثم انتقل إلى الرفيق الأعلى', icon: '🌹' },
-    ],
-  },
-]
 
 export default async function SeerahPage({
   params,
