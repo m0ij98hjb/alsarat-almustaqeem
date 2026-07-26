@@ -1,20 +1,15 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import scholars from '@/data/scholars.json'
+import { SCHOLARS } from '@/data/scholars'
 
-type Scholar = {
-  id: number
-  name: string
-  image: string
-  about: string
-  specialty: string
-  country: string
-  website: string
-  contact: string
+const CATEGORY_LABELS: Record<string, string> = {
+  saudi: 'علماء المملكة العربية السعودية',
+  international: 'دعاة ومشايخ عالميون',
+  organization: 'مؤسسات وهيئات إسلامية رسمية',
 }
 
 export function ScholarsPageContent() {
-  const data = scholars as Scholar[]
+  const categories = ['saudi', 'international', 'organization'] as const
 
   return (
     <div className="min-h-screen bg-islamic-cream">
@@ -26,46 +21,94 @@ export function ScholarsPageContent() {
           </div>
           <h1 className="font-arabic text-white text-4xl sm:text-5xl font-bold mb-4">العلماء والدعاة</h1>
           <p className="text-gold-200 text-lg max-w-3xl mx-auto">
-            مقدمة عن أهمية سؤال أهل العلم والتوجيه من ذوي الخبرة في شتى المجالات الإسلامية.
+            دليل موثوق للعلماء والدعاة والمؤسسات الإسلامية الرسمية، مع روابط مصادرهم الرسمية المعتمدة فقط.
           </p>
         </div>
       </section>
 
       <section className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid gap-6 lg:grid-cols-3">
-          {data.map((scholar) => (
-            <article key={scholar.id} className="card-islamic overflow-hidden">
-              <div className="relative h-56 w-full">
-                <Image
-                  src={scholar.image}
-                  alt={`صورة ${scholar.name}، ${scholar.specialty}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
-                  loading="lazy"
-                />
+        {categories.map((cat) => {
+          const items = SCHOLARS.filter((s) => s.category === cat)
+          if (items.length === 0) return null
+
+          return (
+            <div key={cat} className="mb-14">
+              <h2 className="font-arabic text-2xl md:text-3xl font-bold text-islamic-green mb-6">
+                {CATEGORY_LABELS[cat]}
+              </h2>
+              <div className="grid gap-6 lg:grid-cols-3">
+                {items.map((scholar) => (
+                  <article key={scholar.id} className="card-islamic overflow-hidden">
+                    <div className="relative h-56 w-full bg-hero-gradient flex items-center justify-center">
+                      {scholar.photo ? (
+                        <Image
+                          src={scholar.photo}
+                          alt={`صورة ${scholar.nameAr}، ${scholar.specialty}`}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="text-6xl text-gold-300" aria-hidden="true">👳</span>
+                      )}
+                    </div>
+                    <div className="p-6">
+                      <h3 className="font-arabic text-2xl font-bold text-islamic-green mb-2">{scholar.nameAr}</h3>
+                      <p className="text-gray-700 leading-relaxed mb-4">{scholar.aboutAr}</p>
+                      <div className="space-y-2 text-sm text-gray-600 mb-5">
+                        <p><span className="font-bold text-gold-600">التخصص:</span> {scholar.specialty}</p>
+                        <p><span className="font-bold text-gold-600">الدولة:</span> {scholar.country}</p>
+                      </div>
+                      <div className="flex flex-wrap gap-3">
+                        {scholar.website && (
+                          <Link href={scholar.website} target="_blank" rel="noopener noreferrer" className="btn-gold text-sm px-4 py-2">
+                            زيارة الموقع
+                          </Link>
+                        )}
+                        {scholar.youtube && (
+                          <Link href={scholar.youtube} target="_blank" rel="noopener noreferrer" className="btn-outline-gold text-sm px-4 py-2">
+                            يوتيوب
+                          </Link>
+                        )}
+                        {scholar.fatwaSite && (
+                          <Link href={scholar.fatwaSite} target="_blank" rel="noopener noreferrer" className="btn-outline-gold text-sm px-4 py-2">
+                            فتاوى
+                          </Link>
+                        )}
+                        {scholar.lecturesSite && (
+                          <Link href={scholar.lecturesSite} target="_blank" rel="noopener noreferrer" className="btn-outline-gold text-sm px-4 py-2">
+                            الدروس
+                          </Link>
+                        )}
+                        {scholar.x && (
+                          <Link href={scholar.x} target="_blank" rel="noopener noreferrer" className="btn-outline-gold text-sm px-4 py-2">
+                            X
+                          </Link>
+                        )}
+                        {scholar.facebook && (
+                          <Link href={scholar.facebook} target="_blank" rel="noopener noreferrer" className="btn-outline-gold text-sm px-4 py-2">
+                            فيسبوك
+                          </Link>
+                        )}
+                        {scholar.instagram && (
+                          <Link href={scholar.instagram} target="_blank" rel="noopener noreferrer" className="btn-outline-gold text-sm px-4 py-2">
+                            إنستجرام
+                          </Link>
+                        )}
+                        {scholar.telegram && (
+                          <Link href={scholar.telegram} target="_blank" rel="noopener noreferrer" className="btn-outline-gold text-sm px-4 py-2">
+                            تيليجرام
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                ))}
               </div>
-              <div className="p-6">
-                <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-2">{scholar.name}</h2>
-                <p className="text-gray-700 leading-relaxed mb-4">{scholar.about}</p>
-                <div className="space-y-2 text-sm text-gray-600 mb-5">
-                  <p><span className="font-bold text-gold-600">التخصص:</span> {scholar.specialty}</p>
-                  <p><span className="font-bold text-gold-600">الدولة:</span> {scholar.country}</p>
-                </div>
-                <div className="flex flex-wrap gap-3">
-                  <Link href={scholar.website} target="_blank" rel="noreferrer" className="btn-gold text-sm px-4 py-2">
-                    زيارة الموقع
-                  </Link>
-                  {scholar.contact ? (
-                    <Link href={scholar.contact} target="_blank" rel="noreferrer" className="btn-outline-gold text-sm px-4 py-2">
-                      التواصل
-                    </Link>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
+            </div>
+          )
+        })}
       </section>
     </div>
   )
