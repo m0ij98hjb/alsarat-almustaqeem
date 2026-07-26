@@ -2,53 +2,10 @@
 
 import { useMemo, useState } from 'react'
 import { Copy, Heart, Share2, Search } from 'lucide-react'
+import { HADITHS } from '@/data/hadiths'
 
-type HadithItem = {
-  id: number
-  text: string
-  narrator: string
-  grade: 'SAHIH' | 'HASAN' | 'DAIF'
-  topic: string
-  author: string
-}
-
-const hadiths: HadithItem[] = [
-  {
-    id: 1,
-    text: 'إنما الأعمال بالنيات وإنما لكل امرئ ما نوى',
-    narrator: 'عمر بن الخطاب رضي الله عنه',
-    grade: 'SAHIH',
-    topic: 'النية',
-    author: 'البخاري',
-  },
-  {
-    id: 2,
-    text: 'من كان يؤمن بالله واليوم الآخر فليقل خيرًا أو ليصمت',
-    narrator: 'أبو هريرة رضي الله عنه',
-    grade: 'SAHIH',
-    topic: 'القول الحسن',
-    author: 'مسلم',
-  },
-  {
-    id: 3,
-    text: 'خيركم من تعلم القرآن وعلمه',
-    narrator: 'عثمان بن عفان رضي الله عنه',
-    grade: 'HASAN',
-    topic: 'القرآن',
-    author: 'البخاري',
-  },
-  {
-    id: 4,
-    text: 'اتق الله حيثما كنت وأتبع السيئة الحسنة تمحها',
-    narrator: 'أبو ذر الغفاري رضي الله عنه',
-    grade: 'DAIF',
-    topic: 'التوبة',
-    author: 'الترمذي',
-  },
-]
-
-const categories = ['الكل', 'النية', 'القول الحسن', 'القرآن', 'التوبة']
-const authors = ['الكل', 'البخاري', 'مسلم', 'الترمذي']
+const categories = ['الكل', ...Array.from(new Set(HADITHS.map((h) => h.topic)))]
+const authors = ['الكل', ...Array.from(new Set(HADITHS.map((h) => h.source)))]
 
 const gradeClass: Record<string, string> = {
   SAHIH: 'grade-sahih',
@@ -75,13 +32,23 @@ export function HadithPageContent() {
   }
 
   const filteredHadiths = useMemo(() => {
-    return hadiths.filter((item) => {
+    return HADITHS.filter((item) => {
       const matchesQuery = `${item.text} ${item.narrator} ${item.topic}`.includes(query)
       const matchesCategory = selectedCategory === 'الكل' || item.topic === selectedCategory
-      const matchesAuthor = selectedAuthor === 'الكل' || item.author === selectedAuthor
+      const matchesAuthor = selectedAuthor === 'الكل' || item.source === selectedAuthor
       return matchesQuery && matchesCategory && matchesAuthor
     })
   }, [query, selectedCategory, selectedAuthor])
+
+  const gradeCounts = useMemo(() => {
+    return filteredHadiths.reduce(
+      (acc, item) => {
+        acc[item.grade] += 1
+        return acc
+      },
+      { SAHIH: 0, HASAN: 0, DAIF: 0 } as Record<'SAHIH' | 'HASAN' | 'DAIF', number>
+    )
+  }, [filteredHadiths])
 
   const toggleFavorite = (id: number) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]))
@@ -107,7 +74,7 @@ export function HadithPageContent() {
           </div>
           <h1 className="font-arabic text-white text-4xl sm:text-5xl font-bold mb-4">الأحاديث</h1>
           <p className="text-gold-200 text-lg max-w-3xl mx-auto">
-            واجهة جاهزة للربط بمصدر بيانات مستقبلي أو API دون التأثير على التصميم العام.
+            مجموعة مختارة من الأحاديث النبوية الصحيحة والحسنة من الأربعين النووية ورياض الصالحين، مصنّفة بالموضوع والدرجة.
           </p>
         </div>
       </section>
@@ -221,15 +188,15 @@ export function HadithPageContent() {
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             <div className="rounded-xl bg-gold-50 p-4">
               <p className="text-sm text-gray-600">الصحيح</p>
-              <p className="font-arabic text-2xl font-bold text-islamic-green">1</p>
+              <p className="font-arabic text-2xl font-bold text-islamic-green">{gradeCounts.SAHIH}</p>
             </div>
             <div className="rounded-xl bg-blue-50 p-4">
               <p className="text-sm text-gray-600">الحسن</p>
-              <p className="font-arabic text-2xl font-bold text-islamic-green">1</p>
+              <p className="font-arabic text-2xl font-bold text-islamic-green">{gradeCounts.HASAN}</p>
             </div>
             <div className="rounded-xl bg-red-50 p-4">
               <p className="text-sm text-gray-600">الضعيف</p>
-              <p className="font-arabic text-2xl font-bold text-islamic-green">1</p>
+              <p className="font-arabic text-2xl font-bold text-islamic-green">{gradeCounts.DAIF}</p>
             </div>
           </div>
         </div>
@@ -241,14 +208,14 @@ export function HadithPageContent() {
                 <div className="flex items-center gap-2 flex-wrap">
                   <span className={gradeClass[hadith.grade]}>{hadith.grade === 'SAHIH' ? 'صحيح' : hadith.grade === 'HASAN' ? 'حسن' : 'ضعيف'}</span>
                   <span className="text-sm text-gray-500">{hadith.topic}</span>
-                  <span className="text-sm text-gray-500">{hadith.author}</span>
+                  <span className="text-sm text-gray-500">{hadith.source}</span>
                 </div>
                 <button onClick={() => toggleFavorite(hadith.id)} className="text-gold-600">
                   <Heart size={18} fill={favorites.includes(hadith.id) ? 'currentColor' : 'none'} />
                 </button>
               </div>
               <p className="font-arabic text-2xl leading-loose text-gray-900 mb-4">«{hadith.text}»</p>
-              <p className="text-sm text-gray-600 mb-4">{hadith.narrator}</p>
+              {hadith.narrator && <p className="text-sm text-gray-600 mb-4">{hadith.narrator}</p>}
               <div className="flex flex-wrap gap-3">
                 <button onClick={() => copyHadith(hadith.text)} className="btn-outline-gold text-sm px-4 py-2 inline-flex items-center gap-2">
                   <Copy size={16} /> نسخ الحديث

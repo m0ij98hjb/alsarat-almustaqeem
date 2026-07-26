@@ -1,14 +1,21 @@
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
+import { HADITHS } from '@/data/hadiths'
 
-const SAMPLE_HADITHS = [
-  { id: 1,    hadithNum: 1,    textArabic: 'إِنَّمَا الأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى', narrator: 'عمر بن الخطاب', grade: 'SAHIH', book: { nameArabic: 'صحيح البخاري', slug: 'bukhari' } },
-  { id: 2,    hadithNum: 8,    textArabic: 'بُنِيَ الإِسْلاَمُ عَلَى خَمْسٍ: شَهَادَةِ أَنْ لاَ إِلَهَ إِلاَّ اللَّهُ', narrator: 'ابن عمر', grade: 'SAHIH', book: { nameArabic: 'صحيح البخاري', slug: 'bukhari' } },
-  { id: 3,    hadithNum: 6018, textArabic: 'مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ', narrator: 'أبو هريرة', grade: 'SAHIH', book: { nameArabic: 'صحيح البخاري', slug: 'bukhari' } },
-  { id: 4,    hadithNum: 45,   textArabic: 'لاَ يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ', narrator: 'أنس بن مالك', grade: 'SAHIH', book: { nameArabic: 'صحيح مسلم', slug: 'muslim' } },
-]
+export async function GET(req: NextRequest) {
+  const { searchParams } = new URL(req.url)
+  const topic = searchParams.get('topic')
+  const grade = searchParams.get('grade')
+  const page = parseInt(searchParams.get('page') || '1')
+  const limit = parseInt(searchParams.get('limit') || '20')
 
-export async function GET() {
-  return NextResponse.json({ success: true, data: SAMPLE_HADITHS, total: SAMPLE_HADITHS.length, page: 1, totalPages: 1 })
+  let data = HADITHS
+  if (topic) data = data.filter((h) => h.topic === topic)
+  if (grade) data = data.filter((h) => h.grade === grade)
+
+  const total = data.length
+  data = data.slice((page - 1) * limit, page * limit)
+
+  return NextResponse.json({ success: true, data, total, page, totalPages: Math.ceil(total / limit) })
 }
 
 export async function POST() {
