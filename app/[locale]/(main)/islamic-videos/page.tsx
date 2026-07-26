@@ -23,4 +23,3 @@ export async function generateMetadata({
 export default function IslamicVideosPage() {
   return <IslamicVideosClient />
 }
-
