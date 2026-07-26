@@ -31,6 +31,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
   robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
+  verification: { google: 'i09wG_Yi1lfk227f_bYjaFyAUZ1Xy815OShsPFbzCGY' },
 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

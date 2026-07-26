@@ -60,12 +60,50 @@ function formatCountdown(minutes: number): string {
   return `${m} دقيقة`
 }
 
+const LOCATION_STORAGE_KEY = 'prayerTimesLocation'
+
+type SavedLocation =
+  | { mode: 'city'; city: string; country: string }
+  | { mode: 'coords'; lat: number; lng: number }
+
+function loadSavedLocation(): SavedLocation {
+  const fallback: SavedLocation = { mode: 'city', city: 'Cairo', country: 'EG' }
+  if (typeof window === 'undefined') return fallback
+  try {
+    const raw = localStorage.getItem(LOCATION_STORAGE_KEY)
+    if (!raw) return fallback
+    const saved = JSON.parse(raw)
+    if (saved?.mode === 'coords' && typeof saved.lat === 'number' && typeof saved.lng === 'number') {
+      return { mode: 'coords', lat: saved.lat, lng: saved.lng }
+    }
+    if (saved?.mode === 'city' && saved.city && saved.country) {
+      return { mode: 'city', city: saved.city, country: saved.country }
+    }
+  } catch {}
+  return fallback
+}
+
 export default function PrayerTimesClient() {
-  const [city, setCity] = useState('Cairo')
-  const [country, setCountry] = useState('EG')
-  const [cityInput, setCityInput] = useState('Cairo')
-  const [countryInput, setCountryInput] = useState('EG')
-  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null)
+  const [city, setCity] = useState(() => {
+    const saved = loadSavedLocation()
+    return saved.mode === 'city' ? saved.city : 'Cairo'
+  })
+  const [country, setCountry] = useState(() => {
+    const saved = loadSavedLocation()
+    return saved.mode === 'city' ? saved.country : 'EG'
+  })
+  const [cityInput, setCityInput] = useState(() => {
+    const saved = loadSavedLocation()
+    return saved.mode === 'city' ? saved.city : 'Cairo'
+  })
+  const [countryInput, setCountryInput] = useState(() => {
+    const saved = loadSavedLocation()
+    return saved.mode === 'city' ? saved.country : 'EG'
+  })
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(() => {
+    const saved = loadSavedLocation()
+    return saved.mode === 'coords' ? { lat: saved.lat, lng: saved.lng } : null
+  })
   const [timings, setTimings] = useState<Timings | null>(null)
   const [meta, setMeta] = useState<Meta | null>(null)
   const [hijri, setHijri] = useState<HijriDate | null>(null)
@@ -78,6 +116,13 @@ export default function PrayerTimesClient() {
     const interval = setInterval(() => setTick((t) => t + 1), 30000)
     return () => clearInterval(interval)
   }, [])
+
+  useEffect(() => {
+    const toSave: SavedLocation = coords
+      ? { mode: 'coords', lat: coords.lat, lng: coords.lng }
+      : { mode: 'city', city, country }
+    localStorage.setItem(LOCATION_STORAGE_KEY, JSON.stringify(toSave))
+  }, [city, country, coords])
 
   useEffect(() => {
     let cancelled = false
