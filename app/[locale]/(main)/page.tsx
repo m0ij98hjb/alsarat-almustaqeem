@@ -2,6 +2,22 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { getTranslations } from 'next-intl/server'
 import { buildAlternates } from '@/lib/seo'
+import { dailyVerses } from '@/data/dailyVerses'
+import { dailyIndex } from '@/components/home/dailyPick'
+import { JourneySteps } from '@/components/home/JourneySteps'
+import { WhyExploreIslam } from '@/components/home/WhyExploreIslam'
+import { MeetProphet } from '@/components/home/MeetProphet'
+import { DiscoverQuran } from '@/components/home/DiscoverQuran'
+import { FivePillars } from '@/components/home/FivePillars'
+import { WorldStats } from '@/components/home/WorldStats'
+import { FaqSection } from '@/components/home/FaqSection'
+import { AskAIHome } from '@/components/home/AskAIHome'
+import { WatchLearnHome } from '@/components/home/WatchLearnHome'
+import { LiveFromMakkah } from '@/components/home/LiveFromMakkah'
+import { TrustedScholars } from '@/components/home/TrustedScholars'
+import { DailyInspiration } from '@/components/home/DailyInspiration'
+import { TodaysPicks } from '@/components/home/TodaysPicks'
+import { FinalCTA } from '@/components/home/FinalCTA'
 
 export async function generateMetadata({
   params,
@@ -33,15 +49,16 @@ export default async function HomePage({
   ]
 
   const features = [
-    { href: `/${locale}/quran`,        icon: '📖', key: 'quran' as const },
-    { href: `/${locale}/hadith`,       icon: '📜', key: 'hadith' as const },
-    { href: `/${locale}/adhkar`,       icon: '📿', key: 'adhkar' as const },
-    { href: `/${locale}/prophets`,     icon: '🌟', key: 'prophets' as const },
-    { href: `/${locale}/seerah`,       icon: '🌙', key: 'seerah' as const },
-    { href: `/${locale}/asma-allah`,   icon: '✨', key: 'asmaAllah' as const },
-    { href: `/${locale}/fatawa`,       icon: '⚖️', key: 'fatawa' as const },
-    { href: `/${locale}/prayer-times`, icon: '🕌', key: 'prayerTimes' as const },
-    { href: `/${locale}/ai`,           icon: '🤖', key: 'ai' as const },
+    { href: `/${locale}/quran`,          icon: '📖', key: 'quran' as const },
+    { href: `/${locale}/hadith`,         icon: '📜', key: 'hadith' as const },
+    { href: `/${locale}/adhkar`,         icon: '📿', key: 'adhkar' as const },
+    { href: `/${locale}/prophets`,       icon: '🌟', key: 'prophets' as const },
+    { href: `/${locale}/seerah`,         icon: '🌙', key: 'seerah' as const },
+    { href: `/${locale}/asma-allah`,     icon: '✨', key: 'asmaAllah' as const },
+    { href: `/${locale}/fatawa`,         icon: '⚖️', key: 'fatawa' as const },
+    { href: `/${locale}/prayer-times`,   icon: '🕌', key: 'prayerTimes' as const },
+    { href: `/${locale}/islamic-videos`, icon: '📺', key: 'videos' as const },
+    { href: `/${locale}/ai`,             icon: '🤖', key: 'ai' as const },
   ]
 
   const stats = [
@@ -50,6 +67,8 @@ export default async function HomePage({
     { num: '25',       key: 'prophets' as const },
     { num: '99',       key: 'names' as const },
   ]
+
+  const todayVerse = dailyVerses[dailyIndex(dailyVerses.length)]
 
   return (
     <div className="overflow-hidden">
@@ -89,9 +108,11 @@ export default async function HomePage({
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href={`/${locale}/quran`}  className="btn-gold text-base px-8 py-3">{t('btnQuran')}</Link>
-            <Link href={`/${locale}/adhkar`} className="btn-outline-gold text-base px-8 py-3">{t('btnAdhkar')}</Link>
-            <Link href={`/${locale}/ai`}     className="btn-outline-gold text-base px-8 py-3">{t('btnAI')}</Link>
+            <Link href={`/${locale}/quran`}          className="btn-gold text-base px-8 py-3">{t('btnQuran')}</Link>
+            <Link href={`/${locale}/adhkar`}         className="btn-outline-gold text-base px-8 py-3">{t('btnAdhkar')}</Link>
+            <Link href={`/${locale}/islamic-videos`} className="btn-outline-gold text-base px-8 py-3">{locale === 'ar' ? '📺 شاهد الفيديوهات' : '📺 Watch Videos'}</Link>
+            <Link href={`/${locale}/live`}           className="btn-outline-gold text-base px-8 py-3">{locale === 'ar' ? '📡 بث مباشر من مكة' : '📡 Live From Makkah'}</Link>
+            <Link href={`/${locale}#ask-ai`}         className="btn-outline-gold text-base px-8 py-3">{t('btnAI')}</Link>
           </div>
         </div>
 
@@ -114,6 +135,15 @@ export default async function HomePage({
         </div>
       </section>
 
+      {/* ===== START YOUR JOURNEY ===== */}
+      <JourneySteps locale={locale} />
+
+      {/* ===== WHY EXPLORE ISLAM ===== */}
+      <WhyExploreIslam locale={locale} />
+
+      {/* ===== MEET THE PROPHET ===== */}
+      <MeetProphet locale={locale} />
+
       {/* ===== SERVICES ===== */}
       <section className="py-20 bg-islamic-cream dark:bg-islamic-navy">
         <div className="max-w-7xl mx-auto px-4">
@@ -133,6 +163,28 @@ export default async function HomePage({
         </div>
       </section>
 
+      {/* ===== DISCOVER THE QURAN ===== */}
+      <DiscoverQuran locale={locale} />
+
+      {/* ===== DAILY AYAH ===== */}
+      <section id="daily-ayah" className="py-20 bg-islamic-navy-mid">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <div className="divider-islamic justify-center mb-8">
+            <span>{t('dailyAyah')}</span>
+          </div>
+          <blockquote className="quran-text text-white text-2xl md:text-3xl mb-6">
+            ﴿ {todayVerse.arabic} ﴾
+          </blockquote>
+          <p className="text-gold-400 text-lg mb-8">{todayVerse.ref}</p>
+          <Link href={`/${locale}/quran/${todayVerse.surahId}`} className="btn-outline-gold inline-block">
+            {t('readFullSurah')}
+          </Link>
+        </div>
+      </section>
+
+      {/* ===== FIVE PILLARS ===== */}
+      <FivePillars locale={locale} />
+
       {/* ===== FEATURES ===== */}
       <section className="py-20 bg-islamic-cream dark:bg-islamic-navy">
         <div className="max-w-7xl mx-auto px-4">
@@ -146,34 +198,50 @@ export default async function HomePage({
                 <div className="text-4xl mb-4">{f.icon}</div>
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="font-arabic text-xl font-bold text-islamic-green dark:text-gold-300 group-hover:text-gold-500 transition-colors">
-                    {t(`features.${f.key}.title`)}
+                    {f.key === 'videos'
+                      ? (locale === 'ar' ? 'الفيديوهات الإسلامية' : 'Islamic Videos')
+                      : t(`features.${f.key}.title`)}
                   </h3>
-                  <span className="text-xs bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-400 px-2 py-0.5 rounded-full">
-                    {t(`features.${f.key}.badge`)}
-                  </span>
+                  {f.key !== 'videos' && (
+                    <span className="text-xs bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-400 px-2 py-0.5 rounded-full">
+                      {t(`features.${f.key}.badge`)}
+                    </span>
+                  )}
                 </div>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{t(`features.${f.key}.desc`)}</p>
+                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                  {f.key === 'videos'
+                    ? (locale === 'ar' ? 'محاضرات موثوقة من قنوات إسلامية رسمية' : 'Trusted lectures from official Islamic channels')
+                    : t(`features.${f.key}.desc`)}
+                </p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ===== DAILY AYAH ===== */}
-      <section className="py-20 bg-islamic-navy-mid">
-        <div className="max-w-3xl mx-auto px-4 text-center">
-          <div className="divider-islamic justify-center mb-8">
-            <span>{t('dailyAyah')}</span>
-          </div>
-          <blockquote className="quran-text text-white text-2xl md:text-3xl mb-6">
-            ﴿ وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا ۝ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ ﴾
-          </blockquote>
-          <p className="text-gold-400 text-lg mb-8">{t('dailyAyahRef')}</p>
-          <Link href={`/${locale}/quran/65`} className="btn-outline-gold inline-block">
-            {t('readFullSurah')}
-          </Link>
-        </div>
-      </section>
+      {/* ===== ISLAM AROUND THE WORLD ===== */}
+      <WorldStats locale={locale} />
+
+      {/* ===== FAQ ===== */}
+      <FaqSection locale={locale} />
+
+      {/* ===== ASK AI ===== */}
+      <AskAIHome />
+
+      {/* ===== WATCH & LEARN ===== */}
+      <WatchLearnHome locale={locale} />
+
+      {/* ===== LIVE FROM MAKKAH ===== */}
+      <LiveFromMakkah locale={locale} />
+
+      {/* ===== TRUSTED SCHOLARS ===== */}
+      <TrustedScholars locale={locale} />
+
+      {/* ===== DAILY INSPIRATION ===== */}
+      <DailyInspiration locale={locale} />
+
+      {/* ===== TODAY'S PICKS ===== */}
+      <TodaysPicks locale={locale} />
 
       {/* ===== AI CTA ===== */}
       <section className="py-20 bg-islamic-cream dark:bg-islamic-navy">
@@ -191,6 +259,9 @@ export default async function HomePage({
           </div>
         </div>
       </section>
+
+      {/* ===== FINAL CTA ===== */}
+      <FinalCTA locale={locale} />
     </div>
   )
 }
