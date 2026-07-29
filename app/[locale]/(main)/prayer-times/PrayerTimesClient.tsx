@@ -60,50 +60,33 @@ function formatCountdown(minutes: number): string {
   return `${m} دقيقة`
 }
 
-const LOCATION_STORAGE_KEY = 'prayerTimesLocation'
-
 type SavedLocation =
   | { mode: 'city'; city: string; country: string }
   | { mode: 'coords'; lat: number; lng: number }
 
-function loadSavedLocation(): SavedLocation {
-  const fallback: SavedLocation = { mode: 'city', city: 'Cairo', country: 'EG' }
-  if (typeof window === 'undefined') return fallback
+const DEFAULT_LOCATION: { mode: 'city'; city: string; country: string } = {
+  mode: 'city',
+  city: 'Jeddah',
+  country: 'SA',
+}
+
+async function persistLocation(loc: SavedLocation) {
   try {
-    const raw = localStorage.getItem(LOCATION_STORAGE_KEY)
-    if (!raw) return fallback
-    const saved = JSON.parse(raw)
-    if (saved?.mode === 'coords' && typeof saved.lat === 'number' && typeof saved.lng === 'number') {
-      return { mode: 'coords', lat: saved.lat, lng: saved.lng }
-    }
-    if (saved?.mode === 'city' && saved.city && saved.country) {
-      return { mode: 'city', city: saved.city, country: saved.country }
-    }
+    await fetch('/api/prayer-location', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(loc),
+    })
   } catch {}
-  return fallback
 }
 
 export default function PrayerTimesClient() {
-  const [city, setCity] = useState(() => {
-    const saved = loadSavedLocation()
-    return saved.mode === 'city' ? saved.city : 'Cairo'
-  })
-  const [country, setCountry] = useState(() => {
-    const saved = loadSavedLocation()
-    return saved.mode === 'city' ? saved.country : 'EG'
-  })
-  const [cityInput, setCityInput] = useState(() => {
-    const saved = loadSavedLocation()
-    return saved.mode === 'city' ? saved.city : 'Cairo'
-  })
-  const [countryInput, setCountryInput] = useState(() => {
-    const saved = loadSavedLocation()
-    return saved.mode === 'city' ? saved.country : 'EG'
-  })
-  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(() => {
-    const saved = loadSavedLocation()
-    return saved.mode === 'coords' ? { lat: saved.lat, lng: saved.lng } : null
-  })
+  const [city, setCity] = useState(DEFAULT_LOCATION.city)
+  const [country, setCountry] = useState(DEFAULT_LOCATION.country)
+  const [cityInput, setCityInput] = useState(DEFAULT_LOCATION.city)
+  const [countryInput, setCountryInput] = useState(DEFAULT_LOCATION.country)
+  const [coords, setCoords] = useState<{ lat: number; lng: number } | null>(null)
+  const [locationReady, setLocationReady] = useState(false)
   const [timings, setTimings] = useState<Timings | null>(null)
   const [meta, setMeta] = useState<Meta | null>(null)
   const [hijri, setHijri] = useState<HijriDate | null>(null)
@@ -118,13 +101,30 @@ export default function PrayerTimesClient() {
   }, [])
 
   useEffect(() => {
-    const toSave: SavedLocation = coords
-      ? { mode: 'coords', lat: coords.lat, lng: coords.lng }
-      : { mode: 'city', city, country }
-    localStorage.setItem(LOCATION_STORAGE_KEY, JSON.stringify(toSave))
-  }, [city, country, coords])
+    let cancelled = false
+    fetch('/api/prayer-location')
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled) return
+        const saved: SavedLocation = d?.location ?? DEFAULT_LOCATION
+        if (saved.mode === 'coords') {
+          setCoords({ lat: saved.lat, lng: saved.lng })
+        } else {
+          setCity(saved.city)
+          setCountry(saved.country)
+          setCityInput(saved.city)
+          setCountryInput(saved.country)
+        }
+      })
+      .catch(() => {})
+      .finally(() => !cancelled && setLocationReady(true))
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
+    if (!locationReady) return
     let cancelled = false
     setLoading(true)
     setError('')
@@ -154,21 +154,28 @@ export default function PrayerTimesClient() {
     return () => {
       cancelled = true
     }
-  }, [city, country, coords])
+  }, [locationReady, city, country, coords])
 
   const useMyLocation = () => {
     if (!navigator.geolocation) return
     navigator.geolocation.getCurrentPosition(
-      (pos) => setCoords({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+      (pos) => {
+        const next = { lat: pos.coords.latitude, lng: pos.coords.longitude }
+        setCoords(next)
+        persistLocation({ mode: 'coords', ...next })
+      },
       () => setError('تعذّر الوصول إلى موقعك، يمكنك اختيار المدينة يدوياً')
     )
   }
 
   const searchCity = (e: React.FormEvent) => {
     e.preventDefault()
+    const nextCity = cityInput.trim() || DEFAULT_LOCATION.city
+    const nextCountry = countryInput.trim() || DEFAULT_LOCATION.country
     setCoords(null)
-    setCity(cityInput.trim() || 'Cairo')
-    setCountry(countryInput.trim() || 'EG')
+    setCity(nextCity)
+    setCountry(nextCountry)
+    persistLocation({ mode: 'city', city: nextCity, country: nextCountry })
   }
 
   const nextPrayer = useMemo(() => {
@@ -195,7 +202,7 @@ export default function PrayerTimesClient() {
               value={cityInput}
               onChange={(e) => setCityInput(e.target.value)}
               className="px-4 py-2 rounded-xl border border-gold-200 dark:border-gold-800/50 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:border-gold-400"
-              placeholder="القاهرة"
+              placeholder="جدة"
             />
           </div>
           <div>
@@ -204,7 +211,7 @@ export default function PrayerTimesClient() {
               value={countryInput}
               onChange={(e) => setCountryInput(e.target.value)}
               className="w-24 px-4 py-2 rounded-xl border border-gold-200 dark:border-gold-800/50 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:border-gold-400"
-              placeholder="EG"
+              placeholder="SA"
             />
           </div>
           <button type="submit" className="btn-gold px-5 py-2">بحث</button>

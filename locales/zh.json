@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "siteName": "正道",
     "siteDesc": "综合伊斯兰平台，包含古兰经、圣训和伊斯兰科学"
@@ -9,7 +9,6 @@
     "adhkar": "念诵",
     "prophets": "先知",
     "seerah": "先知传记",
-    "fatawa": "法特瓦",
     "asmaAllah": "真主名号",
     "prayerTimes": "礼拜时间",
     "search": "搜索",
@@ -39,7 +38,6 @@
       "prophetsStories": "先知故事",
       "seerah": "先知传记",
       "asmaAllah": "真主99名号",
-      "fatawa": "法特瓦",
       "prayerTimes": "礼拜时间",
       "search": "综合搜索",
       "aiAssistant": "伊斯兰助手"
@@ -96,11 +94,6 @@
         "title": "真主99名号",
         "desc": "99个名号的含义和美德解释",
         "badge": "99名号"
-      },
-      "fatawa": {
-        "title": "伊斯兰法特瓦",
-        "desc": "法特瓦数据库，带智能搜索引擎",
-        "badge": "有据可查"
       },
       "prayerTimes": {
         "title": "礼拜时间",
@@ -232,7 +225,6 @@
       "content": "内容",
       "hadiths": "圣训",
       "adhkar": "念诵",
-      "fatwas": "法特瓦",
       "analytics": "分析",
       "settings": "设置"
     },

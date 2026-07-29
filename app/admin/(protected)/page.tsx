@@ -1,13 +1,11 @@
 const cards = [
   { label: 'الأحاديث',    value: 0, icon: '📜', color: 'bg-emerald-500', href: '/admin/hadiths' },
   { label: 'الأذكار',      value: 0, icon: '📿', color: 'bg-purple-500',  href: '/admin/adhkar' },
-  { label: 'الفتاوى',      value: 6, icon: '⚖️', color: 'bg-orange-500',  href: '/admin/fatwas' },
   { label: 'الكتب',        value: 6, icon: '📚', color: 'bg-gold-500',    href: '/admin/books' },
 ]
 
 const quickActions = [
   { label: 'إضافة حديث جديد',  href: '/admin/hadiths/new',  icon: '📜' },
-  { label: 'إضافة فتوى جديدة', href: '/admin/fatwas/new',   icon: '⚖️' },
   { label: 'إضافة ذكر جديد',   href: '/admin/adhkar/new',   icon: '📿' },
 ]
 

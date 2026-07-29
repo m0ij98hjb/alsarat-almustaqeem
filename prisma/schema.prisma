@@ -225,24 +225,6 @@ model SeerahEvent {
   @@map("seerah_events")
 }
 
-// ===================== FATWAS =====================
-
-model Fatwa {
-  id          Int      @id @default(autoincrement())
-  question    String   @db.Text
-  answer      String   @db.Text
-  category    String
-  scholar     String?
-  source      String?
-  tags        String[]
-  isVerified  Boolean  @default(false)
-  views       Int      @default(0)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  @@map("fatwas")
-}
-
 // ===================== ASMA ALLAH =====================
 
 model AsmaAllah {
@@ -269,4 +251,20 @@ model SiteSettings {
   updatedAt DateTime @updatedAt
 
   @@map("site_settings")
+}
+
+// ===================== PRAYER TIMES =====================
+
+model PrayerLocationPreference {
+  id        Int      @id @default(autoincrement())
+  visitorId String   @unique
+  mode      String // city | coords
+  city      String?
+  country   String?
+  lat       Float?
+  lng       Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("prayer_location_preferences")
 }

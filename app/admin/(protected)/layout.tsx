@@ -6,7 +6,6 @@ import { LogoutButton } from '@/components/admin/LogoutButton'
 const navItems = [
   { href: '/admin',            label: 'لوحة التحكم', icon: '📊' },
   { href: '/admin/hadiths',    label: 'الأحاديث',      icon: '📜' },
-  { href: '/admin/fatwas',     label: 'الفتاوى',        icon: '⚖️' },
   { href: '/admin/settings',   label: 'الإعدادات',     icon: '⚙️' },
 ]
 

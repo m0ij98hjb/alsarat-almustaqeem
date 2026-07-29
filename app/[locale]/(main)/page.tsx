@@ -55,7 +55,6 @@ export default async function HomePage({
     { href: `/${locale}/prophets`,       icon: '🌟', key: 'prophets' as const },
     { href: `/${locale}/seerah`,         icon: '🌙', key: 'seerah' as const },
     { href: `/${locale}/asma-allah`,     icon: '✨', key: 'asmaAllah' as const },
-    { href: `/${locale}/fatawa`,         icon: '⚖️', key: 'fatawa' as const },
     { href: `/${locale}/prayer-times`,   icon: '🕌', key: 'prayerTimes' as const },
     { href: `/${locale}/islamic-videos`, icon: '📺', key: 'videos' as const },
     { href: `/${locale}/ai`,             icon: '🤖', key: 'ai' as const },

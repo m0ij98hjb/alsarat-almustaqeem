@@ -39,7 +39,7 @@ export interface HadithWithBook {
 
 export interface SearchResult {
   id: string | number
-  type: 'ayah' | 'hadith' | 'dhikr' | 'fatwa' | 'prophet' | 'dua'
+  type: 'ayah' | 'hadith' | 'dhikr' | 'prophet' | 'dua'
   title: string
   text: string
   reference: string

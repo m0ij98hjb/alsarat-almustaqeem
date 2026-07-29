@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "siteName": "As-Sirat Al-Mustaqeem",
     "siteDesc": "Kutsal Kuran, Peygamber Sünneti ve İslam ilimleri için kapsamlı bir İslam platformu"
@@ -9,7 +9,6 @@
     "adhkar": "Zikirler",
     "prophets": "Peygamberler",
     "seerah": "Siyer",
-    "fatawa": "Fetvalar",
     "asmaAllah": "Allah'ın İsimleri",
     "prayerTimes": "Namaz Vakitleri",
     "search": "Ara",
@@ -39,7 +38,6 @@
       "prophetsStories": "Peygamber Kıssaları",
       "seerah": "Peygamber Biyografisi",
       "asmaAllah": "Allah'ın 99 İsmi",
-      "fatawa": "Fetvalar",
       "prayerTimes": "Namaz Vakitleri",
       "search": "Kapsamlı Arama",
       "aiAssistant": "İslam Asistanı"
@@ -96,11 +94,6 @@
         "title": "Allah'ın 99 İsmi",
         "desc": "99 ismin anlam ve faziletleriyle açıklaması",
         "badge": "99 İsim"
-      },
-      "fatawa": {
-        "title": "İslami Fetvalar",
-        "desc": "Akıllı arama motoruyla fetva veritabanı",
-        "badge": "Belgelenmiş"
       },
       "prayerTimes": {
         "title": "Namaz Vakitleri",
@@ -232,7 +225,6 @@
       "content": "İçerik",
       "hadiths": "Hadisler",
       "adhkar": "Zikirler",
-      "fatwas": "Fetvalar",
       "analytics": "Analitik",
       "settings": "Ayarlar"
     },

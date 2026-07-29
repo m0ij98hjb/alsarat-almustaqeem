@@ -30,7 +30,6 @@ export async function Footer() {
         { href: `/${locale}/prophets`,   label: t('links.prophetsStories') },
         { href: `/${locale}/seerah`,     label: t('links.seerah') },
         { href: `/${locale}/asma-allah`, label: t('links.asmaAllah') },
-        { href: `/${locale}/fatawa`,     label: t('links.fatawa') },
       ],
     },
     {

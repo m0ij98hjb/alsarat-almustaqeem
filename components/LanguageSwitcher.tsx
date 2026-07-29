@@ -3,6 +3,7 @@
 import { useLocale } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
+import { ChevronDown } from 'lucide-react'
 import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config'
 
 export function LanguageSwitcher() {
@@ -47,14 +48,7 @@ export function LanguageSwitcher() {
       >
         <span className="text-base leading-none">{localeFlags[locale]}</span>
         <span className="hidden sm:block text-xs font-medium">{localeNames[locale]}</span>
-        <svg
-          className={`w-3 h-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        <ChevronDown size={13} className={`transition-transform duration-200 ${open ? 'rotate-180' : ''}`} />
       </button>
 
       {open && (

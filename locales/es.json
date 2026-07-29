@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "siteName": "As-Sirat Al-Mustaqeem",
     "siteDesc": "Una plataforma islámica integral para el Sagrado Corán, la Sunnah Profética y las ciencias islámicas"
@@ -9,7 +9,6 @@
     "adhkar": "Adhkar",
     "prophets": "Profetas",
     "seerah": "Seerah",
-    "fatawa": "Fatwas",
     "asmaAllah": "Nombres de Alá",
     "prayerTimes": "Horarios de Oración",
     "search": "Buscar",
@@ -39,7 +38,6 @@
       "prophetsStories": "Historias de Profetas",
       "seerah": "Biografía Profética",
       "asmaAllah": "99 Nombres de Alá",
-      "fatawa": "Fatwas",
       "prayerTimes": "Horarios de Oración",
       "search": "Búsqueda Completa",
       "aiAssistant": "Asistente Islámico"
@@ -96,11 +94,6 @@
         "title": "99 Nombres de Alá",
         "desc": "Explicación de los 99 nombres con significados y virtudes",
         "badge": "99 Nombres"
-      },
-      "fatawa": {
-        "title": "Fatwas Islámicas",
-        "desc": "Base de datos de fatwas con motor de búsqueda inteligente",
-        "badge": "Documentadas"
       },
       "prayerTimes": {
         "title": "Horarios de Oración",
@@ -232,7 +225,6 @@
       "content": "Contenido",
       "hadiths": "Hadices",
       "adhkar": "Adhkar",
-      "fatwas": "Fatwas",
       "analytics": "Analíticas",
       "settings": "Configuración"
     },

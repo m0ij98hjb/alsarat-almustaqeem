@@ -18,7 +18,7 @@ export default function PrayerPage() {
       subtitle="كيف نصلي بسلام وطمأنينة؟"
       icon="🕋"
       intro="الصلاة هي عمود الدين، وهي فرصة للأطفال للتقرب إلى الله من خلال الترتيب والوضوء والأذكار."
-      videoId="y3k0yanH4Fk"
+      videoId="edL3W38ODd4"
       videoTitle="الشيخ عمر فارس - تعليم الصلاة للأطفال بطريقة سهلة"
       steps={[
         { title: 'الاستقبال', text: 'نستقبل القبلة ونقف بهدوء.' },

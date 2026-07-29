@@ -1,4 +1,4 @@
-﻿{
+{
   "meta": {
     "siteName": "As-Sirat Al-Mustaqeem",
     "siteDesc": "A comprehensive Islamic platform for the Holy Quran, Prophetic Sunnah, and Islamic sciences"
@@ -12,7 +12,6 @@
     "scholars": "Scholars",
     "kids": "Kids",
     "seerah": "Seerah",
-    "fatawa": "Fatwas",
     "asmaAllah": "Names of Allah",
     "prayerTimes": "Prayer Times",
     "search": "Search",
@@ -42,7 +41,6 @@
       "prophetsStories": "Stories of Prophets",
       "seerah": "Prophetic Biography",
       "asmaAllah": "99 Names of Allah",
-      "fatawa": "Fatwas",
       "prayerTimes": "Prayer Times",
       "search": "Comprehensive Search",
       "aiAssistant": "Islamic Assistant"
@@ -99,11 +97,6 @@
         "title": "99 Names of Allah",
         "desc": "Explanation of the 99 names with meanings and virtues",
         "badge": "99 Names"
-      },
-      "fatawa": {
-        "title": "Islamic Fatwas",
-        "desc": "Fatwa database with smart search engine",
-        "badge": "Documented"
       },
       "prayerTimes": {
         "title": "Prayer Times",
@@ -256,7 +249,6 @@
       "content": "Content",
       "hadiths": "Hadiths",
       "adhkar": "Adhkar",
-      "fatwas": "Fatwas",
       "analytics": "Analytics",
       "settings": "Settings"
     },
