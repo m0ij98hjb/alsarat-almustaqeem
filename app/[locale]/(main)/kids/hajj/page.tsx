@@ -1,19 +1,23 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { KidsLessonPage } from '@/components/kids/KidsLessonPage'
 import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'kidsPage' })
   return {
-    title: 'تعلم الحج للأطفال',
-    description: 'الخطوات الأساسية للحج مع شرح مبسط للأطفال وفيديو تعليمي.',
+    title: t('lessons.hajj.title'),
+    description: t('lessons.hajj.desc'),
     alternates: buildAlternates(locale, 'kids/hajj'),
   }
 }
 
-export default function HajjPage() {
+export default async function HajjPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
   return (
     <KidsLessonPage
+      locale={locale}
       title="تعلم الحج"
       subtitle="الخطوات الأساسية للحج مع شرح مبسط للأطفال"
       icon="🪔"

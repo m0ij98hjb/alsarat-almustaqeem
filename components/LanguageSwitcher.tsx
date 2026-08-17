@@ -1,6 +1,6 @@
 'use client'
 
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useRouter, usePathname } from 'next/navigation'
 import { useState, useRef, useEffect } from 'react'
 import { ChevronDown } from 'lucide-react'
@@ -8,6 +8,7 @@ import { locales, localeNames, localeFlags, type Locale } from '@/i18n/config'
 
 export function LanguageSwitcher() {
   const locale = useLocale() as Locale
+  const t = useTranslations('nav')
   const router = useRouter()
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -44,7 +45,7 @@ export function LanguageSwitcher() {
       <button
         onClick={() => setOpen(v => !v)}
         className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-gray-300 hover:text-gold-300 hover:bg-white/5 transition-colors text-sm"
-        aria-label="Select language"
+        aria-label={t('language')}
       >
         <span className="text-base leading-none">{localeFlags[locale]}</span>
         <span className="hidden sm:block text-xs font-medium">{localeNames[locale]}</span>

@@ -1,7 +1,9 @@
 import Link from 'next/link'
+import { getTranslations } from 'next-intl/server'
 import { SEERAH_TIMELINE } from '@/data/seerah'
 
-export function MeetProphet({ locale }: { locale: string }) {
+export async function MeetProphet({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: 'home' })
   // 4 landmark events spanning birth to death, one from each key moment.
   const highlights = [
     SEERAH_TIMELINE[0].events[0], // birth
@@ -14,12 +16,8 @@ export function MeetProphet({ locale }: { locale: string }) {
     <section className="py-20 bg-islamic-navy-mid">
       <div className="max-w-6xl mx-auto px-4">
         <div className="section-header">
-          <h2 className="text-white">{locale === 'ar' ? 'تعرّف على النبي محمد ﷺ' : 'Meet Prophet Muhammad ﷺ'}</h2>
-          <p className="text-gray-300">
-            {locale === 'ar'
-              ? 'خاتم الأنبياء والمرسلين، رحمة للعالمين، أُنزل عليه القرآن الكريم'
-              : 'The final prophet, a mercy to all worlds, to whom the Quran was revealed'}
-          </p>
+          <h2 className="text-white">{t('meetProphet.title')}</h2>
+          <p className="text-gray-300">{t('meetProphet.subtitle')}</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 mb-8">
           {highlights.map((event) => (
@@ -36,7 +34,7 @@ export function MeetProphet({ locale }: { locale: string }) {
         </div>
         <div className="text-center">
           <Link href={`/${locale}/seerah`} className="btn-gold px-8 py-3 inline-block">
-            {locale === 'ar' ? 'اقرأ السيرة كاملة' : 'Read More'}
+            {t('meetProphet.cta')}
           </Link>
         </div>
       </div>

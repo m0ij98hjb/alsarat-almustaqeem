@@ -10,9 +10,10 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
+  const tl = await getTranslations({ locale, namespace: 'livePage' })
   return {
-    title: `البث المباشر | ${t('siteName')}`,
-    description: 'تابع القنوات الإسلامية المباشرة والاذاعة من خلال البث المباشر.',
+    title: `${tl('title')} | ${t('siteName')}`,
+    description: tl('subtitle'),
     alternates: buildAlternates(locale, 'live'),
   }
 }

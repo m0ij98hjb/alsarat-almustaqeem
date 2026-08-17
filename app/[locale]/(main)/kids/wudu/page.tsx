@@ -1,19 +1,23 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import { KidsLessonPage } from '@/components/kids/KidsLessonPage'
 import { buildAlternates } from '@/lib/seo'
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'kidsPage' })
   return {
-    title: 'تعلم الوضوء للأطفال',
-    description: 'خطوات الوضوء بشكل بسيط وممتع للأطفال مع فيديو تعليمي.',
+    title: t('lessons.wudu.title'),
+    description: t('lessons.wudu.desc'),
     alternates: buildAlternates(locale, 'kids/wudu'),
   }
 }
 
-export default function WuduPage() {
+export default async function WuduPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
   return (
     <KidsLessonPage
+      locale={locale}
       title="تعلم الوضوء"
       subtitle="خطوات الوضوء بشكل بسيط وممتع للأطفال"
       icon="🧼"

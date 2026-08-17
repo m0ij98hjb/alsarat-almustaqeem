@@ -11,7 +11,6 @@ import { DiscoverQuran } from '@/components/home/DiscoverQuran'
 import { FivePillars } from '@/components/home/FivePillars'
 import { WorldStats } from '@/components/home/WorldStats'
 import { FaqSection } from '@/components/home/FaqSection'
-import { AskAIHome } from '@/components/home/AskAIHome'
 import { WatchLearnHome } from '@/components/home/WatchLearnHome'
 import { LiveFromMakkah } from '@/components/home/LiveFromMakkah'
 import { TrustedScholars } from '@/components/home/TrustedScholars'
@@ -42,10 +41,10 @@ export default async function HomePage({
   const t = await getTranslations({ locale, namespace: 'home' })
 
   const services = [
-    { href: `/${locale}/live`,     icon: '📡', title: locale === 'ar' ? 'البث المباشر' : 'Live', desc: locale === 'ar' ? 'تابع القنوات الإسلامية مباشرة' : 'Watch Islamic channels directly' },
-    { href: `/${locale}/scholars`, icon: '👳', title: locale === 'ar' ? 'العلماء والدعاة' : 'Scholars', desc: locale === 'ar' ? 'تعرف على العلماء والدعاة الموثوقين' : 'Meet trusted scholars and preachers' },
-    { href: `/${locale}/kids`,     icon: '🧒', title: locale === 'ar' ? 'تعليم الأطفال' : 'Kids Education', desc: locale === 'ar' ? 'محتوى مبسط للأطفال عن الإسلام' : 'Simple, child-friendly Islamic lessons' },
-    { href: `/${locale}/hadith`,   icon: '📚', title: locale === 'ar' ? 'الأحاديث' : 'Hadith', desc: locale === 'ar' ? 'أحاديث مصنفة مع البحث والنسخ' : 'Curated hadiths with search and sharing' },
+    { href: `/${locale}/live`,     icon: '📡', title: t('services.live.title'), desc: t('services.live.desc') },
+    { href: `/${locale}/scholars`, icon: '👳', title: t('services.scholars.title'), desc: t('services.scholars.desc') },
+    { href: `/${locale}/kids`,     icon: '🧒', title: t('services.kids.title'), desc: t('services.kids.desc') },
+    { href: `/${locale}/hadith`,   icon: '📚', title: t('services.hadith.title'), desc: t('services.hadith.desc') },
   ]
 
   const features = [
@@ -109,8 +108,8 @@ export default async function HomePage({
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href={`/${locale}/quran`}          className="btn-gold text-base px-8 py-3">{t('btnQuran')}</Link>
             <Link href={`/${locale}/adhkar`}         className="btn-outline-gold text-base px-8 py-3">{t('btnAdhkar')}</Link>
-            <Link href={`/${locale}/islamic-videos`} className="btn-outline-gold text-base px-8 py-3">{locale === 'ar' ? '📺 شاهد الفيديوهات' : '📺 Watch Videos'}</Link>
-            <Link href={`/${locale}/live`}           className="btn-outline-gold text-base px-8 py-3">{locale === 'ar' ? '📡 بث مباشر من مكة' : '📡 Live From Makkah'}</Link>
+            <Link href={`/${locale}/islamic-videos`} className="btn-outline-gold text-base px-8 py-3">{t('btnWatchVideos')}</Link>
+            <Link href={`/${locale}/live`}           className="btn-outline-gold text-base px-8 py-3">{t('btnLiveMakkah')}</Link>
             <Link href={`/${locale}#ask-ai`}         className="btn-outline-gold text-base px-8 py-3">{t('btnAI')}</Link>
           </div>
         </div>
@@ -147,8 +146,8 @@ export default async function HomePage({
       <section className="py-20 bg-islamic-cream dark:bg-islamic-navy">
         <div className="max-w-7xl mx-auto px-4">
           <div className="section-header">
-            <h2>{locale === 'ar' ? 'الخدمات الإسلامية' : 'Islamic Services'}</h2>
-            <p>{locale === 'ar' ? 'خدمات مختارة تناسب جميع احتياجاتك الإسلامية' : 'A curated set of services for your everyday Islamic needs'}</p>
+            <h2>{t('servicesTitle')}</h2>
+            <p>{t('servicesDesc')}</p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
             {services.map(service => (
@@ -197,9 +196,7 @@ export default async function HomePage({
                 <div className="text-4xl mb-4">{f.icon}</div>
                 <div className="flex items-start justify-between mb-2">
                   <h3 className="font-arabic text-xl font-bold text-islamic-green dark:text-gold-300 group-hover:text-gold-500 transition-colors">
-                    {f.key === 'videos'
-                      ? (locale === 'ar' ? 'الفيديوهات الإسلامية' : 'Islamic Videos')
-                      : t(`features.${f.key}.title`)}
+                    {f.key === 'videos' ? t('featuresVideos.title') : t(`features.${f.key}.title`)}
                   </h3>
                   {f.key !== 'videos' && (
                     <span className="text-xs bg-gold-100 dark:bg-gold-900/30 text-gold-700 dark:text-gold-400 px-2 py-0.5 rounded-full">
@@ -208,9 +205,7 @@ export default async function HomePage({
                   )}
                 </div>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                  {f.key === 'videos'
-                    ? (locale === 'ar' ? 'محاضرات موثوقة من قنوات إسلامية رسمية' : 'Trusted lectures from official Islamic channels')
-                    : t(`features.${f.key}.desc`)}
+                  {f.key === 'videos' ? t('featuresVideos.desc') : t(`features.${f.key}.desc`)}
                 </p>
               </Link>
             ))}
@@ -223,9 +218,6 @@ export default async function HomePage({
 
       {/* ===== FAQ ===== */}
       <FaqSection locale={locale} />
-
-      {/* ===== ASK AI ===== */}
-      <AskAIHome />
 
       {/* ===== WATCH & LEARN ===== */}
       <WatchLearnHome locale={locale} />

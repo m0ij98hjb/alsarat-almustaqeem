@@ -10,24 +10,27 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
+  const th = await getTranslations({ locale, namespace: 'hadith' })
   return {
-    title: `الأحاديث | ${t('siteName')}`,
-    description: 'استكشف أحاديث إسلامية مصنفة مع البحث والتصنيفات وتبادل الحديث بسهولة.',
+    title: `${th('title')} | ${t('siteName')}`,
+    description: th('heroDesc'),
     alternates: buildAlternates(locale, 'hadith'),
   }
 }
 
 export default async function HadithPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'meta' })
+  const th = await getTranslations({ locale, namespace: 'hadith' })
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: 'الأحاديث النبوية',
-    description: 'استكشف أحاديث إسلامية مصنفة مع البحث والتصنيفات وتبادل الحديث بسهولة.',
+    headline: th('title'),
+    description: th('heroDesc'),
     inLanguage: locale,
     mainEntityOfPage: absoluteUrl(`/${locale}/hadith`),
-    author: { '@type': 'Organization', name: 'الصراط المستقيم' },
-    publisher: { '@type': 'Organization', name: 'الصراط المستقيم' },
+    author: { '@type': 'Organization', name: t('siteName') },
+    publisher: { '@type': 'Organization', name: t('siteName') },
   }
   return (
     <>

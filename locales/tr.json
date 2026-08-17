@@ -8,6 +8,12 @@
     "hadith": "Hadisler",
     "adhkar": "Zikirler",
     "prophets": "Peygamberler",
+    "live": "Canlı",
+    "scholars": "Alimler",
+    "kids": "Çocuklar",
+    "islamicVideos": "İslami Videolar",
+    "library": "İslami Kütüphane",
+    "mainSection": "Ana Menü",
     "seerah": "Siyer",
     "asmaAllah": "Allah'ın İsimleri",
     "prayerTimes": "Namaz Vakitleri",
@@ -111,7 +117,175 @@
     "readFullSurah": "Tam Sureyi oku",
     "aiTitle": "YZ İslam Asistanı \"Er-Reşid\"",
     "aiDesc": "Her İslami soruyu sor, asistan Kutsal Kuran ve sahih Peygamber Sünneti'nden cevap verir",
-    "aiBtn": "Konuşmayı Başlat"
+    "aiBtn": "Konuşmayı Başlat",
+    "servicesTitle": "İslami Hizmetler",
+    "servicesDesc": "Tüm İslami ihtiyaçlarınız için seçilmiş hizmetler",
+    "services": {
+      "live": {
+        "title": "Canlı",
+        "desc": "İslami kanalları canlı takip edin"
+      },
+      "scholars": {
+        "title": "Alimler",
+        "desc": "Güvenilir alimleri ve vaizleri tanıyın"
+      },
+      "kids": {
+        "title": "Çocuk Eğitimi",
+        "desc": "Çocuklara yönelik sade İslami dersler"
+      },
+      "hadith": {
+        "title": "Hadisler",
+        "desc": "Arama ve paylaşım özellikli sınıflandırılmış hadisler"
+      }
+    },
+    "featuresVideos": {
+      "title": "İslami Videolar",
+      "desc": "Resmi İslami kanallardan güvenilir dersler"
+    },
+    "btnWatchVideos": "📺 Videoları izle",
+    "btnLiveMakkah": "📡 Mekke'den Canlı",
+    "journey": {
+      "title": "Yolculuğunuza Başlayın",
+      "subtitle": "İslam'ı merak eden herkes için basit, adım adım bir rehber",
+      "steps": {
+        "islam": "İslam nedir?",
+        "allah": "Allah kimdir?",
+        "prophet": "Peygamber Muhammed ﷺ kimdir?",
+        "quran": "Kuran nedir?",
+        "prayer": "Neden namaz kılarız?",
+        "ramadan": "Ramazan",
+        "hajj": "Hac",
+        "live": "Mekke'yi canlı izleyin",
+        "ai": "Yapay zeka asistanına sorun"
+      }
+    },
+    "whyExplore": {
+      "title": "Neden İslam'ı Keşfetmeli?",
+      "subtitle": "İslam'ın temelindeki evrensel insani değerler",
+      "values": {
+        "mercy": {
+          "title": "Merhamet",
+          "desc": "Müslümanlar her işe Er-Rahman ve Er-Rahim olan Allah'ın adıyla başlar — merhamet, İslam'ın tüm yaratılışa bakışının merkezindedir."
+        },
+        "justice": {
+          "title": "Adalet",
+          "desc": "İslam, hoşlanmadığımız kimselere karşı bile adaleti emreder ve onu takvaya yakın kılar."
+        },
+        "compassion": {
+          "title": "Şefkat",
+          "desc": "Peygamber ﷺ, müminleri karşılıklı şefkatlerinde tek bir beden gibi tasvir etmiştir."
+        },
+        "knowledge": {
+          "title": "İlim",
+          "desc": "Kuran'dan ilk inen ayet okumayı emreder — ilim aramak her Müslümana farzdır."
+        },
+        "family": {
+          "title": "Aile",
+          "desc": "İslam, ebeveynlere hürmeti ve akrabalık bağlarını güçlü bir toplumun temeli olarak görür."
+        },
+        "hope": {
+          "title": "Umut",
+          "desc": "İslam, sıkıntı ne kadar büyük olursa olsun Allah'ın rahmetinden ümit kesmeyi yasaklar."
+        },
+        "peace": {
+          "title": "Barış",
+          "desc": "\"İslam\" kelimesinin kökü \"barış\" ile aynıdır ve Müslümanlar birbirlerini bu kelimeyle selamlar."
+        },
+        "honesty": {
+          "title": "Doğruluk",
+          "desc": "Peygamber ﷺ, kişiyi sıddıklar mertebesine ulaştırana dek doğruluğu emretmiştir."
+        }
+      }
+    },
+    "meetProphet": {
+      "title": "Peygamber Muhammed'i ﷺ Tanıyın",
+      "subtitle": "Kuran'ın kendisine indirildiği, âlemlere rahmet olan son peygamber",
+      "cta": "Tüm Siyeri Oku"
+    },
+    "discoverQuran": {
+      "title": "Kutsal Kuran'ı Keşfedin",
+      "subtitle": "Elinizin altında 6.236 ayet — okuyun, dinleyin ve arayın",
+      "tiles": {
+        "read": "Oku",
+        "listen": "Dinle",
+        "translations": "Çeviriler",
+        "randomVerse": "Rastgele Ayet",
+        "search": "Ara",
+        "continueReading": "Okumaya Devam Et"
+      }
+    },
+    "fivePillarsSection": {
+      "title": "İslam'ın Beş Şartı",
+      "subtitle": "Bir Müslümanın hayatının üzerine inşa edildiği temel",
+      "pillars": {
+        "shahada": {
+          "name": "Kelime-i Şehadet",
+          "desc": "Allah'tan başka ilah olmadığına ve Muhammed'in O'nun elçisi olduğuna şahitlik etmek"
+        },
+        "salah": {
+          "name": "Namaz",
+          "desc": "Kulu Rabbine bağlayan günde beş vakit namaz"
+        },
+        "zakat": {
+          "name": "Zekat",
+          "desc": "Malın bir kısmını ihtiyaç sahiplerine vermek"
+        },
+        "sawm": {
+          "name": "Oruç",
+          "desc": "Nefis terbiyesi ve takva için Ramazan ayında oruç tutmak"
+        },
+        "hajj": {
+          "name": "Hac",
+          "desc": "Gücü yetenler için ömürde bir kez Mekke'ye yapılan yolculuk"
+        }
+      }
+    },
+    "worldStats": {
+      "title": "Dünyada İslam",
+      "stats": {
+        "muslims": "Dünya çapında Müslüman",
+        "countries": "Müslüman çoğunluklu ülke",
+        "religion": "En hızlı büyüyen din",
+        "history": "Kesintisiz tarih yılı"
+      }
+    },
+    "faqSection": {
+      "title": "Sıkça Sorulan Sorular",
+      "subtitle": "İslam'ı keşfederken en sık sorulan sorulara kısa cevaplar"
+    },
+    "watchLearn": {
+      "title": "İzle ve Öğren",
+      "subtitle": "Yalnızca doğrulanmış resmi İslami kanallardan dersler",
+      "playAria": "Videoyu oynat: {title}",
+      "seeAll": "Tüm videoları gör"
+    },
+    "liveMakkah": {
+      "title": "Mekke ve Medine'den Canlı Yayın",
+      "subtitle": "İki Kutsal Mescid'den resmi 7/24 yayını takip edin",
+      "status": "Canlı yayın",
+      "seeAll": "Tüm canlı kanalları gör"
+    },
+    "trustedScholarsSection": {
+      "title": "Güvenilir Alimler",
+      "subtitle": "Yalnızca resmi kaynaklarına bağlantı verilen doğrulanmış alimleri ve vaizleri tanıyın",
+      "seeAll": "Tüm alimleri ve vaizleri gör"
+    },
+    "dailyInspiration": {
+      "title": "Günün İlhamı",
+      "subtitle": "Her gün yenilenen bir ayet, bir hadis ve bir dua"
+    },
+    "todaysPicks": {
+      "featuredVideo": "Günün Öne Çıkan Videosu",
+      "featuredScholar": "Günün Öne Çıkan Alimi"
+    },
+    "finalCta": {
+      "title": "Yolculuğunuza Devam Edin",
+      "subtitle": "Nereden başlarsanız başlayın, bu site sonraki her adımda size eşlik etmek için burada",
+      "btnQuran": "📖 Kuran Oku",
+      "btnAI": "🤖 Yapay Zekaya Sor",
+      "btnVideos": "📺 Videoları İzle",
+      "btnLearnMore": "🌟 Daha Fazla Bilgi"
+    }
   },
   "quran": {
     "title": "Kutsal Kuran",
@@ -135,7 +309,33 @@
     "copied": "Kopyalandı",
     "prevSurah": "Önceki sure",
     "juz": "Cüz",
-    "nextSurah": "Sonraki sure"
+    "nextSurah": "Sonraki sure",
+    "referenceTitle": "Kuran Kaynağı",
+    "referenceDesc": "Bu harici kaynak, Kuran-ı Kerim'i Osmanlı hattıyla okumanıza, tilavetleri dinlemenize, tefsir okumanıza, ayetlerde arama yapmanıza ve sureleri kolayca gezinmenize olanak tanır.\nBu site kaynağın içeriğini doğrudan göstermez, yalnızca hızlı erişim sağlar.",
+    "referenceLinkBtn": "Kuran Kaynağına Git",
+    "referenceFeatures": {
+      "read": {
+        "title": "📖 Kuran-ı Kerim'i Oku",
+        "desc": "Kuran-ı Kerim'i net Osmanlı hattıyla okumaya doğrudan git."
+      },
+      "listen": {
+        "title": "🎧 Tilavetleri Dinle",
+        "desc": "Harici kaynaktaki güvenilir kaynaklardan tilavetleri dinle."
+      },
+      "tafsir": {
+        "title": "📚 Kuran Tefsiri",
+        "desc": "Ayetlerin birden fazla tefsirine kolayca göz at."
+      },
+      "search": {
+        "title": "🔍 Kuran'da Ara",
+        "desc": "Ayet ve surelerde hızlı ve doğru şekilde ara."
+      },
+      "browse": {
+        "title": "⭐ Tüm Sureleri Gezin",
+        "desc": "Surelerin tam listesine rahatça göz at."
+      }
+    },
+    "referenceNote": "Kaynak yeni bir pencerede açılacak, böylece tüm hizmetlerinden yararlanıp ardından kolayca sitemize dönebilirsiniz."
   },
   "hadith": {
     "title": "Şerefli Peygamber Hadisleri",
@@ -149,7 +349,28 @@
       "HASAN": "Hasen",
       "DAIF": "Zayıf",
       "MAWDU": "Mevzu"
-    }
+    },
+    "heroDesc": "Kırk Hadis (Erbain Neveviyye) ve Riyazüs Salihin'den derlenen, konu ve dereceye göre sınıflandırılmış sahih ve hasen hadislerden oluşan seçkin bir koleksiyon.",
+    "dorarTitle": "Dorar Al-Saniyyah Ansiklopedisinde Ara",
+    "dorarDesc": "Dorar Al-Saniyyah web sitesinden doğrudan milyonlarca hadis ve konuda arama yapın; arama ve uzman ansiklopedilerine hızlı erişim sağlayın.",
+    "dorarPlaceholder": "Arama kelimenizi yazın ve ara'ya basın",
+    "dorarSearchBtn": "Ara",
+    "visitDorar": "Dorar Al-Saniyyah Ansiklopedisini ziyaret et",
+    "servicesTitle": "Dorar Al-Saniyyah Hizmetleri",
+    "servicesDesc": "Aradığınız kitap ve hizmetlere doğrudan ulaşmanız için Dorar Al-Saniyyah'ın başlıca ansiklopedilerine hızlı bağlantılar.",
+    "serviceOpenDesc": "Dorar Al-Saniyyah sitesindeki ilgili bölümü açar.",
+    "services": {
+      "encyclopedia": "Hadis Ansiklopedisi",
+      "adhkar": "Zikirler",
+      "duas": "Dualar",
+      "scientific": "İlmi Ansiklopedi",
+      "fiqh": "Fıkıh Ansiklopedisi"
+    },
+    "filterPlaceholder": "Hadislerde, ravilerde veya konularda arayın",
+    "categoriesLabel": "Kategoriler:",
+    "shareTitle": "İslami Hadis",
+    "copyHadithBtn": "Hadisi kopyala",
+    "shareHadithBtn": "Hadisi paylaş"
   },
   "adhkar": {
     "title": "Zikirler ve Dualar",
@@ -165,12 +386,18 @@
       "TRAVEL": "Yolculuk Zikirleri",
       "FOOD": "Yemek Zikirleri",
       "GENERAL": "Genel Zikirler"
-    }
+    },
+    "searchPlaceholder": "Zikirlerde ve dualarda ara...",
+    "noResults": "Eşleşen sonuç bulunamadı"
   },
   "prophets": {
     "title": "Peygamberler ve Resuller'in Kıssaları",
     "ayah": "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
-    "inQuran": "× Kuran'da"
+    "inQuran": "× Kuran'da",
+    "backToList": "← Peygamberler listesine dön",
+    "storyTitle": "Kıssa",
+    "lessonsTitle": "Ders ve İbretler",
+    "referencesTitle": "Kuran'da Geçtiği Yerler"
   },
   "seerah": {
     "title": "Şerefli Peygamber Biyografisi",
@@ -206,6 +433,44 @@
       "İstiğfarın (tövbenin) fazileti nedir?"
     ]
   },
+  "videos": {
+    "title": "📺 İslami Videolar",
+    "subtitle": "Tanınmış alimlerden ve vaizlerden güvenilir dersler, konferanslar ve davet klipleri sunan profesyonel bir İslami kaynak; öğrenmeniz ve hakikate güvenle dönmeniz için.",
+    "quickSearch": "Hızlı ve etkili arama",
+    "searchPlaceholder": "Videoları başlık, kanal, konuşmacı veya kategoriye göre arayın",
+    "categoryFilter": "Kategori",
+    "channelAndSpeaker": "Kanal ve Konuşmacı",
+    "statsAvailable": "Mevcut video sayısı",
+    "statsFeatured": "Öne çıkan içerik",
+    "statsFeaturedDesc": "Güvenilir seçkiler",
+    "discover": "İslam'ı Keşfedin",
+    "discoverDesc": "İslam'ı ve Peygamber Muhammed'in ﷺ mesajını tanımak istiyorsanız, burada güvenilir ve anlaşılır bilgiler sunan tanıtıcı videolardan oluşan bir seçki bulacaksınız.",
+    "sectionDesc": "Bu İslami alanla ilgili seçilmiş video koleksiyonu.",
+    "referenceTitle": "Profesyonel İslami Kaynak",
+    "referenceDesc": "Tüm videolar, sitenin görsel kimliği ve içerik kalitesi korunarak arama, filtreleme, favoriler ve paylaşım özellikleriyle resmi YouTube bağlantıları olarak sunulmaktadır.",
+    "watchNow": "Şimdi izle",
+    "share": "Paylaş",
+    "copyLink": "Bağlantıyı kopyala",
+    "saved": "Kaydedildi",
+    "addToFavorites": "Favorilere ekle",
+    "libraryBadge": "Güvenilir Davet Kütüphanesi",
+    "libraryStats": "Kütüphane İstatistikleri",
+    "visitChannel": "Kanalı ziyaret et",
+    "noResults": "Aramanızla eşleşen video yok.",
+    "channelChip": "Kanal: {channel}",
+    "sheikhChip": "Şeyh: {sheikh}",
+    "playAria": "Videoyu oynat: {title}",
+    "thumbnailAlt": "Video küçük resmi: {title}",
+    "langArabic": "Arapça",
+    "langEnglish": "İngilizce",
+    "categories": {
+      "aqeedah": "Akide",
+      "fiqh": "Fıkıh",
+      "seerah": "Siyer",
+      "dawah": "Davet",
+      "tazkiyah": "Tezkiye"
+    }
+  },
   "common": {
     "siteName": "As-Sirat Al-Mustaqeem",
     "loading": "Yükleniyor...",
@@ -214,7 +479,10 @@
     "back": "Geri",
     "backToSite": "Siteye dön",
     "admin": "Yönetici",
-    "dashboard": "Panel"
+    "dashboard": "Panel",
+    "all": "Tümü",
+    "comingSoon": "Yakında",
+    "play": "Oynat"
   },
   "admin": {
     "title": "As-Sirat Al-Mustaqeem Yönetimi",
@@ -229,5 +497,96 @@
       "settings": "Ayarlar"
     },
     "backToSite": "Siteye dön"
+  },
+  "asmaAllah": {
+    "searchPlaceholder": "Allah'ın bir ismini arayın...",
+    "resultsCount": "99 isimden {count}",
+    "noResults": "Eşleşen sonuç bulunamadı"
+  },
+  "prayerTimes": {
+    "cityLabel": "Şehir",
+    "countryLabel": "Ülke Kodu",
+    "cityPlaceholder": "Cidde",
+    "countryPlaceholder": "SA",
+    "searchBtn": "Ara",
+    "useMyLocation": "📍 Mevcut konumumu kullan",
+    "loading": "Namaz vakitleri yükleniyor...",
+    "errorFetch": "Namaz vakitleri alınamadı",
+    "errorConnection": "Namaz vakitleri servisine bağlanılamadı",
+    "errorLocation": "Konumunuza erişilemedi, şehri manuel olarak seçebilirsiniz",
+    "yourLocation": "Mevcut konumunuz",
+    "nextPrayer": "Sıradaki Namaz",
+    "after": "{time} sonra",
+    "hoursAndMinutes": "{h} sa {m} dk",
+    "minutesOnly": "{m} dk",
+    "midnight": "Gece Yarısı",
+    "prayers": {
+      "imsak": "İmsak",
+      "fajr": "Sabah",
+      "sunrise": "Güneş",
+      "dhuhr": "Öğle",
+      "asr": "İkindi",
+      "maghrib": "Akşam",
+      "isha": "Yatsı"
+    },
+    "pageDescription": "Şehriniz veya mevcut konumunuza göre tam namaz vakitleri: Sabah, Güneş, Öğle, İkindi, Akşam ve Yatsı."
+  },
+  "livePage": {
+    "title": "Canlı Yayın",
+    "subtitle": "Sitenin kimliğine uygun, rahat bir deneyimle İslami TV ve radyo kanallarını canlı takip edin."
+  },
+  "scholarsPage": {
+    "title": "Alimler ve Vaizler",
+    "subtitle": "Yalnızca doğrulanmış resmi kaynaklarına bağlantı veren, alimlerin, vaizlerin ve resmi İslami kurumların güvenilir bir rehberi.",
+    "categories": {
+      "saudi": "Suudi Arabistan Alimleri",
+      "international": "Uluslararası Vaizler ve Şeyhler",
+      "organization": "Resmi İslami Kurum ve Kuruluşlar"
+    },
+    "specialtyLabel": "Uzmanlık:",
+    "countryLabel": "Ülke:",
+    "links": {
+      "website": "Web Sitesini Ziyaret Et",
+      "youtube": "YouTube",
+      "fatwa": "Fetvalar",
+      "lectures": "Dersler",
+      "x": "X",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "telegram": "Telegram"
+    },
+    "photoAlt": "{name} fotoğrafı, {specialty}"
+  },
+  "kidsPage": {
+    "title": "Çocuk Bölümü",
+    "subtitle": "Çocukların resimler ve kolay açıklamalarla İslam'ı adım adım öğrenmesi için basit ve eğlenceli içerikler.",
+    "lessons": {
+      "wudu": {
+        "title": "Abdesti Öğren",
+        "desc": "Abdestin adımları ve önemi"
+      },
+      "prayer": {
+        "title": "Namazı Öğren",
+        "desc": "Namazın temel aşamaları ve şartları"
+      },
+      "umrah": {
+        "title": "Umreyi Öğren",
+        "desc": "Umrenin adımları basitçe anlatılıyor"
+      },
+      "hajj": {
+        "title": "Haccı Öğren",
+        "desc": "Kutsal mekanlar ve haccın adımları"
+      },
+      "learn": {
+        "title": "Çocuklar için İslam",
+        "desc": "İslam'ın temelleri ve şartları"
+      }
+    }
+  },
+  "kidsLesson": {
+    "explanationTitle": "Basit Açıklama",
+    "watchVideoTitle": "Videoyu İzle",
+    "quizTitle": "Kısa Test",
+    "answerLabel": "Cevap"
   }
 }

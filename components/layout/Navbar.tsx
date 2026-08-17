@@ -68,21 +68,21 @@ export function Navbar() {
   const directItems: NavItem[] = [
     { href: `/${locale}/quran`,        label: t('quran'),       icon: BookOpen },
     { href: `/${locale}/hadith`,       label: t('hadith'),      icon: ScrollText },
-    { href: `/${locale}/live`,         label: locale === 'ar' ? 'البث المباشر' : 'Live', icon: Radio },
-    { href: `/${locale}/kids`,         label: locale === 'ar' ? 'قسم الأطفال' : 'Kids', icon: Baby },
+    { href: `/${locale}/live`,         label: t('live'), icon: Radio },
+    { href: `/${locale}/kids`,         label: t('kids'), icon: Baby },
     { href: `/${locale}/prayer-times`, label: t('prayerTimes'), icon: Clock3 },
   ]
 
   const libraryItems: NavItem[] = [
-    { href: `/${locale}/islamic-videos`, label: locale === 'ar' ? 'الفيديوهات الإسلامية' : 'Islamic Videos', icon: Video },
-    { href: `/${locale}/scholars`,       label: locale === 'ar' ? 'العلماء والدعاة' : 'Scholars', icon: Users },
+    { href: `/${locale}/islamic-videos`, label: t('islamicVideos'), icon: Video },
+    { href: `/${locale}/scholars`,       label: t('scholars'), icon: Users },
     { href: `/${locale}/adhkar`,         label: t('adhkar'),      icon: Repeat },
     { href: `/${locale}/prophets`,       label: t('prophets'),    icon: Star },
     { href: `/${locale}/seerah`,         label: t('seerah'),      icon: History },
     { href: `/${locale}/asma-allah`,     label: t('asmaAllah'),   icon: Sparkles },
   ]
 
-  const libraryLabel = locale === 'ar' ? 'المكتبة الإسلامية' : 'Islamic Library'
+  const libraryLabel = t('library')
 
   const isActive = (href: string) => pathname?.startsWith(href) && pathname !== `/${locale}`
   const isLibraryActive = libraryItems.some((item) => isActive(item.href))
@@ -212,7 +212,7 @@ export function Navbar() {
           <div className="lg:hidden border-t border-gold-400/20 py-4 space-y-5">
             <div>
               <p className="px-3 mb-2 text-xs font-semibold text-gold-400/70 tracking-wide">
-                {locale === 'ar' ? 'الرئيسية' : 'Main'}
+                {t('mainSection')}
               </p>
               <ul className="space-y-1">
                 {directItems.map((item) => (

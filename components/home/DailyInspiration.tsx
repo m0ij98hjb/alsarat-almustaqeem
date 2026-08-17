@@ -1,9 +1,11 @@
+import { getTranslations } from 'next-intl/server'
 import { dailyVerses } from '@/data/dailyVerses'
 import { HADITHS } from '@/data/hadiths'
 import { ADHKAR_CATEGORIES } from '@/data/adhkar'
 import { dailyIndex } from './dailyPick'
 
-export function DailyInspiration({ locale }: { locale: string }) {
+export async function DailyInspiration({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: 'home' })
   const verse = dailyVerses[dailyIndex(dailyVerses.length)]
   const hadith = HADITHS[dailyIndex(HADITHS.length)]
 
@@ -15,10 +17,8 @@ export function DailyInspiration({ locale }: { locale: string }) {
     <section className="py-20 bg-islamic-navy-mid">
       <div className="max-w-6xl mx-auto px-4">
         <div className="section-header">
-          <h2 className="text-white">{locale === 'ar' ? 'إلهام اليوم' : 'Daily Inspiration'}</h2>
-          <p className="text-gray-300">
-            {locale === 'ar' ? 'آية وحديث ودعاء يتجدد كل يوم' : 'A verse, a hadith, and a dua — refreshed daily'}
-          </p>
+          <h2 className="text-white">{t('dailyInspiration.title')}</h2>
+          <p className="text-gray-300">{t('dailyInspiration.subtitle')}</p>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
           <div className="card-islamic p-6 text-center">

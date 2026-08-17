@@ -11,6 +11,9 @@
     "live": "Live",
     "scholars": "Scholars",
     "kids": "Kids",
+    "islamicVideos": "Islamic Videos",
+    "library": "Islamic Library",
+    "mainSection": "Main",
     "seerah": "Seerah",
     "asmaAllah": "Names of Allah",
     "prayerTimes": "Prayer Times",
@@ -114,7 +117,175 @@
     "readFullSurah": "Read the full Surah",
     "aiTitle": "The AI Islamic Assistant \"Al-Rashid\"",
     "aiDesc": "Ask any Islamic question and the assistant will answer from the Holy Quran and authentic Prophetic Sunnah",
-    "aiBtn": "Start the Conversation"
+    "aiBtn": "Start the Conversation",
+    "servicesTitle": "Islamic Services",
+    "servicesDesc": "A curated set of services for your everyday Islamic needs",
+    "services": {
+      "live": {
+        "title": "Live",
+        "desc": "Watch Islamic channels directly"
+      },
+      "scholars": {
+        "title": "Scholars",
+        "desc": "Meet trusted scholars and preachers"
+      },
+      "kids": {
+        "title": "Kids Education",
+        "desc": "Simple, child-friendly Islamic lessons"
+      },
+      "hadith": {
+        "title": "Hadith",
+        "desc": "Curated hadiths with search and sharing"
+      }
+    },
+    "featuresVideos": {
+      "title": "Islamic Videos",
+      "desc": "Trusted lectures from official Islamic channels"
+    },
+    "btnWatchVideos": "📺 Watch Videos",
+    "btnLiveMakkah": "📡 Live From Makkah",
+    "journey": {
+      "title": "Start Your Journey",
+      "subtitle": "A simple, step-by-step guide for anyone curious about Islam",
+      "steps": {
+        "islam": "What is Islam?",
+        "allah": "Who is Allah?",
+        "prophet": "Who is Prophet Muhammad ﷺ?",
+        "quran": "What is the Quran?",
+        "prayer": "Why do we pray?",
+        "ramadan": "Ramadan",
+        "hajj": "Hajj",
+        "live": "Watch Makkah Live",
+        "ai": "Ask AI"
+      }
+    },
+    "whyExplore": {
+      "title": "Why Explore Islam",
+      "subtitle": "Universal human values at the heart of Islam",
+      "values": {
+        "mercy": {
+          "title": "Mercy",
+          "desc": "Muslims begin every act in the name of the Most Merciful — mercy is central to how Islam sees all creation."
+        },
+        "justice": {
+          "title": "Justice",
+          "desc": "Islam commands justice even toward those we dislike, and ties it closely to piety."
+        },
+        "compassion": {
+          "title": "Compassion",
+          "desc": "The Prophet ﷺ described believers as one body in their mutual compassion."
+        },
+        "knowledge": {
+          "title": "Knowledge",
+          "desc": "The first Quranic revelation was a command to read — seeking knowledge is a duty on every Muslim."
+        },
+        "family": {
+          "title": "Family",
+          "desc": "Islam places deep emphasis on honoring parents and maintaining family ties."
+        },
+        "hope": {
+          "title": "Hope",
+          "desc": "Islam forbids despairing of God's mercy, no matter how great the hardship."
+        },
+        "peace": {
+          "title": "Peace",
+          "desc": "The word \"Islam\" itself shares its root with \"peace,\" and Muslims greet one another with it."
+        },
+        "honesty": {
+          "title": "Honesty",
+          "desc": "The Prophet ﷺ urged truthfulness until it leads a person to the ranks of the sincere."
+        }
+      }
+    },
+    "meetProphet": {
+      "title": "Meet Prophet Muhammad ﷺ",
+      "subtitle": "The final prophet, a mercy to all worlds, to whom the Quran was revealed",
+      "cta": "Read More"
+    },
+    "discoverQuran": {
+      "title": "Discover the Quran",
+      "subtitle": "6,236 verses at your fingertips — read, listen, and search",
+      "tiles": {
+        "read": "Read",
+        "listen": "Listen",
+        "translations": "Translations",
+        "randomVerse": "Random Verse",
+        "search": "Search",
+        "continueReading": "Continue Reading"
+      }
+    },
+    "fivePillarsSection": {
+      "title": "The Five Pillars of Islam",
+      "subtitle": "The foundation a Muslim's life is built upon",
+      "pillars": {
+        "shahada": {
+          "name": "Shahada",
+          "desc": "Testifying there is no god but Allah, and Muhammad is His messenger"
+        },
+        "salah": {
+          "name": "Salah",
+          "desc": "Five daily prayers connecting the believer with God"
+        },
+        "zakat": {
+          "name": "Zakat",
+          "desc": "Giving a portion of wealth to those in need"
+        },
+        "sawm": {
+          "name": "Sawm",
+          "desc": "Fasting the month of Ramadan for self-discipline and God-consciousness"
+        },
+        "hajj": {
+          "name": "Hajj",
+          "desc": "A pilgrimage to Makkah once in a lifetime for those able"
+        }
+      }
+    },
+    "worldStats": {
+      "title": "Islam Around the World",
+      "stats": {
+        "muslims": "Muslims worldwide",
+        "countries": "Muslim-majority countries",
+        "religion": "Largest religion by growth",
+        "history": "Years of continuous history"
+      }
+    },
+    "faqSection": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Short answers to the most common questions about Islam"
+    },
+    "watchLearn": {
+      "title": "Watch & Learn",
+      "subtitle": "Lectures from verified official Islamic channels only",
+      "playAria": "Play video: {title}",
+      "seeAll": "See all videos"
+    },
+    "liveMakkah": {
+      "title": "Live From Makkah & Madinah",
+      "subtitle": "Follow the official 24/7 broadcast from the Two Holy Mosques",
+      "status": "Live broadcast",
+      "seeAll": "See all live channels"
+    },
+    "trustedScholarsSection": {
+      "title": "Trusted Scholars",
+      "subtitle": "Meet verified scholars and preachers, linked to their official sources only",
+      "seeAll": "See all scholars"
+    },
+    "dailyInspiration": {
+      "title": "Daily Inspiration",
+      "subtitle": "A verse, a hadith, and a dua — refreshed daily"
+    },
+    "todaysPicks": {
+      "featuredVideo": "Today's Featured Video",
+      "featuredScholar": "Today's Featured Scholar"
+    },
+    "finalCta": {
+      "title": "Continue Your Journey",
+      "subtitle": "Wherever you start, this site is here to walk with you every step after",
+      "btnQuran": "📖 Read Quran",
+      "btnAI": "🤖 Ask AI",
+      "btnVideos": "📺 Watch Videos",
+      "btnLearnMore": "🌟 Learn More"
+    }
   },
   "quran": {
     "title": "The Holy Quran",
@@ -138,7 +309,33 @@
     "copied": "Copied",
     "prevSurah": "Previous Surah",
     "juz": "Juz",
-    "nextSurah": "Next Surah"
+    "nextSurah": "Next Surah",
+    "referenceTitle": "Quran Reference",
+    "referenceDesc": "This external reference lets you read the Holy Quran in Uthmani script, listen to recitations, read tafsir, search verses, and browse surahs easily.\nThis site doesn't display the reference content itself — it simply provides quick access to it.",
+    "referenceLinkBtn": "Go to the Quran Reference",
+    "referenceFeatures": {
+      "read": {
+        "title": "📖 Read the Holy Quran",
+        "desc": "Go directly to reading the Holy Quran in clear Uthmani script."
+      },
+      "listen": {
+        "title": "🎧 Listen to Recitations",
+        "desc": "Listen to recitations from trusted sources on the external reference."
+      },
+      "tafsir": {
+        "title": "📚 Quran Tafsir",
+        "desc": "Browse multiple tafsirs of the verses easily."
+      },
+      "search": {
+        "title": "🔍 Search the Quran",
+        "desc": "Search verses and surahs quickly and accurately."
+      },
+      "browse": {
+        "title": "⭐ Browse All Surahs",
+        "desc": "Browse the full list of surahs with ease."
+      }
+    },
+    "referenceNote": "The reference will open in a new window so you can use all its services and easily return to our site."
   },
   "hadith": {
     "title": "The Noble Prophetic Hadiths",
@@ -152,7 +349,28 @@
       "HASAN": "Hasan",
       "DAIF": "Da'if",
       "MAWDU": "Mawdu'"
-    }
+    },
+    "heroDesc": "A curated collection of authentic (sahih) and good (hasan) hadiths from Al-Arba'in Al-Nawawiyyah and Riyad al-Saliheen, classified by topic and grade.",
+    "dorarTitle": "Search the Dorar Al-Saniyyah Encyclopedia",
+    "dorarDesc": "Search millions of hadiths and topics directly from the Dorar Al-Saniyyah website, with a quick link to search and specialized encyclopedias.",
+    "dorarPlaceholder": "Type your search term and press search",
+    "dorarSearchBtn": "Search",
+    "visitDorar": "Visit the Dorar Al-Saniyyah Encyclopedia",
+    "servicesTitle": "Dorar Al-Saniyyah Services",
+    "servicesDesc": "Quick links to the main Dorar Al-Saniyyah encyclopedias so you can go directly to the books and services you're looking for.",
+    "serviceOpenDesc": "Opens the relevant section on the Dorar Al-Saniyyah website.",
+    "services": {
+      "encyclopedia": "Hadith Encyclopedia",
+      "adhkar": "Adhkar",
+      "duas": "Duas",
+      "scientific": "Scientific Encyclopedia",
+      "fiqh": "Fiqh Encyclopedia"
+    },
+    "filterPlaceholder": "Search hadiths, narrators, or topics",
+    "categoriesLabel": "Categories:",
+    "shareTitle": "Islamic Hadith",
+    "copyHadithBtn": "Copy Hadith",
+    "shareHadithBtn": "Share Hadith"
   },
   "adhkar": {
     "title": "Adhkar & Dua",
@@ -168,12 +386,18 @@
       "TRAVEL": "Travel Adhkar",
       "FOOD": "Food Adhkar",
       "GENERAL": "General Adhkar"
-    }
+    },
+    "searchPlaceholder": "Search adhkar and duas...",
+    "noResults": "No matching results found"
   },
   "prophets": {
     "title": "Stories of Prophets & Messengers",
     "ayah": "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
-    "inQuran": "× in the Quran"
+    "inQuran": "× in the Quran",
+    "backToList": "← Back to the list of Prophets",
+    "storyTitle": "The Story",
+    "lessonsTitle": "Lessons & Reflections",
+    "referencesTitle": "Mentions in the Quran"
   },
   "seerah": {
     "title": "The Prophetic Biography",
@@ -228,7 +452,24 @@
     "share": "Share",
     "copyLink": "Copy link",
     "saved": "Saved",
-    "addToFavorites": "Add to favorites"
+    "addToFavorites": "Add to favorites",
+    "libraryBadge": "Trusted Da'wah Library",
+    "libraryStats": "Library Statistics",
+    "visitChannel": "Visit Channel",
+    "noResults": "No videos match your search.",
+    "channelChip": "Channel: {channel}",
+    "sheikhChip": "Sheikh: {sheikh}",
+    "playAria": "Play video: {title}",
+    "thumbnailAlt": "Thumbnail for video: {title}",
+    "langArabic": "Arabic",
+    "langEnglish": "English",
+    "categories": {
+      "aqeedah": "Aqeedah",
+      "fiqh": "Fiqh",
+      "seerah": "Seerah",
+      "dawah": "Dawah",
+      "tazkiyah": "Tazkiyah"
+    }
   },
   "common": {
     "siteName": "As-Sirat Al-Mustaqeem",
@@ -238,7 +479,10 @@
     "back": "Back",
     "backToSite": "Back to Site",
     "admin": "Administrator",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "all": "All",
+    "comingSoon": "Coming Soon",
+    "play": "Play"
   },
   "admin": {
     "title": "As-Sirat Al-Mustaqeem Admin",
@@ -253,5 +497,96 @@
       "settings": "Settings"
     },
     "backToSite": "Back to Site"
+  },
+  "asmaAllah": {
+    "searchPlaceholder": "Search for a name of Allah...",
+    "resultsCount": "{count} of 99 names",
+    "noResults": "No matching results found"
+  },
+  "prayerTimes": {
+    "cityLabel": "City",
+    "countryLabel": "Country Code",
+    "cityPlaceholder": "Jeddah",
+    "countryPlaceholder": "SA",
+    "searchBtn": "Search",
+    "useMyLocation": "📍 Use my current location",
+    "loading": "Loading prayer times...",
+    "errorFetch": "Failed to fetch prayer times",
+    "errorConnection": "Failed to connect to the prayer times service",
+    "errorLocation": "Couldn't access your location — you can select a city manually",
+    "yourLocation": "Your current location",
+    "nextPrayer": "Next Prayer",
+    "after": "In {time}",
+    "hoursAndMinutes": "{h}h {m}m",
+    "minutesOnly": "{m}m",
+    "midnight": "Midnight",
+    "prayers": {
+      "imsak": "Imsak",
+      "fajr": "Fajr",
+      "sunrise": "Sunrise",
+      "dhuhr": "Dhuhr",
+      "asr": "Asr",
+      "maghrib": "Maghrib",
+      "isha": "Isha"
+    },
+    "pageDescription": "Complete prayer times for your city or current location: Fajr, Sunrise, Dhuhr, Asr, Maghrib, and Isha."
+  },
+  "livePage": {
+    "title": "Live Broadcast",
+    "subtitle": "Follow Islamic TV and radio channels live, in a comfortable experience that matches the site's identity."
+  },
+  "scholarsPage": {
+    "title": "Scholars & Preachers",
+    "subtitle": "A trusted directory of scholars, preachers, and official Islamic institutions, linking only to their verified official sources.",
+    "categories": {
+      "saudi": "Scholars of Saudi Arabia",
+      "international": "International Preachers & Sheikhs",
+      "organization": "Official Islamic Institutions & Bodies"
+    },
+    "specialtyLabel": "Specialty:",
+    "countryLabel": "Country:",
+    "links": {
+      "website": "Visit Website",
+      "youtube": "YouTube",
+      "fatwa": "Fatwas",
+      "lectures": "Lectures",
+      "x": "X",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "telegram": "Telegram"
+    },
+    "photoAlt": "Photo of {name}, {specialty}"
+  },
+  "kidsPage": {
+    "title": "Kids Section",
+    "subtitle": "Simple, fun content for kids to learn about Islam step by step, with pictures and easy explanations.",
+    "lessons": {
+      "wudu": {
+        "title": "Learn Wudu",
+        "desc": "The steps of wudu and why it matters"
+      },
+      "prayer": {
+        "title": "Learn Prayer",
+        "desc": "The basic stages and pillars of prayer"
+      },
+      "umrah": {
+        "title": "Learn Umrah",
+        "desc": "The steps of Umrah, simply explained"
+      },
+      "hajj": {
+        "title": "Learn Hajj",
+        "desc": "The sacred sites and steps of Hajj"
+      },
+      "learn": {
+        "title": "Islam for Kids",
+        "desc": "The basics and pillars of Islam"
+      }
+    }
+  },
+  "kidsLesson": {
+    "explanationTitle": "Simple Explanation",
+    "watchVideoTitle": "Watch the Video",
+    "quizTitle": "Quick Quiz",
+    "answerLabel": "Answer"
   }
 }

@@ -1,290 +1,408 @@
 import { NextRequest, NextResponse } from 'next/server'
+import Anthropic from '@anthropic-ai/sdk'
+import { PROPHETS } from '@/data/prophets'
+import { SEERAH_TIMELINE } from '@/data/seerah'
+import { ASMA_ALLAH } from '@/data/asmaAllah'
+import { SCHOLARS } from '@/data/scholars'
+import { LIVE_CHANNELS } from '@/data/liveChannels'
+import { HADITHS } from '@/data/hadiths'
+import { ADHKAR_CATEGORIES } from '@/data/adhkar'
+import { homeFaq } from '@/data/homeFaq'
 
-// ── Types ──────────────────────────────────────────────────────────────────────
-type QuestionType = 'quran' | 'hadith' | 'azkar' | 'general'
+const anthropic = new Anthropic()
+const MODEL = 'claude-opus-5'
 
-// ── Question type detection ────────────────────────────────────────────────────
-function detectType(msg: string): QuestionType {
-  // Quran-related keywords
-  if (
-    /آية|آيات|سورة|سور|قرآن|كريم|تفسير|قراءة|حزب|جزء|فاتحة|بقرة|آل عمران|نساء|مائدة|الأنعام|أعراف|الأنفال|التوبة|يونس|هود|يوسف|الرعد|إبراهيم|الحجر|النحل|الإسراء|الكهف|مريم|طه|الأنبياء|الحج|المؤمنون|النور|الفرقان|يس|الصافات|الزمر|غافر|فصلت|الشورى|الزخرف|الدخان|الجاثية|الأحقاف|محمد|الفتح|الحجرات|الذاريات|الطور|النجم|القمر|الرحمن|الواقعة|الحديد|الحشر|الصف|الجمعة|التغابن|الملك|القلم|الحاقة|المعارج|نوح|الجن|المزمل|المدثر|القيامة|الإنسان|المرسلات|النبأ|النازعات|عبس|التكوير|الانفطار|المطففين|الانشقاق|البروج|الطارق|الأعلى|الغاشية|الفجر|البلد|الشمس|الليل|الضحى|الشرح|التين|العلق|القدر|البينة|الزلزلة|العاديات|القارعة|التكاثر|العصر|الهمزة|الفيل|قريش|الماعون|الكوثر|الكافرون|النصر|المسد|الإخلاص|الفلق|الناس/.test(msg)
-  ) return 'quran'
-
-  // Hadith-related keywords
-  if (
-    /حديث|حديثاً|حديثا|رواه|قال النبي|قال رسول|صلى الله عليه وسلم|ﷺ|أحاديث|سنة نبوية|سنة المصطفى|ما ورد عن|روي عن|البخاري|مسلم|الترمذي|أبو داود|ابن ماجه|النسائي|أحمد|الطبراني/.test(msg)
-  ) return 'hadith'
-
-  // Azkar / dua keywords
-  if (
-    /ذكر|أذكار|دعاء|أدعية|تسبيح|استغفار|تهليل|تكبير|تحميد|أذكار الصباح|أذكار المساء|أذكار النوم|أذكار الاستيقاظ|أذكار الصلاة|أذكار السفر|أذكار الطعام|حصن المسلم|سيد الاستغفار/.test(msg)
-  ) return 'azkar'
-
-  return 'general'
+const CHAT_MESSAGES: Record<string, { refusal: string; noAnswer: string; generalError: string }> = {
+  ar: {
+    refusal: 'عذراً، لا يمكنني الإجابة على هذا السؤال. جرّب صياغة مختلفة.',
+    noAnswer: 'تعذّر الحصول على إجابة الآن، حاول مرة أخرى.',
+    generalError: 'عذراً، حدث خطأ مؤقت. حاول مجدداً.',
+  },
+  en: {
+    refusal: 'Sorry, I cannot answer that question. Please try rephrasing it.',
+    noAnswer: 'Could not get an answer right now, please try again.',
+    generalError: 'Sorry, a temporary error occurred. Please try again.',
+  },
+  de: {
+    refusal: 'Entschuldigung, ich kann diese Frage nicht beantworten. Bitte versuche eine andere Formulierung.',
+    noAnswer: 'Konnte gerade keine Antwort erhalten, bitte versuche es erneut.',
+    generalError: 'Entschuldigung, ein vorübergehender Fehler ist aufgetreten. Bitte versuche es erneut.',
+  },
+  fr: {
+    refusal: 'Désolé, je ne peux pas répondre à cette question. Essayez de la reformuler.',
+    noAnswer: 'Impossible d\'obtenir une réponse pour le moment, veuillez réessayer.',
+    generalError: 'Désolé, une erreur temporaire s\'est produite. Veuillez réessayer.',
+  },
+  es: {
+    refusal: 'Lo siento, no puedo responder a esa pregunta. Intenta reformularla.',
+    noAnswer: 'No se pudo obtener una respuesta en este momento, inténtalo de nuevo.',
+    generalError: 'Lo sentimos, se produjo un error temporal. Inténtalo de nuevo.',
+  },
+  zh: {
+    refusal: '抱歉，我无法回答这个问题。请尝试换一种表述方式。',
+    noAnswer: '暂时无法获取答案，请重试。',
+    generalError: '抱歉，发生了临时错误。请重试。',
+  },
+  tr: {
+    refusal: 'Üzgünüm, bu soruyu yanıtlayamıyorum. Farklı bir şekilde ifade etmeyi deneyin.',
+    noAnswer: 'Şu anda bir yanıt alınamadı, lütfen tekrar deneyin.',
+    generalError: 'Üzgünüz, geçici bir hata oluştu. Lütfen tekrar deneyin.',
+  },
+  ur: {
+    refusal: 'معذرت، میں اس سوال کا جواب نہیں دے سکتا۔ براہ کرم مختلف انداز میں پوچھیں۔',
+    noAnswer: 'اس وقت جواب حاصل نہیں ہو سکا، براہ کرم دوبارہ کوشش کریں۔',
+    generalError: 'معذرت، ایک عارضی خرابی پیش آگئی۔ براہ کرم دوبارہ کوشش کریں۔',
+  },
+  ru: {
+    refusal: 'Извините, я не могу ответить на этот вопрос. Попробуйте переформулировать его.',
+    noAnswer: 'Не удалось получить ответ прямо сейчас, попробуйте ещё раз.',
+    generalError: 'Извините, произошла временная ошибка. Попробуйте ещё раз.',
+  },
 }
 
-// Clean message for API search
-function extractKeyword(msg: string): string {
-  return msg
-    .replace(/ما هي|ما هو|ما هم|ما حكم|ما فضل|ما معنى|اشرح|بين|وضح|كيف|متى|أين|من هو|هل يجوز|هل|لماذا|أخبرني عن|ابحث عن/g, ' ')
-    .replace(/في الإسلام|الإسلامي|في الدين|الإسلامية|المبارك|الشريف|الكريم|العظيم/g, ' ')
-    .replace(/[؟?!،,\.]/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim()
-    .substring(0, 60)
+function chatMessages(language: string) {
+  return CHAT_MESSAGES[language] ?? CHAT_MESSAGES.en
 }
 
-// ── Quran search via AlQuran Cloud ─────────────────────────────────────────────
-async function searchQuran(keyword: string): Promise<string> {
+// ───────────────────────── Local site-content search ─────────────────────────
+// Every helper below searches the same static data that powers the site's own
+// pages, so the assistant's answers are grounded in what the site actually shows.
+
+function norm(s: string): string {
+  return s.toLowerCase().trim()
+}
+
+function matches<T>(items: T[], query: string, fields: (item: T) => string[], limit: number): T[] {
+  const q = norm(query)
+  if (!q) return items.slice(0, limit)
+  return items.filter((item) => fields(item).some((f) => norm(f).includes(q))).slice(0, limit)
+}
+
+function searchProphets(query: string): string {
+  const results = matches(PROPHETS, query, (p) => [p.nameAr, p.nameEn, p.summary, p.nation], 3)
+  if (!results.length) return 'لا توجد نتائج مطابقة في صفحة الأنبياء بالموقع.'
+  return results
+    .map((p) => `${p.nameAr} (${p.nameEn})\nالفترة: ${p.period} | الأمة: ${p.nation}\n${p.summary}\nذُكر في القرآن ${p.quranMentions} مرة.`)
+    .join('\n\n')
+}
+
+function searchSeerah(query: string): string {
+  const events = SEERAH_TIMELINE.flatMap((era) => era.events.map((e) => ({ ...e, era: era.era })))
+  const results = matches(events, query, (e) => [e.title, e.desc, e.year], 4)
+  if (!results.length) return 'لا توجد أحداث مطابقة في السيرة النبوية بالموقع.'
+  return results.map((e) => `[${e.era} — ${e.year}] ${e.title}\n${e.desc}`).join('\n\n')
+}
+
+function searchAsmaAllah(query: string): string {
+  const num = Number(query.trim())
+  const results = Number.isInteger(num) && num > 0
+    ? ASMA_ALLAH.filter((n) => n.number === num)
+    : matches(ASMA_ALLAH, query, (n) => [n.nameArabic, n.nameEnglish, n.meaning], 5)
+  if (!results.length) return 'لا يوجد اسم مطابق بين أسماء الله الحسنى في الموقع.'
+  return results
+    .map((n) => `${n.number}. ${n.nameArabic} (${n.nameEnglish}) — ${n.meaning}\n${n.explanation}${n.quranRef ? `\nالمرجع: ${n.quranRef}` : ''}`)
+    .join('\n\n')
+}
+
+function searchScholars(query: string): string {
+  const results = matches(SCHOLARS, query, (s) => [s.nameAr, s.nameEn, s.country, s.specialty, s.aboutAr], 3)
+  if (!results.length) return 'لا يوجد عالم مطابق في دليل العلماء والدعاة بالموقع.'
+  return results.map((s) => `${s.nameAr} (${s.nameEn}) — ${s.country}\nالتخصص: ${s.specialty}\n${s.aboutAr}`).join('\n\n')
+}
+
+function getLiveChannels(): string {
+  return LIVE_CHANNELS
+    .map((c) => `${c.nameAr} (${c.nameEn}) — ${c.category === 'tv' ? 'قناة تلفزيونية' : 'إذاعة'}\n${c.descriptionAr}\nالموقع الرسمي: ${c.officialWebsite}`)
+    .join('\n\n')
+}
+
+function searchSiteFaq(query: string): string | null {
+  const results = matches(homeFaq, query, (f) => [f.questionAr, f.answerAr], 2)
+  if (!results.length) return null
+  return results.map((f) => `س: ${f.questionAr}\nج: ${f.answerAr}`).join('\n\n')
+}
+
+function searchSiteHadith(query: string): string | null {
+  const results = matches(HADITHS, query, (h) => [h.text, h.narrator, h.topic], 3)
+  if (!results.length) return null
+  return results
+    .map((h) => `"${h.text}"\nالراوي: ${h.narrator || 'غير محدد'} | الدرجة: ${h.grade} | المصدر: ${h.source}`)
+    .join('\n\n')
+}
+
+function searchAdhkar(query: string): string {
+  const q = norm(query)
+  const out: string[] = []
+  outer: for (const cat of ADHKAR_CATEGORIES) {
+    const catHit = q.length > 0 && norm(cat.title).includes(q)
+    for (const item of cat.items) {
+      if (out.length >= 5) break outer
+      if (catHit || (q.length > 0 && norm(item.text).includes(q))) {
+        out.push(`[${cat.title}] ${item.text}${item.count > 1 ? ` (يُكرر ${item.count} مرة)` : ''}`)
+      }
+    }
+  }
+  if (!out.length) return 'لا يوجد ذكر أو دعاء مطابق في حصن المسلم بالموقع.'
+  return out.join('\n\n')
+}
+
+// ───────────────────────── External sources (Quran / Hadith) ─────────────────────────
+
+async function searchQuranApi(keyword: string): Promise<string> {
   try {
-    const encoded = encodeURIComponent(keyword)
     const res = await fetch(
-      `https://api.alquran.cloud/v1/search/${encoded}/all/quran-uthmani`,
+      `https://api.alquran.cloud/v1/search/${encodeURIComponent(keyword)}/all/quran-uthmani`,
       { next: { revalidate: 3600 } },
     )
     const data = await res.json()
-
     if (data.code !== 200 || !data.data?.matches?.length) {
-      return `لم أجد نتائج قرآنية لـ "${keyword}".\n\nجرّب صياغة مختلفة، أو تصفّح موقع qurancomplex.gov.sa للبحث المتقدم.`
+      return `لم يتم العثور على آيات مطابقة لـ "${keyword}".`
     }
-
-    const matches: Array<{
-      text: string
-      surah: { name: string; number: number }
-      numberInSurah: number
-    }> = data.data.matches.slice(0, 3)
-
-    let reply = `📖 من القرآن الكريم:\n\n`
-    for (const m of matches) {
-      reply += `﴿${m.text}﴾\n`
-      reply += `— ${m.surah.name} [${m.surah.number}:${m.numberInSurah}]\n\n`
+    const found: Array<{ text: string; surah: { name: string; number: number }; numberInSurah: number }> =
+      data.data.matches.slice(0, 3)
+    let reply = ''
+    for (const m of found) {
+      reply += `﴿${m.text}﴾\n— ${m.surah.name} [${m.surah.number}:${m.numberInSurah}]\n\n`
     }
-    if (data.data.count > 3) {
-      reply += `(وجدت ${data.data.count} نتيجة — عُرض أول 3)`
-    }
-    return reply
+    if (data.data.count > 3) reply += `(إجمالي النتائج: ${data.data.count})`
+    return reply.trim()
   } catch {
-    return 'تعذّر البحث في القرآن الآن. تحقق من الاتصال وحاول مجدداً.'
+    return 'تعذّر البحث في القرآن الآن.'
   }
 }
 
-// ── Hadith search via Dorar ────────────────────────────────────────────────────
-async function searchHadith(keyword: string): Promise<string> {
+async function searchHadithApi(keyword: string): Promise<string> {
   try {
-    const encoded = encodeURIComponent(keyword)
-    const res = await fetch(
-      `https://dorar.net/api/v1/hadiths?value=${encoded}&books=0`,
-      {
-        headers: {
-          Accept: 'application/json',
-          'User-Agent': 'Mozilla/5.0 (compatible; IslamicApp/1.0)',
-        },
-        next: { revalidate: 3600 },
-      },
-    )
+    const res = await fetch(`https://dorar.net/api/v1/hadiths?value=${encodeURIComponent(keyword)}&books=0`, {
+      headers: { Accept: 'application/json', 'User-Agent': 'Mozilla/5.0 (compatible; IslamicApp/1.0)' },
+      next: { revalidate: 3600 },
+    })
     if (!res.ok) throw new Error(`Dorar ${res.status}`)
-
     const data = await res.json()
-    if (!data.data?.length) return getStaticHadith(keyword)
-
-    const hadiths: Array<{
-      hadith: string
-      rawi?: string
-      book?: string
-      grade?: string
-    }> = data.data.slice(0, 2)
-
-    let reply = `📜 من الأحاديث النبوية الشريفة:\n\n`
-    for (const h of hadiths) {
-      reply += `"${h.hadith}"\n\n`
+    if (!data.data?.length) return searchSiteHadith(keyword) ?? 'لم يتم العثور على أحاديث مطابقة.'
+    const found: Array<{ hadith: string; rawi?: string; book?: string; grade?: string }> = data.data.slice(0, 2)
+    let reply = ''
+    for (const h of found) {
+      reply += `"${h.hadith}"\n`
       const meta: string[] = []
       if (h.rawi) meta.push(`الراوي: ${h.rawi}`)
       if (h.book) meta.push(`المصدر: ${h.book}`)
       if (h.grade) meta.push(`الدرجة: ${h.grade}`)
-      if (meta.length) reply += meta.join(' | ') + '\n\n'
-    }
-    return reply
-  } catch {
-    return getStaticHadith(keyword)
-  }
-}
-
-// ── Azkar via GitHub JSON ──────────────────────────────────────────────────────
-async function fetchAzkar(msg: string): Promise<string> {
-  try {
-    const res = await fetch(
-      'https://raw.githubusercontent.com/nawafalqari/azkar-api/main/src/data/adkar.json',
-      { next: { revalidate: 86400 } },
-    )
-    if (!res.ok) throw new Error('azkar 404')
-
-    const data: Record<
-      string,
-      Array<{ content: string; count: string; description?: string }>
-    > = await res.json()
-
-    // Map message keywords to JSON category keys
-    const catMatches: Array<[RegExp, string]> = [
-      [/صباح|الفجر|الضحى/, 'الصباح'],
-      [/مساء|المغرب|العصر/, 'المساء'],
-      [/نوم|ينام|قبل النوم/, 'النوم'],
-      [/استيقاظ|يقظة|صحو/, 'الاستيقاظ'],
-      [/سفر|مسافر|طريق/, 'السفر'],
-      [/طعام|أكل|شرب/, 'الطعام'],
-      [/صلاة|سجود|ركوع/, 'الصلاة'],
-    ]
-
-    let chosenKey = Object.keys(data)[0]
-    for (const [pattern, partial] of catMatches) {
-      if (pattern.test(msg)) {
-        const found = Object.keys(data).find(k => k.includes(partial))
-        if (found) { chosenKey = found; break }
-      }
-    }
-
-    const items = (data[chosenKey] ?? []).slice(0, 3)
-    if (!items.length) return getStaticAzkar(msg)
-
-    let reply = `📿 من ${chosenKey}:\n\n`
-    for (const item of items) {
-      reply += `"${item.content}"\n`
-      if (item.count && item.count !== '1') reply += `التكرار: ${item.count} مرة\n`
-      if (item.description) reply += `الفضل: ${item.description}\n`
+      if (meta.length) reply += meta.join(' | ') + '\n'
       reply += '\n'
     }
-    return reply
+    return reply.trim()
   } catch {
-    return getStaticAzkar(msg)
+    return searchSiteHadith(keyword) ?? 'تعذّر البحث في الأحاديث الآن.'
   }
 }
 
-// ── Static fallbacks (used when APIs are unavailable) ─────────────────────────
-const STATIC_HADITHS: Array<[RegExp, string]> = [
-  [
-    /صلاة|صلوات/,
-    `📜 من الأحاديث النبوية:\n\n"إن أول ما يُحاسب به العبد يوم القيامة من عمله صلاته، فإن صلحت فقد أفلح وأنجح، وإن فسدت فقد خاب وخسر."\n\nالراوي: أبو هريرة | المصدر: أبو داود والترمذي | الدرجة: صحيح`,
-  ],
-  [
-    /صوم|صيام|رمضان/,
-    `📜 من الأحاديث النبوية:\n\n"من صام رمضان إيماناً واحتساباً غُفر له ما تقدم من ذنبه."\n\nالراوي: أبو هريرة | المصدر: البخاري ومسلم | الدرجة: صحيح`,
-  ],
-  [
-    /زكاة|تزكية/,
-    `📜 من الأحاديث النبوية:\n\n"ما نقصت صدقة من مال، وما زاد الله عبداً بعفو إلا عزاً."\n\nالراوي: أبو هريرة | المصدر: مسلم | الدرجة: صحيح`,
-  ],
-  [
-    /حج|عمرة/,
-    `📜 من الأحاديث النبوية:\n\n"من حجّ لله فلم يرفث ولم يفسق رجع كيوم ولدته أمه."\n\nالراوي: أبو هريرة | المصدر: البخاري ومسلم | الدرجة: صحيح`,
-  ],
+// ───────────────────────── Tool definitions & dispatch ─────────────────────────
+
+const TOOLS: Anthropic.Tool[] = [
+  {
+    name: 'search_quran',
+    description:
+      'ابحث في القرآن الكريم عن آيات تتعلق بكلمة أو موضوع معيّن. استخدمه لأي سؤال عن آية أو معنى قرآني أو موضوع قرآني.',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'كلمة أو عبارة البحث بالعربية' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'search_hadith',
+    description: 'ابحث في الأحاديث النبوية الشريفة عن أحاديث متعلقة بموضوع معيّن، مع درجة الحديث وراويه ومصدره.',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'كلمة أو موضوع البحث' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'search_adhkar',
+    description:
+      'ابحث في أذكار وأدعية حصن المسلم (أذكار الصباح والمساء والنوم والصلاة والسفر وغيرها) الموجودة في صفحة الأذكار بالموقع.',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'اسم المناسبة أو كلمة من نص الذكر، مثال: الصباح أو السفر' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'search_prophets',
+    description: 'ابحث عن معلومات عن أحد الأنبياء عليهم السلام من صفحة الأنبياء بالموقع (قصته، أمته، عدد ذكره في القرآن).',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'اسم النبي بالعربية أو الإنجليزية' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'search_seerah',
+    description: 'ابحث في الخط الزمني للسيرة النبوية بالموقع عن أحداث معينة في حياة النبي ﷺ.',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'كلمة أو موضوع الحدث، مثال: الهجرة أو غزوة بدر' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'search_asma_allah',
+    description: 'ابحث عن اسم من أسماء الله الحسنى التسعة والتسعين من صفحة الأسماء الحسنى بالموقع، بالاسم أو الرقم.',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'اسم من أسماء الله أو رقمه من 1 إلى 99' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'search_scholars',
+    description: 'ابحث في دليل العلماء والدعاة الموثوقين بالموقع بالاسم أو الدولة أو التخصص.',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'اسم العالم أو الدولة أو التخصص' } },
+      required: ['query'],
+    },
+  },
+  {
+    name: 'get_live_channels',
+    description: 'احصل على قائمة القنوات والإذاعات الإسلامية المباشرة المتاحة في صفحة البث المباشر بالموقع.',
+    input_schema: { type: 'object', properties: {}, required: [] },
+  },
+  {
+    name: 'search_site_faq',
+    description: 'ابحث في الأسئلة الشائعة عن الإسلام الموجودة في الصفحة الرئيسية بالموقع.',
+    input_schema: {
+      type: 'object',
+      properties: { query: { type: 'string', description: 'كلمة من السؤال' } },
+      required: ['query'],
+    },
+  },
 ]
 
-function getStaticHadith(keyword: string): string {
-  for (const [pattern, text] of STATIC_HADITHS) {
-    if (pattern.test(keyword)) return text
+async function runTool(name: string, input: unknown): Promise<string> {
+  const query = typeof (input as { query?: unknown })?.query === 'string' ? (input as { query: string }).query : ''
+  switch (name) {
+    case 'search_quran':
+      return searchQuranApi(query)
+    case 'search_hadith':
+      return searchHadithApi(query)
+    case 'search_adhkar':
+      return searchAdhkar(query)
+    case 'search_prophets':
+      return searchProphets(query)
+    case 'search_seerah':
+      return searchSeerah(query)
+    case 'search_asma_allah':
+      return searchAsmaAllah(query)
+    case 'search_scholars':
+      return searchScholars(query)
+    case 'get_live_channels':
+      return getLiveChannels()
+    case 'search_site_faq':
+      return searchSiteFaq(query) ?? 'لا توجد نتائج مطابقة في الأسئلة الشائعة.'
+    default:
+      return `أداة غير معروفة: ${name}`
   }
-  return `📜 من الأحاديث النبوية:\n\n"خيركم من تعلّم القرآن وعلّمه."\n\nالراوي: عثمان بن عفان | المصدر: البخاري | الدرجة: صحيح\n\n"إن الله لا ينظر إلى صوركم وأموالكم ولكن ينظر إلى قلوبكم وأعمالكم."\n\nالراوي: أبو هريرة | المصدر: مسلم | الدرجة: صحيح`
 }
 
-function getStaticAzkar(msg: string): string {
-  if (/مساء|المغرب/.test(msg))
-    return `📿 أذكار المساء:\n\n"أَمسَينا وأَمسى المُلكُ لله والحمدُ لله، لا إلهَ إلاّ اللّهُ وحدَهُ لا شَريكَ له، له المُلكُ وله الحمدُ وهو على كلّ شيءٍ قدير"\n(تقال مرة مساءً)\n\n"اللّهُمَّ بكَ أَمسَينا وبكَ أَصبَحنا وبكَ نَحيا وبكَ نَموتُ وإليكَ المَصير"\n(تقال مرة مساءً)`
+// ───────────────────────── System prompt ─────────────────────────
 
-  if (/نوم/.test(msg))
-    return `📿 أذكار النوم:\n\n"بِاسْمِكَ اللّهُمَّ أَموتُ وَأَحيا"\n(تقال مرة)\n\n"سُبحانَ اللّه" (33 مرة)\n"الحمدُ لله" (33 مرة)\n"اللّهُ أَكبر" (34 مرة)`
+const SITE_MAP = `
+- القرآن الكريم: /quran
+- الأحاديث النبوية: /hadith
+- الأذكار والأدعية: /adhkar
+- قصص الأنبياء: /prophets
+- السيرة النبوية: /seerah
+- أسماء الله الحسنى: /asma-allah
+- مواقيت الصلاة: /prayer-times
+- العلماء والدعاة: /scholars
+- البث المباشر: /live
+- الفيديوهات الإسلامية: /islamic-videos
+- قسم الأطفال: /kids
+- البحث الشامل: /search
+`.trim()
 
-  // Default: morning azkar
-  return `📿 أذكار الصباح:\n\n"أَصْبَحْنا وَأَصْبَحَ المُلكُ لله والحمدُ لله، لا إلهَ إلاّ اللّهُ وحدَهُ لا شَريكَ له، له المُلكُ وله الحمدُ وهو على كلّ شيءٍ قدير"\n(تقال مرة صباحاً)\n\n"اللّهُمَّ بكَ أَصبَحنا وبكَ أَمسَينا وبكَ نَحيا وبكَ نَموتُ وإليكَ النُّشور"\n(تقال مرة صباحاً)`
+function buildSystemPrompt(language: string): string {
+  return `أنت "الراشد"، المساعد الذكي لموقع "الصراط المستقيم"، منصة إسلامية شاملة.
+
+مهمتك: الإجابة على أسئلة الزوار عن الإسلام والقرآن والسنة، بالاعتماد على محتوى الموقع نفسه كلما أمكن، عبر الأدوات المتاحة لك للبحث في القرآن والحديث والأذكار وقصص الأنبياء والسيرة النبوية وأسماء الله الحسنى والعلماء والقنوات المباشرة والأسئلة الشائعة.
+
+قواعد مهمة:
+1. استخدم الأدوات المتاحة كلما كان السؤال متعلقاً بمحتوى تغطيه (آية، حديث، ذكر، نبي، حدث من السيرة، اسم من أسماء الله، عالم، قناة). لا تعتمد على معرفتك المحفوظة وحدها في هذه الحالات.
+2. بعد الإجابة، إذا كان هناك قسم في الموقع يحتوي تفاصيل أوسع، أشر إليه بشكل طبيعي (مثال: "تقدر تلاقي التفاصيل الكاملة في صفحة السيرة النبوية بالموقع").
+3. خريطة أقسام الموقع:
+${SITE_MAP}
+4. للأسئلة الفقهية الخلافية أو التي تحتاج فتوى شخصية، أجب بالمبدأ العام بحذر وانصح بالرجوع لعالم موثوق أو مواقع مثل dorar.net أو islamweb.net، ولا تُفتِ نيابة عن عالم.
+5. أجب دائماً بلغة المستخدم (كود اللغة: ${language})، حتى لو كانت نتائج الأدوات بالعربية — لخّصها وترجمها بأمانة مع الإبقاء على النصوص القرآنية والحديثية الأصلية بين علامتي اقتباس عند الاستشهاد بها.
+6. اجعل إجاباتك موجزة وواضحة ومناسبة لمحادثة نصية قصيرة، وليست مقالاً طويلاً.
+7. لا تخترع معلومات دينية غير موجودة في نتائج الأدوات أو معرفتك الموثوقة؛ إن لم تجد نتيجة، قل ذلك بصراحة.`
 }
 
-// ── Static general knowledge ───────────────────────────────────────────────────
-const KNOWLEDGE: Array<[RegExp, string]> = [
-  [
-    /أركان الإسلام|خمسة أركان|ما الإسلام|بُني الإسلام|بني الإسلام/,
-    `🕌 أركان الإسلام الخمسة:\n\n1. شهادة أن لا إله إلا الله وأن محمداً رسول الله\n2. إقامة الصلاة (خمس صلوات يومياً)\n3. إيتاء الزكاة (2.5% من المال الزكوي)\n4. صوم رمضان\n5. حج البيت لمن استطاع إليه سبيلاً\n\nقال النبي ﷺ: "بُنِيَ الإسلام على خمس" — متفق عليه`,
-  ],
-  [
-    /أركان الإيمان|ستة أركان|الإيمان الست/,
-    `✨ أركان الإيمان الستة:\n\n1. الإيمان بالله\n2. الإيمان بالملائكة\n3. الإيمان بالكتب السماوية\n4. الإيمان بالرسل والأنبياء\n5. الإيمان باليوم الآخر\n6. الإيمان بالقدر خيره وشره\n\nمن حديث جبريل ﷺ — رواه مسلم`,
-  ],
-  [
-    /معنى التوحيد|ما التوحيد|ما هو التوحيد|اشرح التوحيد/,
-    `🌟 معنى التوحيد:\n\nإفراد الله بالعبادة، وأنواعه ثلاثة:\n\n• توحيد الربوبية: الإقرار بأن الله وحده الخالق الرازق المدبر\n• توحيد الألوهية: إخلاص العبادة لله وحده\n• توحيد الأسماء والصفات: إثبات ما أثبته الله لنفسه بلا تحريف ولا تعطيل\n\n﴿وَمَا خَلَقْتُ الْجِنَّ وَالْإِنسَ إِلَّا لِيَعْبُدُونِ﴾ [الذاريات: 56]`,
-  ],
-  [
-    /فضل القرآن|فضائل القرآن|ثواب القرآن|فضل التلاوة/,
-    `📖 فضائل القرآن الكريم:\n\n• "خيركم من تعلّم القرآن وعلّمه" — البخاري\n• "اقرأوا القرآن فإنه يأتي يوم القيامة شفيعاً لأصحابه" — مسلم\n• "من قرأ حرفاً من كتاب الله فله حسنة، والحسنة بعشر أمثالها" — الترمذي\n• "الذي يقرأ القرآن وهو ماهر به مع السفرة الكرام البررة" — متفق عليه`,
-  ],
-  [
-    /فضل الاستغفار|فضائل الاستغفار|ثواب الاستغفار/,
-    `🤲 فضل الاستغفار:\n\n• "من لزم الاستغفار جعل الله له من كل ضيق مخرجاً، ومن كل هم فرجاً، ورزقه من حيث لا يحتسب" — أبو داود\n• كان النبي ﷺ يستغفر في اليوم أكثر من سبعين مرة — البخاري\n\nسيد الاستغفار:\n"اللهم أنت ربي لا إله إلا أنت خلقتني وأنا عبدك وأنا على عهدك ووعدك ما استطعت، أعوذ بك من شر ما صنعت، أبوء لك بنعمتك علي وأبوء بذنبي فاغفر لي فإنه لا يغفر الذنوب إلا أنت"`,
-  ],
-  [
-    /حكم الصلاة|فريضة الصلاة|وجوب الصلاة|أوقات الصلاة/,
-    `🕌 الصلاة في الإسلام:\n\nالصلاة فريضة واجبة — الركن الثاني من أركان الإسلام.\n\n﴿إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَّوْقُوتًا﴾ [النساء: 103]\n\nالصلوات الخمس:\n• الفجر: ركعتان\n• الظهر: أربع ركعات\n• العصر: أربع ركعات\n• المغرب: ثلاث ركعات\n• العشاء: أربع ركعات`,
-  ],
-  [
-    /من هو النبي|سيرة النبي|محمد ﷺ|المصطفى ﷺ/,
-    `🌙 النبي محمد ﷺ:\n\nخاتم الأنبياء والمرسلين، وُلد في مكة المكرمة عام الفيل (570م)، وبُعث بالرسالة في سن الأربعين، هاجر إلى المدينة، وتوفي فيها سنة 11هـ.\n\nقال تعالى: ﴿وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ﴾ [الأنبياء: 107]`,
-  ],
-]
+// ───────────────────────── Route handler ─────────────────────────
 
-function matchKnowledge(msg: string): string | null {
-  for (const [pattern, answer] of KNOWLEDGE) {
-    if (pattern.test(msg)) return answer
-  }
-  return null
-}
+const MAX_ITERATIONS = 5
 
-// ── Route handler ──────────────────────────────────────────────────────────────
 export async function POST(req: NextRequest) {
+  let language = 'ar'
   try {
     const body = await req.json()
     const message: string = body.message ?? ''
-    const language: string = body.language ?? 'ar'
+    language = body.language ?? 'ar'
 
     if (!message.trim()) {
       return NextResponse.json({ error: 'message required' }, { status: 400 })
     }
 
-    const type = detectType(message)
-    const keyword = extractKeyword(message)
+    const messages: Anthropic.MessageParam[] = [{ role: 'user', content: message }]
+    let finalText = ''
 
-    let reply: string
+    for (let iteration = 0; iteration < MAX_ITERATIONS; iteration++) {
+      const response = await anthropic.messages.create({
+        model: MODEL,
+        max_tokens: 2048,
+        system: buildSystemPrompt(language),
+        tools: TOOLS,
+        output_config: { effort: 'medium' },
+        messages,
+      })
 
-    if (type === 'quran') {
-      reply = await searchQuran(keyword)
-    } else if (type === 'hadith') {
-      reply = await searchHadith(keyword)
-    } else if (type === 'azkar') {
-      reply = await fetchAzkar(message)
-    } else {
-      const known = matchKnowledge(message)
-      reply = known ??
-        `جزاك الله خيراً على سؤالك الكريم.\n\nللإجابة الدقيقة أنصحك بـ:\n\n• موسوعة الدرر السنية: dorar.net\n• موقع إسلام ويب: islamweb.net\n• الرجوع لعالم ثقة في بلدك\n\nوالله أعلم، وصلى الله على نبينا محمد وآله وصحبه أجمعين. 🌙`
+      if (response.stop_reason === 'refusal') {
+        finalText = chatMessages(language).refusal
+        break
+      }
+
+      messages.push({ role: 'assistant', content: response.content })
+
+      const toolUses = response.content.filter(
+        (b): b is Anthropic.ToolUseBlock => b.type === 'tool_use',
+      )
+
+      if (!toolUses.length || response.stop_reason !== 'tool_use') {
+        finalText = response.content
+          .filter((b): b is Anthropic.TextBlock => b.type === 'text')
+          .map((b) => b.text)
+          .join('\n')
+          .trim()
+        break
+      }
+
+      const toolResults: Anthropic.ToolResultBlockParam[] = []
+      for (const toolUse of toolUses) {
+        const result = await runTool(toolUse.name, toolUse.input)
+        toolResults.push({ type: 'tool_result', tool_use_id: toolUse.id, content: result })
+      }
+      messages.push({ role: 'user', content: toolResults })
     }
 
-    // Prefix a non-Arabic language note so users know the source is Arabic
-    const LANG_NOTES: Record<string, string> = {
-      en: '🌙 Answer based on the Quran and Sunnah:\n\n',
-      zh: '🌙 来自《古兰经》和圣训的回答：\n\n',
-      es: '🌙 Respuesta basada en el Corán y la Sunnah:\n\n',
-      fr: '🌙 Réponse basée sur le Coran et la Sunnah :\n\n',
-      de: '🌙 Antwort basierend auf Quran und Sunnah:\n\n',
-      tr: '🌙 Kuran ve Sünnete dayalı cevap:\n\n',
-      ur: '🌙 قرآن و سنت سے جواب:\n\n',
-      ru: '🌙 Ответ на основе Корана и Сунны:\n\n',
+    if (!finalText) {
+      finalText = chatMessages(language).noAnswer
     }
 
-    const finalReply = language !== 'ar' && LANG_NOTES[language]
-      ? LANG_NOTES[language] + reply
-      : reply
-
-    return NextResponse.json({ reply: finalReply })
+    return NextResponse.json({ reply: finalText })
   } catch (error) {
     console.error('AI chat error:', error)
-    return NextResponse.json(
-      { reply: 'عذراً، حدث خطأ مؤقت. حاول مجدداً.' },
-      { status: 500 },
-    )
+    return NextResponse.json({ reply: chatMessages(language).generalError }, { status: 500 })
   }
 }

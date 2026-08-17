@@ -10,13 +10,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'meta' })
+  const ts = await getTranslations({ locale, namespace: 'scholarsPage' })
   return {
-    title: `العلماء والدعاة | ${t('siteName')}`,
-    description: 'اكتشف مجموعة من العلماء والدعاة مع نبذة مختصرة عن تخصصاتهم وطرق التواصل.',
+    title: `${ts('title')} | ${t('siteName')}`,
+    description: ts('subtitle'),
     alternates: buildAlternates(locale, 'scholars'),
   }
 }
 
-export default function ScholarsPage() {
-  return <ScholarsPageContent />
+export default async function ScholarsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params
+  return <ScholarsPageContent locale={locale} />
 }

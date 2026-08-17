@@ -1,9 +1,11 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { ASMA_ALLAH } from '@/data/asmaAllah'
 
 export default function AsmaAllahClient() {
+  const t = useTranslations('asmaAllah')
   const [search, setSearch] = useState('')
 
   const filtered = useMemo(() => {
@@ -24,10 +26,10 @@ export default function AsmaAllahClient() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="ابحث عن اسم من أسماء الله الحسنى..."
+          placeholder={t('searchPlaceholder')}
           className="w-full px-5 py-3 rounded-full border border-gold-200 dark:border-gold-800/50 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:border-gold-400"
         />
-        <p className="text-center text-xs text-gray-400 mt-2">{filtered.length} من ٩٩ اسماً</p>
+        <p className="text-center text-xs text-gray-400 mt-2">{t('resultsCount', { count: filtered.length })}</p>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -50,7 +52,7 @@ export default function AsmaAllahClient() {
           </div>
         ))}
         {filtered.length === 0 && (
-          <p className="col-span-full text-center text-gray-400">لا توجد نتائج مطابقة للبحث</p>
+          <p className="col-span-full text-center text-gray-400">{t('noResults')}</p>
         )}
       </div>
     </div>

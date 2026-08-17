@@ -6,14 +6,6 @@ import { Share2, Copy, Search, PlayCircle, ShieldCheck, Sparkles, BookOpenText, 
 import { featuredVideos, type FeaturedVideo, type VideoCategory } from '@/data/featuredVideos'
 import { cn } from '@/utils'
 
-const CATEGORY_LABELS: Record<VideoCategory, string> = {
-  aqeedah: 'العقيدة',
-  fiqh: 'الفقه',
-  seerah: 'السيرة النبوية',
-  dawah: 'الدعوة إلى الإسلام',
-  tazkiyah: 'التزكية',
-}
-
 const CATEGORY_ICONS: Record<VideoCategory, string> = {
   aqeedah: '🕌',
   fiqh: '⚖️',
@@ -22,8 +14,9 @@ const CATEGORY_ICONS: Record<VideoCategory, string> = {
   tazkiyah: '✨',
 }
 
-const categoryFilters: (VideoCategory | 'الكل')[] = ['الكل', 'aqeedah', 'fiqh', 'seerah', 'dawah', 'tazkiyah']
-const languages = ['الكل', 'العربية', 'English']
+const CATEGORY_KEYS: VideoCategory[] = ['aqeedah', 'fiqh', 'seerah', 'dawah', 'tazkiyah']
+const ALL_SENTINEL = 'all'
+const LANG_SENTINELS = [ALL_SENTINEL, 'ar', 'en'] as const
 
 function watchUrl(id: string): string {
   return `https://www.youtube.com/watch?v=${id}`
@@ -39,36 +32,39 @@ function getUniqueValues(videos: FeaturedVideo[], key: 'channelName' | 'sheikhNa
 
 export default function IslamicVideosClient() {
   const t = useTranslations('videos')
+  const tc = useTranslations('common')
+  const ALL = tc('all')
+
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState<VideoCategory | 'الكل'>('الكل')
-  const [selectedChannel, setSelectedChannel] = useState('الكل')
-  const [selectedSheikh, setSelectedSheikh] = useState('الكل')
-  const [selectedLanguage, setSelectedLanguage] = useState('الكل')
+  const [selectedCategory, setSelectedCategory] = useState<VideoCategory | typeof ALL_SENTINEL>(ALL_SENTINEL)
+  const [selectedChannel, setSelectedChannel] = useState(ALL_SENTINEL)
+  const [selectedSheikh, setSelectedSheikh] = useState(ALL_SENTINEL)
+  const [selectedLanguage, setSelectedLanguage] = useState<typeof LANG_SENTINELS[number]>(ALL_SENTINEL)
   const [favorites, setFavorites] = useState<string[]>([])
   const [playingId, setPlayingId] = useState<string | null>(null)
 
-  const channels = useMemo(() => ['الكل', ...getUniqueValues(featuredVideos, 'channelName')], [])
-  const sheikhs = useMemo(() => ['الكل', ...getUniqueValues(featuredVideos, 'sheikhName')], [])
+  const categoryLabel = (key: VideoCategory) => t(`categories.${key}`)
+
+  const channels = useMemo(() => [ALL_SENTINEL, ...getUniqueValues(featuredVideos, 'channelName')], [])
+  const sheikhs = useMemo(() => [ALL_SENTINEL, ...getUniqueValues(featuredVideos, 'sheikhName')], [])
 
   const filteredVideos = useMemo(() => {
     const normalizedQuery = searchQuery.trim().toLowerCase()
 
     return featuredVideos.filter((video) => {
       const matchesSearch = normalizedQuery
-        ? [video.title, video.channelName, video.sheikhName, CATEGORY_LABELS[video.category]]
+        ? [video.title, video.channelName, video.sheikhName, categoryLabel(video.category)]
             .filter(Boolean)
             .join(' ')
             .toLowerCase()
             .includes(normalizedQuery)
         : true
-      const matchesCategory = selectedCategory === 'الكل' || video.category === selectedCategory
-      const matchesChannel = selectedChannel === 'الكل' || video.channelName === selectedChannel
-      const matchesSheikh = selectedSheikh === 'الكل' || video.sheikhName === selectedSheikh
-      const matchesLanguage =
-        selectedLanguage === 'الكل' ||
-        (selectedLanguage === 'العربية' && video.language === 'ar') ||
-        (selectedLanguage === 'English' && video.language === 'en')
+      const matchesCategory = selectedCategory === ALL_SENTINEL || video.category === selectedCategory
+      const matchesChannel = selectedChannel === ALL_SENTINEL || video.channelName === selectedChannel
+      const matchesSheikh = selectedSheikh === ALL_SENTINEL || video.sheikhName === selectedSheikh
+      const matchesLanguage = selectedLanguage === ALL_SENTINEL || video.language === selectedLanguage
       return matchesSearch && matchesCategory && matchesChannel && matchesSheikh && matchesLanguage
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     })
   }, [searchQuery, selectedCategory, selectedChannel, selectedSheikh, selectedLanguage])
 
@@ -76,13 +72,14 @@ export default function IslamicVideosClient() {
 
   const sectionGroups = useMemo(
     () =>
-      (Object.keys(CATEGORY_LABELS) as VideoCategory[])
+      CATEGORY_KEYS
         .map((category) => ({
           category,
-          title: `${CATEGORY_ICONS[category]} ${CATEGORY_LABELS[category]}`,
+          title: `${CATEGORY_ICONS[category]} ${categoryLabel(category)}`,
           videos: filteredVideos.filter((video) => video.category === category),
         }))
         .filter((section) => section.videos.length > 0),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [filteredVideos]
   )
 
@@ -96,12 +93,12 @@ export default function IslamicVideosClient() {
 
   const selectChannel = (channel: string) => {
     setSelectedChannel(channel)
-    setSelectedSheikh('الكل')
+    setSelectedSheikh(ALL_SENTINEL)
   }
 
   const selectSheikh = (sheikh: string) => {
     setSelectedSheikh(sheikh)
-    setSelectedChannel('الكل')
+    setSelectedChannel(ALL_SENTINEL)
   }
 
   const handleShare = async (url: string, title: string) => {
@@ -130,11 +127,11 @@ export default function IslamicVideosClient() {
             type="button"
             onClick={() => setPlayingId(video.id)}
             className="relative w-full h-52 rounded-2xl overflow-hidden group"
-            aria-label={`تشغيل فيديو: ${video.title}`}
+            aria-label={t('playAria', { title: video.title })}
           >
             <img
               src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
-              alt={`صورة مصغرة لفيديو: ${video.title}`}
+              alt={t('thumbnailAlt', { title: video.title })}
               className="w-full h-52 object-cover"
               loading="lazy"
             />
@@ -146,7 +143,7 @@ export default function IslamicVideosClient() {
       </div>
       <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
         <span className="font-arabic text-lg font-bold text-islamic-navy dark:text-white">{video.title}</span>
-        <span className="text-xs px-3 py-1 rounded-full bg-gold-100 text-gold-700">{CATEGORY_LABELS[video.category]}</span>
+        <span className="text-xs px-3 py-1 rounded-full bg-gold-100 text-gold-700">{categoryLabel(video.category)}</span>
       </div>
       <div className="text-sm text-gray-600 dark:text-gray-400 mb-4 flex flex-wrap gap-2 items-center">
         <button
@@ -175,7 +172,7 @@ export default function IslamicVideosClient() {
           rel="noopener noreferrer"
           className="btn-outline-gold text-sm px-4 py-2 inline-flex items-center gap-2"
         >
-          <ExternalLink size={16} /> زيارة القناة
+          <ExternalLink size={16} /> {t('visitChannel')}
         </a>
         <button onClick={() => handleShare(watchUrl(video.id), video.title)} className="btn-outline-gold text-sm px-4 py-2 inline-flex items-center gap-2">
           <Share2 size={16} /> {t('share')}
@@ -203,7 +200,7 @@ export default function IslamicVideosClient() {
         <div className="relative z-10 max-w-6xl mx-auto px-4 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-gold-100 backdrop-blur-sm">
             <Sparkles size={16} />
-            مكتبة دعوية موثوقة
+            {t('libraryBadge')}
           </div>
 
           <h1 className="font-arabic text-white text-4xl sm:text-5xl md:text-6xl font-bold mt-5 mb-4 leading-tight">
@@ -237,10 +234,10 @@ export default function IslamicVideosClient() {
                     {t('categoryFilter')}
                   </div>
                   <div className="mt-3 flex flex-wrap gap-2">
-                    {categoryFilters.map((category) => (
+                    {[ALL_SENTINEL, ...CATEGORY_KEYS].map((category) => (
                       <button
                         key={category}
-                        onClick={() => setSelectedCategory(category)}
+                        onClick={() => setSelectedCategory(category as VideoCategory | typeof ALL_SENTINEL)}
                         className={cn(
                           'rounded-full px-3 py-1 text-sm transition-all',
                           selectedCategory === category
@@ -248,7 +245,7 @@ export default function IslamicVideosClient() {
                             : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
                         )}
                       >
-                        {category === 'الكل' ? category : CATEGORY_LABELS[category]}
+                        {category === ALL_SENTINEL ? ALL : categoryLabel(category as VideoCategory)}
                       </button>
                     ))}
                   </div>
@@ -266,7 +263,7 @@ export default function IslamicVideosClient() {
                       className="search-input"
                     >
                       {channels.map((channel) => (
-                        <option key={channel} value={channel}>{channel}</option>
+                        <option key={channel} value={channel}>{channel === ALL_SENTINEL ? ALL : channel}</option>
                       ))}
                     </select>
                     <select
@@ -275,16 +272,18 @@ export default function IslamicVideosClient() {
                       className="search-input"
                     >
                       {sheikhs.map((sheikh) => (
-                        <option key={sheikh} value={sheikh}>{sheikh}</option>
+                        <option key={sheikh} value={sheikh}>{sheikh === ALL_SENTINEL ? ALL : sheikh}</option>
                       ))}
                     </select>
                     <select
                       value={selectedLanguage}
-                      onChange={(event) => setSelectedLanguage(event.target.value)}
+                      onChange={(event) => setSelectedLanguage(event.target.value as typeof LANG_SENTINELS[number])}
                       className="search-input"
                     >
-                      {languages.map((lang) => (
-                        <option key={lang} value={lang}>{lang}</option>
+                      {LANG_SENTINELS.map((lang) => (
+                        <option key={lang} value={lang}>
+                          {lang === ALL_SENTINEL ? ALL : lang === 'ar' ? t('langArabic') : t('langEnglish')}
+                        </option>
                       ))}
                     </select>
                   </div>
@@ -295,7 +294,7 @@ export default function IslamicVideosClient() {
             <div className="rounded-[28px] bg-white/95 dark:bg-gray-900/90 border border-gold-200/60 dark:border-gray-800 p-5 shadow-lg shadow-black/10 backdrop-blur text-right">
               <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
                 <ShieldCheck size={16} className="text-gold-500" />
-                إحصائيات المكتبة
+                {t('libraryStats')}
               </div>
 
               <div className="mt-4 grid gap-3">
@@ -310,22 +309,22 @@ export default function IslamicVideosClient() {
                 </div>
 
                 <div className="flex flex-wrap justify-end gap-2 mt-2">
-                  {selectedChannel !== 'الكل' && (
+                  {selectedChannel !== ALL_SENTINEL && (
                     <button
                       type="button"
-                      onClick={() => setSelectedChannel('الكل')}
+                      onClick={() => setSelectedChannel(ALL_SENTINEL)}
                       className="rounded-full border border-gold-300 px-3 py-1 text-xs text-gold-300 hover:bg-gold-400/10 transition"
                     >
-                      القناة: {selectedChannel} ✕
+                      {t('channelChip', { channel: selectedChannel })} ✕
                     </button>
                   )}
-                  {selectedSheikh !== 'الكل' && (
+                  {selectedSheikh !== ALL_SENTINEL && (
                     <button
                       type="button"
-                      onClick={() => setSelectedSheikh('الكل')}
+                      onClick={() => setSelectedSheikh(ALL_SENTINEL)}
                       className="rounded-full border border-gold-300 px-3 py-1 text-xs text-gold-300 hover:bg-gold-300/10 transition"
                     >
-                      الشيخ: {selectedSheikh} ✕
+                      {t('sheikhChip', { sheikh: selectedSheikh })} ✕
                     </button>
                   )}
                 </div>
@@ -344,7 +343,7 @@ export default function IslamicVideosClient() {
         </div>
         <div className="grid gap-4 xl:grid-cols-3">
           {discoverVideos.length ? discoverVideos.map((video) => renderVideoCard(video)) : (
-            <p className="col-span-full text-center text-gray-400">لا توجد فيديوهات مطابقة للبحث.</p>
+            <p className="col-span-full text-center text-gray-400">{t('noResults')}</p>
           )}
         </div>
       </section>

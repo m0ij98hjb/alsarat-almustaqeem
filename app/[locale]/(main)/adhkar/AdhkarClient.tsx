@@ -48,7 +48,7 @@ export default function AdhkarClient() {
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="ابحث في الأذكار والأدعية..."
+            placeholder={t('searchPlaceholder')}
             className="w-full px-5 py-3 rounded-full border border-gold-200 dark:border-gold-800/50 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-200 focus:outline-none focus:border-gold-400"
           />
         </div>
@@ -73,7 +73,7 @@ export default function AdhkarClient() {
             </button>
           ))}
           {filteredCategories.length === 0 && (
-            <p className="text-gray-400 text-sm">لا توجد نتائج مطابقة للبحث</p>
+            <p className="text-gray-400 text-sm">{t('noResults')}</p>
           )}
         </div>
 

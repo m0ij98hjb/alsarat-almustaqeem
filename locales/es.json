@@ -8,6 +8,12 @@
     "hadith": "Hadices",
     "adhkar": "Adhkar",
     "prophets": "Profetas",
+    "live": "En vivo",
+    "scholars": "Eruditos",
+    "kids": "Niños",
+    "islamicVideos": "Videos islámicos",
+    "library": "Biblioteca islámica",
+    "mainSection": "Principal",
     "seerah": "Seerah",
     "asmaAllah": "Nombres de Alá",
     "prayerTimes": "Horarios de Oración",
@@ -111,7 +117,175 @@
     "readFullSurah": "Leer la Sura completa",
     "aiTitle": "El Asistente Islámico IA \"Al-Rashid\"",
     "aiDesc": "Haz cualquier pregunta islámica y el asistente responderá del Sagrado Corán y la auténtica Sunnah Profética",
-    "aiBtn": "Iniciar la Conversación"
+    "aiBtn": "Iniciar la Conversación",
+    "servicesTitle": "Servicios islámicos",
+    "servicesDesc": "Un conjunto de servicios seleccionados para todas tus necesidades islámicas",
+    "services": {
+      "live": {
+        "title": "En vivo",
+        "desc": "Sigue los canales islámicos en directo"
+      },
+      "scholars": {
+        "title": "Eruditos",
+        "desc": "Conoce a eruditos y predicadores de confianza"
+      },
+      "kids": {
+        "title": "Educación infantil",
+        "desc": "Lecciones islámicas sencillas para niños"
+      },
+      "hadith": {
+        "title": "Hadices",
+        "desc": "Hadices clasificados con búsqueda y opción de compartir"
+      }
+    },
+    "featuresVideos": {
+      "title": "Videos islámicos",
+      "desc": "Conferencias fiables de canales islámicos oficiales"
+    },
+    "btnWatchVideos": "📺 Ver videos",
+    "btnLiveMakkah": "📡 En vivo desde La Meca",
+    "journey": {
+      "title": "Comienza tu viaje",
+      "subtitle": "Una guía sencilla, paso a paso, para cualquiera que quiera conocer el Islam",
+      "steps": {
+        "islam": "¿Qué es el Islam?",
+        "allah": "¿Quién es Alá?",
+        "prophet": "¿Quién es el Profeta Muhammad ﷺ?",
+        "quran": "¿Qué es el Corán?",
+        "prayer": "¿Por qué oramos?",
+        "ramadan": "Ramadán",
+        "hajj": "El Hach",
+        "live": "Ver La Meca en vivo",
+        "ai": "Pregunta al asistente de IA"
+      }
+    },
+    "whyExplore": {
+      "title": "¿Por qué descubrir el Islam?",
+      "subtitle": "Valores humanos universales en el corazón del Islam",
+      "values": {
+        "mercy": {
+          "title": "Misericordia",
+          "desc": "Los musulmanes comienzan cada acto en el nombre del Clementísimo — la misericordia es central en la forma en que el Islam ve toda la creación."
+        },
+        "justice": {
+          "title": "Justicia",
+          "desc": "El Islam ordena la justicia incluso hacia quienes no nos agradan, y la vincula estrechamente con la piedad."
+        },
+        "compassion": {
+          "title": "Compasión",
+          "desc": "El Profeta ﷺ describió a los creyentes como un solo cuerpo en su compasión mutua."
+        },
+        "knowledge": {
+          "title": "Conocimiento",
+          "desc": "La primera revelación coránica fue una orden de leer — buscar conocimiento es un deber para todo musulmán."
+        },
+        "family": {
+          "title": "Familia",
+          "desc": "El Islam pone gran énfasis en honrar a los padres y mantener los lazos familiares."
+        },
+        "hope": {
+          "title": "Esperanza",
+          "desc": "El Islam prohíbe desesperar de la misericordia de Dios, sin importar cuán grande sea la dificultad."
+        },
+        "peace": {
+          "title": "Paz",
+          "desc": "La palabra «Islam» comparte su raíz con «paz», y los musulmanes se saludan entre sí con ella."
+        },
+        "honesty": {
+          "title": "Honestidad",
+          "desc": "El Profeta ﷺ exhortó a la sinceridad hasta que eleva a la persona al rango de los veraces."
+        }
+      }
+    },
+    "meetProphet": {
+      "title": "Conoce al Profeta Muhammad ﷺ",
+      "subtitle": "El último profeta, misericordia para todos los mundos, a quien fue revelado el Corán",
+      "cta": "Leer la biografía completa"
+    },
+    "discoverQuran": {
+      "title": "Descubre el Sagrado Corán",
+      "subtitle": "6.236 versículos a tu alcance — leer, escuchar y buscar",
+      "tiles": {
+        "read": "Leer",
+        "listen": "Escuchar",
+        "translations": "Traducciones",
+        "randomVerse": "Versículo aleatorio",
+        "search": "Buscar",
+        "continueReading": "Continuar leyendo"
+      }
+    },
+    "fivePillarsSection": {
+      "title": "Los cinco pilares del Islam",
+      "subtitle": "El fundamento sobre el que se construye la vida de un musulmán",
+      "pillars": {
+        "shahada": {
+          "name": "Shahada",
+          "desc": "Atestiguar que no hay más dios que Alá y que Muhammad es Su mensajero"
+        },
+        "salah": {
+          "name": "Salat",
+          "desc": "Cinco oraciones diarias que conectan al creyente con Dios"
+        },
+        "zakat": {
+          "name": "Zakat",
+          "desc": "Dar una parte de los bienes a quienes lo necesitan"
+        },
+        "sawm": {
+          "name": "Sawm",
+          "desc": "Ayunar el mes de Ramadán por autodisciplina y conciencia de Dios"
+        },
+        "hajj": {
+          "name": "Hach",
+          "desc": "Una peregrinación a La Meca, una vez en la vida, para quien pueda"
+        }
+      }
+    },
+    "worldStats": {
+      "title": "El Islam en el mundo",
+      "stats": {
+        "muslims": "Musulmanes en el mundo",
+        "countries": "Países de mayoría musulmana",
+        "religion": "Religión de mayor crecimiento",
+        "history": "Años de historia continua"
+      }
+    },
+    "faqSection": {
+      "title": "Preguntas frecuentes",
+      "subtitle": "Respuestas breves a las preguntas más comunes al descubrir el Islam"
+    },
+    "watchLearn": {
+      "title": "Ver y aprender",
+      "subtitle": "Conferencias exclusivamente de canales islámicos oficiales verificados",
+      "playAria": "Reproducir video: {title}",
+      "seeAll": "Ver todos los videos"
+    },
+    "liveMakkah": {
+      "title": "En vivo desde La Meca y Medina",
+      "subtitle": "Sigue la transmisión oficial las 24 horas desde las Dos Mezquitas Sagradas",
+      "status": "Transmisión en vivo",
+      "seeAll": "Ver todos los canales en vivo"
+    },
+    "trustedScholarsSection": {
+      "title": "Eruditos de confianza",
+      "subtitle": "Conoce a eruditos y predicadores verificados, vinculados solo a sus fuentes oficiales",
+      "seeAll": "Ver todos los eruditos y predicadores"
+    },
+    "dailyInspiration": {
+      "title": "Inspiración diaria",
+      "subtitle": "Un versículo, un hadiz y una súplica — renovados cada día"
+    },
+    "todaysPicks": {
+      "featuredVideo": "Video destacado de hoy",
+      "featuredScholar": "Erudito destacado de hoy"
+    },
+    "finalCta": {
+      "title": "Continúa tu viaje",
+      "subtitle": "Dondequiera que empieces, este sitio está aquí para acompañarte en cada paso siguiente",
+      "btnQuran": "📖 Leer el Corán",
+      "btnAI": "🤖 Preguntar a la IA",
+      "btnVideos": "📺 Ver videos",
+      "btnLearnMore": "🌟 Saber más"
+    }
   },
   "quran": {
     "title": "El Sagrado Corán",
@@ -135,7 +309,33 @@
     "copied": "Copiado",
     "prevSurah": "Sura anterior",
     "juz": "Yuz",
-    "nextSurah": "Sura siguiente"
+    "nextSurah": "Sura siguiente",
+    "referenceTitle": "Referencia del Corán",
+    "referenceDesc": "Esta referencia externa te permite leer el Sagrado Corán en escritura otomaní, escuchar recitaciones, leer tafsir, buscar versículos y explorar suras fácilmente.\nEste sitio no muestra el contenido de la referencia en sí, solo proporciona acceso rápido a ella.",
+    "referenceLinkBtn": "Ir a la referencia del Corán",
+    "referenceFeatures": {
+      "read": {
+        "title": "📖 Leer el Sagrado Corán",
+        "desc": "Ve directamente a leer el Sagrado Corán en escritura otomaní clara."
+      },
+      "listen": {
+        "title": "🎧 Escuchar recitaciones",
+        "desc": "Escucha recitaciones de fuentes confiables en la referencia externa."
+      },
+      "tafsir": {
+        "title": "📚 Tafsir del Corán",
+        "desc": "Consulta fácilmente múltiples tafsires de los versículos."
+      },
+      "search": {
+        "title": "🔍 Buscar en el Corán",
+        "desc": "Busca versículos y suras de forma rápida y precisa."
+      },
+      "browse": {
+        "title": "⭐ Explorar todas las suras",
+        "desc": "Explora la lista completa de suras con facilidad."
+      }
+    },
+    "referenceNote": "La referencia se abrirá en una nueva ventana para que puedas aprovechar todos sus servicios y luego volver fácilmente a nuestro sitio."
   },
   "hadith": {
     "title": "Los Nobles Hadices Proféticos",
@@ -149,7 +349,28 @@
       "HASAN": "Hasan",
       "DAIF": "Da'if",
       "MAWDU": "Mawdu'"
-    }
+    },
+    "heroDesc": "Una colección seleccionada de hadices auténticos (sahih) y buenos (hasan) de Al-Arbain An-Nawawiyyah y Riyad as-Salihin, clasificados por tema y grado.",
+    "dorarTitle": "Buscar en la enciclopedia Dorar Al-Saniyyah",
+    "dorarDesc": "Busca millones de hadices y temas directamente desde el sitio Dorar Al-Saniyyah, con un enlace rápido a la búsqueda y enciclopedias especializadas.",
+    "dorarPlaceholder": "Escribe tu búsqueda y pulsa buscar",
+    "dorarSearchBtn": "Buscar",
+    "visitDorar": "Visitar la enciclopedia Dorar Al-Saniyyah",
+    "servicesTitle": "Servicios de Dorar Al-Saniyyah",
+    "servicesDesc": "Enlaces rápidos a las principales enciclopedias Dorar Al-Saniyyah para acceder directamente a los libros y servicios que buscas.",
+    "serviceOpenDesc": "Abre la sección correspondiente en el sitio Dorar Al-Saniyyah.",
+    "services": {
+      "encyclopedia": "Enciclopedia de hadices",
+      "adhkar": "Adhkar",
+      "duas": "Súplicas",
+      "scientific": "Enciclopedia científica",
+      "fiqh": "Enciclopedia de fiqh"
+    },
+    "filterPlaceholder": "Buscar hadices, narradores o temas",
+    "categoriesLabel": "Categorías:",
+    "shareTitle": "Hadiz islámico",
+    "copyHadithBtn": "Copiar hadiz",
+    "shareHadithBtn": "Compartir hadiz"
   },
   "adhkar": {
     "title": "Adhkar y Duaa",
@@ -165,12 +386,18 @@
       "TRAVEL": "Adhkar de Viaje",
       "FOOD": "Adhkar de la Comida",
       "GENERAL": "Adhkar General"
-    }
+    },
+    "searchPlaceholder": "Buscar adhkar y súplicas...",
+    "noResults": "No se encontraron resultados coincidentes"
   },
   "prophets": {
     "title": "Historias de Profetas y Mensajeros",
     "ayah": "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
-    "inQuran": "× en el Corán"
+    "inQuran": "× en el Corán",
+    "backToList": "← Volver a la lista de profetas",
+    "storyTitle": "La historia",
+    "lessonsTitle": "Lecciones y enseñanzas",
+    "referencesTitle": "Menciones en el Corán"
   },
   "seerah": {
     "title": "La Biografía Profética",
@@ -206,6 +433,44 @@
       "¿Cuál es la virtud de pedir perdón (Istighfar)?"
     ]
   },
+  "videos": {
+    "title": "📺 Videos islámicos",
+    "subtitle": "Una referencia islámica profesional con conferencias, lecciones y clips de dawah confiables de reconocidos eruditos y predicadores, para que aprendas y vuelvas a la verdad con confianza.",
+    "quickSearch": "Búsqueda rápida y eficaz",
+    "searchPlaceholder": "Buscar videos por título, canal, orador o categoría",
+    "categoryFilter": "Categoría",
+    "channelAndSpeaker": "Canal y orador",
+    "statsAvailable": "Videos disponibles",
+    "statsFeatured": "Contenido destacado",
+    "statsFeaturedDesc": "Selecciones confiables",
+    "discover": "Descubre el Islam",
+    "discoverDesc": "Si deseas conocer el Islam y el mensaje del Profeta Muhammad ﷺ, aquí encontrarás una selección de videos introductorios con información confiable y clara.",
+    "sectionDesc": "Una colección seleccionada de videos relacionados con este ámbito islámico.",
+    "referenceTitle": "Referencia islámica profesional",
+    "referenceDesc": "Todos los videos se presentan como enlaces oficiales de YouTube, con búsqueda, filtrado, favoritos y opción de compartir, preservando la identidad visual y la calidad del contenido del sitio.",
+    "watchNow": "Ver ahora",
+    "share": "Compartir",
+    "copyLink": "Copiar enlace",
+    "saved": "Guardado",
+    "addToFavorites": "Añadir a favoritos",
+    "libraryBadge": "Biblioteca de dawah confiable",
+    "libraryStats": "Estadísticas de la biblioteca",
+    "visitChannel": "Visitar canal",
+    "noResults": "Ningún video coincide con tu búsqueda.",
+    "channelChip": "Canal: {channel}",
+    "sheikhChip": "Jeque: {sheikh}",
+    "playAria": "Reproducir video: {title}",
+    "thumbnailAlt": "Miniatura del video: {title}",
+    "langArabic": "Árabe",
+    "langEnglish": "Inglés",
+    "categories": {
+      "aqeedah": "Aqidah",
+      "fiqh": "Fiqh",
+      "seerah": "Seerah",
+      "dawah": "Dawah",
+      "tazkiyah": "Tazkiyah"
+    }
+  },
   "common": {
     "siteName": "As-Sirat Al-Mustaqeem",
     "loading": "Cargando...",
@@ -214,7 +479,10 @@
     "back": "Volver",
     "backToSite": "Volver al sitio",
     "admin": "Administrador",
-    "dashboard": "Panel"
+    "dashboard": "Panel",
+    "all": "Todos",
+    "comingSoon": "Próximamente",
+    "play": "Reproducir"
   },
   "admin": {
     "title": "Admin As-Sirat Al-Mustaqeem",
@@ -229,5 +497,96 @@
       "settings": "Configuración"
     },
     "backToSite": "Volver al sitio"
+  },
+  "asmaAllah": {
+    "searchPlaceholder": "Busca un nombre de Alá...",
+    "resultsCount": "{count} de 99 nombres",
+    "noResults": "No se encontraron resultados coincidentes"
+  },
+  "prayerTimes": {
+    "cityLabel": "Ciudad",
+    "countryLabel": "Código de país",
+    "cityPlaceholder": "Yeda",
+    "countryPlaceholder": "SA",
+    "searchBtn": "Buscar",
+    "useMyLocation": "📍 Usar mi ubicación actual",
+    "loading": "Cargando horarios de oración...",
+    "errorFetch": "No se pudieron obtener los horarios de oración",
+    "errorConnection": "Fallo al conectar con el servicio de horarios de oración",
+    "errorLocation": "No se pudo acceder a tu ubicación — puedes elegir una ciudad manualmente",
+    "yourLocation": "Tu ubicación actual",
+    "nextPrayer": "Próxima oración",
+    "after": "En {time}",
+    "hoursAndMinutes": "{h} h {m} min",
+    "minutesOnly": "{m} min",
+    "midnight": "Medianoche",
+    "prayers": {
+      "imsak": "Imsak",
+      "fajr": "Fayr",
+      "sunrise": "Amanecer",
+      "dhuhr": "Duhr",
+      "asr": "Asr",
+      "maghrib": "Magrib",
+      "isha": "Isha"
+    },
+    "pageDescription": "Horarios de oración completos para tu ciudad o ubicación actual: Fayr, amanecer, Duhr, Asr, Magrib e Isha."
+  },
+  "livePage": {
+    "title": "Transmisión en vivo",
+    "subtitle": "Sigue canales de TV y radio islámicos en vivo, en una experiencia cómoda acorde a la identidad del sitio."
+  },
+  "scholarsPage": {
+    "title": "Eruditos y predicadores",
+    "subtitle": "Un directorio confiable de eruditos, predicadores e instituciones islámicas oficiales, con enlaces solo a sus fuentes oficiales verificadas.",
+    "categories": {
+      "saudi": "Eruditos de Arabia Saudita",
+      "international": "Predicadores y jeques internacionales",
+      "organization": "Instituciones y organismos islámicos oficiales"
+    },
+    "specialtyLabel": "Especialidad:",
+    "countryLabel": "País:",
+    "links": {
+      "website": "Visitar sitio web",
+      "youtube": "YouTube",
+      "fatwa": "Fatuas",
+      "lectures": "Clases",
+      "x": "X",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "telegram": "Telegram"
+    },
+    "photoAlt": "Foto de {name}, {specialty}"
+  },
+  "kidsPage": {
+    "title": "Sección Infantil",
+    "subtitle": "Contenido sencillo y divertido para que los niños aprendan sobre el Islam paso a paso, con imágenes y explicaciones fáciles.",
+    "lessons": {
+      "wudu": {
+        "title": "Aprende el Wudu",
+        "desc": "Los pasos de la ablución y su importancia"
+      },
+      "prayer": {
+        "title": "Aprende la Oración",
+        "desc": "Las etapas básicas y los pilares de la oración"
+      },
+      "umrah": {
+        "title": "Aprende la Umrah",
+        "desc": "Los pasos de la Umrah explicados de forma sencilla"
+      },
+      "hajj": {
+        "title": "Aprende el Hach",
+        "desc": "Los lugares sagrados y los pasos del Hach"
+      },
+      "learn": {
+        "title": "El Islam para Niños",
+        "desc": "Los fundamentos y pilares del Islam"
+      }
+    }
+  },
+  "kidsLesson": {
+    "explanationTitle": "Explicación sencilla",
+    "watchVideoTitle": "Ver el video",
+    "quizTitle": "Cuestionario rápido",
+    "answerLabel": "Respuesta"
   }
 }

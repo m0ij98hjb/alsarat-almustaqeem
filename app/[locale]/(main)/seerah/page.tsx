@@ -20,6 +20,7 @@ export default async function SeerahPage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'seerah' })
+  const tm = await getTranslations({ locale, namespace: 'meta' })
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -28,8 +29,8 @@ export default async function SeerahPage({
     description: t('subtitle'),
     inLanguage: locale,
     mainEntityOfPage: absoluteUrl(`/${locale}/seerah`),
-    author: { '@type': 'Organization', name: 'الصراط المستقيم' },
-    publisher: { '@type': 'Organization', name: 'الصراط المستقيم' },
+    author: { '@type': 'Organization', name: tm('siteName') },
+    publisher: { '@type': 'Organization', name: tm('siteName') },
   }
 
   return (

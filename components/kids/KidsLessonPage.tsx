@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 type LessonStep = {
   title: string
   text: string
@@ -15,6 +17,7 @@ type QuizQuestion = {
 }
 
 type KidsLessonPageProps = {
+  locale: string
   title: string
   subtitle: string
   icon: string
@@ -26,7 +29,8 @@ type KidsLessonPageProps = {
   quiz: QuizQuestion[]
 }
 
-export function KidsLessonPage({
+export async function KidsLessonPage({
+  locale,
   title,
   subtitle,
   icon,
@@ -37,6 +41,7 @@ export function KidsLessonPage({
   sections,
   quiz,
 }: KidsLessonPageProps) {
+  const t = await getTranslations({ locale, namespace: 'kidsLesson' })
   return (
     <div className="min-h-screen bg-islamic-cream">
       <section className="bg-hero-gradient py-16 relative overflow-hidden">
@@ -52,13 +57,13 @@ export function KidsLessonPage({
 
       <section className="max-w-7xl mx-auto px-4 py-12">
         <div className="card-islamic p-8 md:p-10 mb-8">
-          <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-4">شرح مبسط</h2>
+          <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-4">{t('explanationTitle')}</h2>
           <p className="text-gray-700 leading-relaxed">{intro}</p>
         </div>
 
         {videoId && (
           <div className="card-islamic p-8 md:p-10 mb-8">
-            <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-4">شاهد الفيديو</h2>
+            <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-4">{t('watchVideoTitle')}</h2>
             <div className="aspect-video rounded-2xl overflow-hidden">
               <iframe
                 className="w-full h-full"
@@ -101,7 +106,7 @@ export function KidsLessonPage({
         </div>
 
         <div className="card-islamic p-8 md:p-10">
-          <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-6">اختبار بسيط</h2>
+          <h2 className="font-arabic text-2xl font-bold text-islamic-green mb-6">{t('quizTitle')}</h2>
           <div className="space-y-6">
             {quiz.map((item, index) => (
               <div key={item.question} className="border border-gold-200 rounded-2xl p-5">
@@ -113,7 +118,7 @@ export function KidsLessonPage({
                     </div>
                   ))}
                 </div>
-                <p className="text-sm text-gold-600 mt-3">الإجابة: {item.options[item.answer]}</p>
+                <p className="text-sm text-gold-600 mt-3">{t('answerLabel')}: {item.options[item.answer]}</p>
               </div>
             ))}
           </div>

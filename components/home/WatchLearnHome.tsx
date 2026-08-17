@@ -3,9 +3,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { PlayCircle } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 import { featuredVideos } from '@/data/featuredVideos'
 
 export function WatchLearnHome({ locale }: { locale: string }) {
+  const t = useTranslations('home')
   const [playingId, setPlayingId] = useState<string | null>(null)
   const videos = featuredVideos.slice(0, 3)
 
@@ -13,12 +15,8 @@ export function WatchLearnHome({ locale }: { locale: string }) {
     <section className="py-20 bg-islamic-cream dark:bg-islamic-navy">
       <div className="max-w-6xl mx-auto px-4">
         <div className="section-header">
-          <h2>{locale === 'ar' ? 'شاهد وتعلّم' : 'Watch & Learn'}</h2>
-          <p>
-            {locale === 'ar'
-              ? 'محاضرات من قنوات إسلامية رسمية موثقة فقط'
-              : 'Lectures from verified official Islamic channels only'}
-          </p>
+          <h2>{t('watchLearn.title')}</h2>
+          <p>{t('watchLearn.subtitle')}</p>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 mb-8">
           {videos.map((video) => (
@@ -39,7 +37,7 @@ export function WatchLearnHome({ locale }: { locale: string }) {
                     type="button"
                     onClick={() => setPlayingId(video.id)}
                     className="relative w-full h-[200px] rounded-2xl overflow-hidden group"
-                    aria-label={locale === 'ar' ? `تشغيل فيديو: ${video.title}` : `Play video: ${video.title}`}
+                    aria-label={t('watchLearn.playAria', { title: video.title })}
                   >
                     <img
                       src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
@@ -62,7 +60,7 @@ export function WatchLearnHome({ locale }: { locale: string }) {
         </div>
         <div className="text-center">
           <Link href={`/${locale}/islamic-videos`} className="btn-outline-gold px-8 py-3 inline-block">
-            {locale === 'ar' ? 'شاهد كل الفيديوهات' : 'See all videos'}
+            {t('watchLearn.seeAll')}
           </Link>
         </div>
       </div>

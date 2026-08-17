@@ -1,16 +1,14 @@
+import { getTranslations } from 'next-intl/server'
 import { homeFaq } from '@/data/homeFaq'
 
-export function FaqSection({ locale }: { locale: string }) {
+export async function FaqSection({ locale }: { locale: string }) {
+  const t = await getTranslations({ locale, namespace: 'home' })
   return (
     <section id="faq" className="py-20 bg-islamic-cream dark:bg-islamic-navy">
       <div className="max-w-3xl mx-auto px-4">
         <div className="section-header">
-          <h2>{locale === 'ar' ? 'أسئلة شائعة' : 'Frequently Asked Questions'}</h2>
-          <p>
-            {locale === 'ar'
-              ? 'إجابات مختصرة عن أكثر الأسئلة شيوعًا عند اكتشاف الإسلام'
-              : 'Short answers to the most common questions about Islam'}
-          </p>
+          <h2>{t('faqSection.title')}</h2>
+          <p>{t('faqSection.subtitle')}</p>
         </div>
         <div className="space-y-4">
           {homeFaq.map((item) => (

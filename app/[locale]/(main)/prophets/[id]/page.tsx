@@ -27,6 +27,7 @@ export default async function ProphetDetailPage({
 }) {
   const { locale, id } = await params
   const t = await getTranslations({ locale, namespace: 'prophets' })
+  const tm = await getTranslations({ locale, namespace: 'meta' })
   const prophetId = parseInt(id)
   const prophet = PROPHETS.find((p) => p.id === prophetId)
 
@@ -38,12 +39,12 @@ export default async function ProphetDetailPage({
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
-    headline: `قصة ${prophet.nameAr}`,
+    headline: `${t('storyTitle')}: ${prophet.nameAr}`,
     description: prophet.summary,
     inLanguage: locale,
     mainEntityOfPage: absoluteUrl(`/${locale}/prophets/${prophet.id}`),
-    author: { '@type': 'Organization', name: 'الصراط المستقيم' },
-    publisher: { '@type': 'Organization', name: 'الصراط المستقيم' },
+    author: { '@type': 'Organization', name: tm('siteName') },
+    publisher: { '@type': 'Organization', name: tm('siteName') },
   }
 
   return (
@@ -63,11 +64,11 @@ export default async function ProphetDetailPage({
 
       <div className="max-w-3xl mx-auto px-4 py-12">
         <Link href={`/${locale}/prophets`} className="inline-flex items-center gap-2 text-sm text-gold-600 dark:text-gold-400 hover:underline mb-8">
-          ← العودة إلى قائمة الأنبياء
+          {t('backToList')}
         </Link>
 
         <div className="card-islamic p-8 md:p-10 mb-8">
-          <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-6">القصة</h2>
+          <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-6">{t('storyTitle')}</h2>
           <div className="space-y-4">
             {prophet.story.map((paragraph, i) => (
               <p key={i} className="text-gray-700 dark:text-gray-300 leading-loose">{paragraph}</p>
@@ -76,7 +77,7 @@ export default async function ProphetDetailPage({
         </div>
 
         <div className="card-islamic p-8 md:p-10 mb-8">
-          <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-4">العبر والدروس المستفادة</h2>
+          <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-4">{t('lessonsTitle')}</h2>
           <ul className="space-y-3">
             {prophet.lessons.map((lesson, i) => (
               <li key={i} className="flex items-start gap-2 text-gray-700 dark:text-gray-300">
@@ -88,7 +89,7 @@ export default async function ProphetDetailPage({
         </div>
 
         <div className="card-islamic p-8 md:p-10 mb-8">
-          <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-4">مواضع الذكر في القرآن</h2>
+          <h2 className="font-arabic text-2xl font-bold text-islamic-green dark:text-gold-300 mb-4">{t('referencesTitle')}</h2>
           <div className="flex flex-wrap gap-2">
             {prophet.refs.map((ref, i) => (
               <span key={i} className="text-sm bg-gold-50 dark:bg-gold-900/20 text-gold-700 dark:text-gold-400 px-3 py-1.5 rounded-full">

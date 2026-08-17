@@ -8,6 +8,12 @@
     "hadith": "圣训",
     "adhkar": "念诵",
     "prophets": "先知",
+    "live": "直播",
+    "scholars": "学者",
+    "kids": "儿童",
+    "islamicVideos": "伊斯兰视频",
+    "library": "伊斯兰文库",
+    "mainSection": "主页",
     "seerah": "先知传记",
     "asmaAllah": "真主名号",
     "prayerTimes": "礼拜时间",
@@ -111,7 +117,175 @@
     "readFullSurah": "阅读完整章节",
     "aiTitle": "AI伊斯兰助手「拉西德」",
     "aiDesc": "提问任何伊斯兰问题，助手将从神圣古兰经和真实先知圣训中回答",
-    "aiBtn": "开始对话"
+    "aiBtn": "开始对话",
+    "servicesTitle": "伊斯兰服务",
+    "servicesDesc": "精心挑选的服务，满足您所有的伊斯兰需求",
+    "services": {
+      "live": {
+        "title": "直播",
+        "desc": "直接观看伊斯兰频道"
+      },
+      "scholars": {
+        "title": "学者",
+        "desc": "认识值得信赖的学者和传道者"
+      },
+      "kids": {
+        "title": "儿童教育",
+        "desc": "简明易懂、适合儿童的伊斯兰课程"
+      },
+      "hadith": {
+        "title": "圣训",
+        "desc": "分类圣训，支持搜索与分享"
+      }
+    },
+    "featuresVideos": {
+      "title": "伊斯兰视频",
+      "desc": "来自官方伊斯兰频道的可信讲座"
+    },
+    "btnWatchVideos": "📺 观看视频",
+    "btnLiveMakkah": "📡 麦加直播",
+    "journey": {
+      "title": "开启您的旅程",
+      "subtitle": "为任何想了解伊斯兰教的人准备的简明分步指南",
+      "steps": {
+        "islam": "什么是伊斯兰教？",
+        "allah": "真主是谁？",
+        "prophet": "先知穆罕默德（愿主赐福安之）是谁？",
+        "quran": "什么是古兰经？",
+        "prayer": "我们为什么要礼拜？",
+        "ramadan": "斋月",
+        "hajj": "朝觐",
+        "live": "观看麦加直播",
+        "ai": "咨询AI助手"
+      }
+    },
+    "whyExplore": {
+      "title": "为什么要探索伊斯兰教？",
+      "subtitle": "伊斯兰教所秉持的普世人文价值",
+      "values": {
+        "mercy": {
+          "title": "慈悯",
+          "desc": "穆斯林在做任何事情之前都会奉至仁至慈的真主之名——慈悯是伊斯兰教看待万物的核心。"
+        },
+        "justice": {
+          "title": "公正",
+          "desc": "伊斯兰教命令即使对待厌恶之人也要公正，并将公正与敬畏紧密相连。"
+        },
+        "compassion": {
+          "title": "怜悯",
+          "desc": "先知（愿主赐福安之）将信士比作一个身体，彼此怜悯、相互关爱。"
+        },
+        "knowledge": {
+          "title": "求知",
+          "desc": "古兰经最早启示的内容就是命令诵读——求知是每个穆斯林的天职。"
+        },
+        "family": {
+          "title": "家庭",
+          "desc": "伊斯兰教高度重视孝敬父母、维系血亲，视其为团结社会的基础。"
+        },
+        "hope": {
+          "title": "希望",
+          "desc": "无论苦难多么深重，伊斯兰教都禁止对真主的慈悯感到绝望。"
+        },
+        "peace": {
+          "title": "和平",
+          "desc": "「伊斯兰」一词本身与「和平」同源，穆斯林彼此之间也以和平相互问候。"
+        },
+        "honesty": {
+          "title": "诚实",
+          "desc": "先知（愿主赐福安之）教导人们要诚实，直至达到至诚者的境界。"
+        }
+      }
+    },
+    "meetProphet": {
+      "title": "认识先知穆罕默德（愿主赐福安之）",
+      "subtitle": "最后一位先知，普世的慈悯，古兰经因他而降示",
+      "cta": "阅读完整传记"
+    },
+    "discoverQuran": {
+      "title": "探索古兰经",
+      "subtitle": "6236节经文触手可及——阅读、聆听与搜索",
+      "tiles": {
+        "read": "阅读",
+        "listen": "聆听",
+        "translations": "译文",
+        "randomVerse": "随机经文",
+        "search": "搜索",
+        "continueReading": "继续阅读"
+      }
+    },
+    "fivePillarsSection": {
+      "title": "伊斯兰教五大功修",
+      "subtitle": "穆斯林人生所依托的根基",
+      "pillars": {
+        "shahada": {
+          "name": "作证言",
+          "desc": "作证除真主外绝无应受崇拜者，穆罕默德是真主的使者"
+        },
+        "salah": {
+          "name": "礼拜",
+          "desc": "每日五次礼拜，连接信士与真主"
+        },
+        "zakat": {
+          "name": "天课",
+          "desc": "拿出一部分财产施予贫困有需要的人"
+        },
+        "sawm": {
+          "name": "斋戒",
+          "desc": "在斋月中封斋，以自律和敬畏真主"
+        },
+        "hajj": {
+          "name": "朝觐",
+          "desc": "有能力者一生一次前往麦加朝觐"
+        }
+      }
+    },
+    "worldStats": {
+      "title": "世界各地的伊斯兰教",
+      "stats": {
+        "muslims": "全球穆斯林人口",
+        "countries": "穆斯林占多数的国家",
+        "religion": "增长最快的宗教",
+        "history": "延续不断的历史年数"
+      }
+    },
+    "faqSection": {
+      "title": "常见问题",
+      "subtitle": "关于探索伊斯兰教的常见问题简要解答"
+    },
+    "watchLearn": {
+      "title": "观看与学习",
+      "subtitle": "仅精选来自经过验证的官方伊斯兰频道的讲座",
+      "playAria": "播放视频：{title}",
+      "seeAll": "查看全部视频"
+    },
+    "liveMakkah": {
+      "title": "麦加与麦地那直播",
+      "subtitle": "全天候关注两大圣寺的官方直播",
+      "status": "直播中",
+      "seeAll": "查看全部直播频道"
+    },
+    "trustedScholarsSection": {
+      "title": "值得信赖的学者",
+      "subtitle": "认识经过验证的学者与传道者，仅链接至其官方来源",
+      "seeAll": "查看全部学者与传道者"
+    },
+    "dailyInspiration": {
+      "title": "每日启迪",
+      "subtitle": "每日更新的一节经文、一段圣训与一段祈祷词"
+    },
+    "todaysPicks": {
+      "featuredVideo": "今日精选视频",
+      "featuredScholar": "今日精选学者"
+    },
+    "finalCta": {
+      "title": "继续您的旅程",
+      "subtitle": "无论您从何处开始，本网站都将在此后的每一步陪伴您",
+      "btnQuran": "📖 阅读古兰经",
+      "btnAI": "🤖 咨询AI",
+      "btnVideos": "📺 观看视频",
+      "btnLearnMore": "🌟 了解更多"
+    }
   },
   "quran": {
     "title": "古兰经",
@@ -135,7 +309,33 @@
     "copied": "已复制",
     "prevSurah": "上一章",
     "juz": "茹兹",
-    "nextSurah": "下一章"
+    "nextSurah": "下一章",
+    "referenceTitle": "古兰经参考资源",
+    "referenceDesc": "该外部资源让您可以阅读奥斯曼体古兰经、聆听诵读、阅读经注、搜索经文并轻松浏览各章。\n本网站并不直接展示该资源的内容，只是提供快速访问入口。",
+    "referenceLinkBtn": "前往古兰经参考资源",
+    "referenceFeatures": {
+      "read": {
+        "title": "📖 阅读古兰经",
+        "desc": "直接前往以清晰奥斯曼体阅读古兰经。"
+      },
+      "listen": {
+        "title": "🎧 聆听诵读",
+        "desc": "在外部资源中聆听来自可信来源的诵读。"
+      },
+      "tafsir": {
+        "title": "📚 古兰经注释",
+        "desc": "轻松查阅经文的多种注释。"
+      },
+      "search": {
+        "title": "🔍 搜索古兰经",
+        "desc": "快速准确地搜索经文与章节。"
+      },
+      "browse": {
+        "title": "⭐浏览全部章节",
+        "desc": "灵活浏览完整的章节列表。"
+      }
+    },
+    "referenceNote": "该资源将在新窗口中打开，方便您使用其全部服务后轻松返回本站。"
   },
   "hadith": {
     "title": "高贵的先知圣训",
@@ -149,7 +349,28 @@
       "HASAN": "良好",
       "DAIF": "薄弱",
       "MAWDU": "伪造"
-    }
+    },
+    "heroDesc": "精选自《四十圣训》和《圣徒花园》中真实可信（صحيح）和优良（حسن）的圣训，按主题和等级分类。",
+    "dorarTitle": "搜索杜拉尔圣训百科全书",
+    "dorarDesc": "直接从杜拉尔圣训网站搜索数百万条圣训和主题，并提供快速搜索及专业百科全书链接。",
+    "dorarPlaceholder": "输入搜索词后点击搜索",
+    "dorarSearchBtn": "搜索",
+    "visitDorar": "访问杜拉尔圣训百科全书",
+    "servicesTitle": "杜拉尔服务",
+    "servicesDesc": "快速链接至杜拉尔圣训主要百科全书，助您直达所需书籍与服务。",
+    "serviceOpenDesc": "在杜拉尔网站打开相应版块。",
+    "services": {
+      "encyclopedia": "圣训百科",
+      "adhkar": "念诵",
+      "duas": "祈祷词",
+      "scientific": "学术百科",
+      "fiqh": "教法百科"
+    },
+    "filterPlaceholder": "搜索圣训、传述者或主题",
+    "categoriesLabel": "分类：",
+    "shareTitle": "伊斯兰圣训",
+    "copyHadithBtn": "复制圣训",
+    "shareHadithBtn": "分享圣训"
   },
   "adhkar": {
     "title": "念诵与祈祷",
@@ -165,12 +386,18 @@
       "TRAVEL": "旅行念诵",
       "FOOD": "饮食念诵",
       "GENERAL": "一般念诵"
-    }
+    },
+    "searchPlaceholder": "搜索念诵与祈祷词...",
+    "noResults": "未找到匹配结果"
   },
   "prophets": {
     "title": "先知与使者的故事",
     "ayah": "﴿ وَكُلًّا نَّقُصُّ عَلَيْكَ مِنْ أَنبَاءِ الرُّسُلِ ﴾",
-    "inQuran": "× 在古兰经中"
+    "inQuran": "× 在古兰经中",
+    "backToList": "← 返回众先知列表",
+    "storyTitle": "故事",
+    "lessonsTitle": "教训与启示",
+    "referencesTitle": "古兰经中的提及"
   },
   "seerah": {
     "title": "先知传记",
@@ -206,6 +433,44 @@
       "求饶恕有何美德？"
     ]
   },
+  "videos": {
+    "title": "📺 伊斯兰视频",
+    "subtitle": "专业的伊斯兰资源库，收录著名学者和传道者的讲座、课程和可信的宣教短片，助您安心学习并回归真理。",
+    "quickSearch": "快速有效的搜索",
+    "searchPlaceholder": "按标题、频道、讲者或分类搜索视频",
+    "categoryFilter": "分类",
+    "channelAndSpeaker": "频道与讲者",
+    "statsAvailable": "可用视频数量",
+    "statsFeatured": "精选内容",
+    "statsFeaturedDesc": "可信精选",
+    "discover": "探索伊斯兰",
+    "discoverDesc": "如果您想了解伊斯兰教及先知穆罕默德（愿主赐福安之）的讯息，这里为您精选了一系列内容可靠、简明易懂的入门视频。",
+    "sectionDesc": "与该伊斯兰领域相关的精选视频合集。",
+    "referenceTitle": "专业伊斯兰资源",
+    "referenceDesc": "所有视频均以官方YouTube链接形式呈现，支持搜索、筛选、收藏与分享，同时保持网站的视觉风格与内容的学术质量。",
+    "watchNow": "立即观看",
+    "share": "分享",
+    "copyLink": "复制链接",
+    "saved": "已收藏",
+    "addToFavorites": "加入收藏",
+    "libraryBadge": "可信宣教资源库",
+    "libraryStats": "资源库统计",
+    "visitChannel": "访问频道",
+    "noResults": "没有与您的搜索匹配的视频。",
+    "channelChip": "频道：{channel}",
+    "sheikhChip": "谢赫：{sheikh}",
+    "playAria": "播放视频：{title}",
+    "thumbnailAlt": "视频缩略图：{title}",
+    "langArabic": "阿拉伯语",
+    "langEnglish": "英语",
+    "categories": {
+      "aqeedah": "教义学",
+      "fiqh": "教法学",
+      "seerah": "先知传记",
+      "dawah": "宣教",
+      "tazkiyah": "身心净化"
+    }
+  },
   "common": {
     "siteName": "正道",
     "loading": "加载中...",
@@ -214,7 +479,10 @@
     "back": "返回",
     "backToSite": "返回网站",
     "admin": "管理员",
-    "dashboard": "仪表板"
+    "dashboard": "仪表板",
+    "all": "全部",
+    "comingSoon": "即将推出",
+    "play": "播放"
   },
   "admin": {
     "title": "正道管理",
@@ -229,5 +497,96 @@
       "settings": "设置"
     },
     "backToSite": "返回网站"
+  },
+  "asmaAllah": {
+    "searchPlaceholder": "搜索真主的尊名...",
+    "resultsCount": "99个尊名中的{count}个",
+    "noResults": "未找到匹配结果"
+  },
+  "prayerTimes": {
+    "cityLabel": "城市",
+    "countryLabel": "国家代码",
+    "cityPlaceholder": "吉达",
+    "countryPlaceholder": "SA",
+    "searchBtn": "搜索",
+    "useMyLocation": "📍 使用我的当前位置",
+    "loading": "正在加载礼拜时间...",
+    "errorFetch": "无法获取礼拜时间",
+    "errorConnection": "无法连接礼拜时间服务",
+    "errorLocation": "无法获取您的位置，您可以手动选择城市",
+    "yourLocation": "您的当前位置",
+    "nextPrayer": "下一次礼拜",
+    "after": "{time}后",
+    "hoursAndMinutes": "{h}小时{m}分钟",
+    "minutesOnly": "{m}分钟",
+    "midnight": "午夜",
+    "prayers": {
+      "imsak": "封斋",
+      "fajr": "晨礼",
+      "sunrise": "日出",
+      "dhuhr": "晌礼",
+      "asr": "晡礼",
+      "maghrib": "昏礼",
+      "isha": "宵礼"
+    },
+    "pageDescription": "根据您的城市或当前位置提供完整礼拜时间：晨礼、日出、晌礼、晡礼、昏礼和宵礼。"
+  },
+  "livePage": {
+    "title": "直播",
+    "subtitle": "实时关注伊斯兰电视和广播频道，享受与网站风格相符的舒适体验。"
+  },
+  "scholarsPage": {
+    "title": "学者与传道者",
+    "subtitle": "值得信赖的学者、传道者与官方伊斯兰机构名录，仅链接至其经过验证的官方来源。",
+    "categories": {
+      "saudi": "沙特阿拉伯学者",
+      "international": "国际传道者与谢赫",
+      "organization": "官方伊斯兰机构与团体"
+    },
+    "specialtyLabel": "专长：",
+    "countryLabel": "国家：",
+    "links": {
+      "website": "访问网站",
+      "youtube": "YouTube",
+      "fatwa": "教法解答",
+      "lectures": "课程",
+      "x": "X",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "telegram": "Telegram"
+    },
+    "photoAlt": "{name}的照片，{specialty}"
+  },
+  "kidsPage": {
+    "title": "儿童专区",
+    "subtitle": "为儿童准备的简单有趣内容，通过图片和简明讲解，一步步了解伊斯兰教。",
+    "lessons": {
+      "wudu": {
+        "title": "学习小净",
+        "desc": "小净的步骤及其重要性"
+      },
+      "prayer": {
+        "title": "学习礼拜",
+        "desc": "礼拜的基本阶段与功修"
+      },
+      "umrah": {
+        "title": "学习副朝",
+        "desc": "简明讲解副朝的步骤"
+      },
+      "hajj": {
+        "title": "学习朝觐",
+        "desc": "朝觐圣地与步骤"
+      },
+      "learn": {
+        "title": "儿童伊斯兰教育",
+        "desc": "伊斯兰教的基础与功修"
+      }
+    }
+  },
+  "kidsLesson": {
+    "explanationTitle": "简明讲解",
+    "watchVideoTitle": "观看视频",
+    "quizTitle": "小测验",
+    "answerLabel": "答案"
   }
 }
