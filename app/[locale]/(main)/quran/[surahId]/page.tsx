@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { getTranslations } from 'next-intl/server'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import fs from 'fs'
+import path from 'path'
 import SurahViewer from './SurahViewer'
 import { fallbackSurahMap } from '../fallback-data'
 import { buildAlternates } from '@/lib/seo'
@@ -36,34 +38,21 @@ async function fetchSurah(id: number): Promise<SurahData | null> {
   return fallbackSurahMap[id] as SurahData | null
 }
 
-async function fetchTranslation(id: number, lang: string): Promise<Record<number, string>> {
-  const editionMap: Record<string, string> = {
-    en: 'en.sahih',
-    fr: 'fr.hamidullah',
-    de: 'de.bubenheim',
-    tr: 'tr.bulac',
-    ru: 'ru.kuliev',
-    es: 'es.bornez',
-    zh: 'zh.jian',
-    ur: 'ur.maududi',
-  }
-  const edition = editionMap[lang]
-  if (!edition) return {}
+// Translations are pre-downloaded locally (see scripts/download-quran-translations.js)
+// rather than fetched live, so each static surah page reads only its own small
+// per-surah file at build time instead of pulling the whole Quran over the network.
+const TRANSLATED_LOCALES = new Set(['en', 'fr', 'de', 'tr', 'ru', 'es', 'zh', 'ur', 'hi'])
+
+function getTranslation(id: number, lang: string): Record<number, string> {
+  if (!TRANSLATED_LOCALES.has(lang)) return {}
   try {
-    const res = await fetch(
-      `https://api.alquran.cloud/v1/surah/${id}/${edition}`,
-      { next: { revalidate: 86400 } },
-    )
-    const data = await res.json()
-    if (data.code === 200) {
-      const map: Record<number, string> = {}
-      for (const a of data.data.ayahs) {
-        map[a.numberInSurah] = a.text
-      }
-      return map
-    }
-  } catch {}
-  return {}
+    const filePath = path.join(process.cwd(), 'data', 'quran-translations', lang, `${id}.json`)
+    const raw = fs.readFileSync(filePath, 'utf8')
+    const parsed = JSON.parse(raw) as { ayahs: Record<string, string> }
+    return parsed.ayahs as Record<number, string>
+  } catch {
+    return {}
+  }
 }
 
 export async function generateMetadata({
@@ -99,10 +88,8 @@ export default async function SurahPage({
   if (isNaN(id) || id < 1 || id > 114) notFound()
 
   const t = await getTranslations({ locale, namespace: 'quran' })
-  const [surah, translation] = await Promise.all([
-    fetchSurah(id),
-    fetchTranslation(id, locale),
-  ])
+  const surah = await fetchSurah(id)
+  const translation = getTranslation(id, locale)
 
   if (!surah) notFound()
 

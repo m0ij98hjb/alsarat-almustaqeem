@@ -4,6 +4,7 @@
     "siteDesc": "A comprehensive Islamic platform for the Holy Quran, Prophetic Sunnah, and Islamic sciences"
   },
   "nav": {
+    "home": "Home",
     "quran": "The Holy Quran",
     "hadith": "Hadiths",
     "adhkar": "Adhkar",
@@ -165,35 +166,43 @@
       "values": {
         "mercy": {
           "title": "Mercy",
-          "desc": "Muslims begin every act in the name of the Most Merciful — mercy is central to how Islam sees all creation."
+          "desc": "Muslims begin every act in the name of the Most Merciful — mercy is central to how Islam sees all creation.",
+          "ref": "Surah Al-Anbiya — Verse 107"
         },
         "justice": {
           "title": "Justice",
-          "desc": "Islam commands justice even toward those we dislike, and ties it closely to piety."
+          "desc": "Islam commands justice even toward those we dislike, and ties it closely to piety.",
+          "ref": "Surah Al-Ma'idah — Verse 8"
         },
         "compassion": {
           "title": "Compassion",
-          "desc": "The Prophet ﷺ described believers as one body in their mutual compassion."
+          "desc": "The Prophet ﷺ described believers as one body in their mutual compassion.",
+          "ref": "Agreed Upon"
         },
         "knowledge": {
           "title": "Knowledge",
-          "desc": "The first Quranic revelation was a command to read — seeking knowledge is a duty on every Muslim."
+          "desc": "The first Quranic revelation was a command to read — seeking knowledge is a duty on every Muslim.",
+          "ref": "Surah Al-Alaq — Verse 1"
         },
         "family": {
           "title": "Family",
-          "desc": "Islam places deep emphasis on honoring parents and maintaining family ties."
+          "desc": "Islam places deep emphasis on honoring parents and maintaining family ties.",
+          "ref": "Surah Al-Isra — Verse 23"
         },
         "hope": {
           "title": "Hope",
-          "desc": "Islam forbids despairing of God's mercy, no matter how great the hardship."
+          "desc": "Islam forbids despairing of God's mercy, no matter how great the hardship.",
+          "ref": "Surah Az-Zumar — Verse 53"
         },
         "peace": {
           "title": "Peace",
-          "desc": "The word \"Islam\" itself shares its root with \"peace,\" and Muslims greet one another with it."
+          "desc": "The word \"Islam\" itself shares its root with \"peace,\" and Muslims greet one another with it.",
+          "ref": "Surah An-Nisa — Verse 94"
         },
         "honesty": {
           "title": "Honesty",
-          "desc": "The Prophet ﷺ urged truthfulness until it leads a person to the ranks of the sincere."
+          "desc": "The Prophet ﷺ urged truthfulness until it leads a person to the ranks of the sincere.",
+          "ref": "Agreed Upon"
         }
       }
     },
@@ -285,6 +294,12 @@
       "btnAI": "🤖 Ask AI",
       "btnVideos": "📺 Watch Videos",
       "btnLearnMore": "🌟 Learn More"
+    },
+    "voiceIntro": {
+      "listen": "🔊 Listen to an Intro",
+      "stop": "⏹ Stop",
+      "unavailable": "Voice narration isn't available in your browser for this language.",
+      "text": "Peace and blessings be upon you, and welcome to As-Sirat Al-Mustaqeem.\n\nIslam is the religion of divine oneness and mercy. It calls people to worship the One God alone, and it is built on justice and compassion toward all creation. God sent Prophet Muhammad, peace be upon him, as a mercy to the entire world.\n\nThis website offers you a complete journey through everything related to your faith, from beginning to end: the full Holy Quran with commentary and recitation, the authentic Prophetic hadiths from trusted collections, the stories of the prophets as mentioned in the Quran, the complete biography of the Prophet from birth to passing, the ninety-nine Beautiful Names of Allah with their meanings and virtues, and a comprehensive collection of daily adhkar.\n\nYou'll also find a section on trusted scholars and preachers, a library of purposeful Islamic videos, a round-the-clock live broadcast from the Two Holy Mosques, accurate prayer times for your city, a dedicated section to teach your children the basics of their faith in an engaging way, and a search feature to quickly find any content you're looking for.\n\nTake your time, and explore whatever interests you, with no pressure or rush at all. This door is open to anyone who wants to learn, ask, or simply reflect.\n\nAnd if any question comes to mind, our AI assistant, Al-Rashid, is ready to answer it from the Quran and the Prophetic Sunnah, any time.\n\nWe wish you a pleasant and meaningful journey."
     }
   },
   "quran": {
@@ -406,7 +421,8 @@
     "age": "years of his life ﷺ",
     "prophethood": "years of prophethood",
     "battles": "battles",
-    "closingAyahRef": "Surah Al-Ahzab — Verse 21"
+    "closingAyahRef": "Surah Al-Ahzab — Verse 21",
+    "closingAyah": "﴿ لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ﴾"
   },
   "ai": {
     "title": "Al-Rashid",
@@ -501,7 +517,9 @@
   "asmaAllah": {
     "searchPlaceholder": "Search for a name of Allah...",
     "resultsCount": "{count} of 99 names",
-    "noResults": "No matching results found"
+    "noResults": "No matching results found",
+    "description": "The complete 99 Beautiful Names of Allah with meaning, explanation, and Quranic reference for each name.",
+    "ayah": "﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾"
   },
   "prayerTimes": {
     "cityLabel": "City",

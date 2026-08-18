@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import fs from 'fs'
+import path from 'path'
 import { getTranslations } from 'next-intl/server'
 import { buildAlternates } from '@/lib/seo'
 import { dailyVerses } from '@/data/dailyVerses'
@@ -17,6 +19,25 @@ import { TrustedScholars } from '@/components/home/TrustedScholars'
 import { DailyInspiration } from '@/components/home/DailyInspiration'
 import { TodaysPicks } from '@/components/home/TodaysPicks'
 import { FinalCTA } from '@/components/home/FinalCTA'
+import { VoiceIntroButton } from '@/components/home/VoiceIntroButton'
+
+// The hero shows the Quranic Arabic text itself (kept as-is, since Islamic convention
+// treats a literal translation as a rendering of the meaning rather than the Quran
+// itself) plus, for non-Arabic locales, the meaning underneath — pulled from the same
+// pre-downloaded per-language translation files the /quran pages already read from
+// (see app/[locale]/(main)/quran/[surahId]/page.tsx), so no new content is needed.
+const TRANSLATED_LOCALES = new Set(['en', 'fr', 'de', 'tr', 'ru', 'es', 'zh', 'ur', 'hi'])
+
+function getFatihaMeaning(locale: string): { bismillah?: string; ayah6?: string } {
+  if (!TRANSLATED_LOCALES.has(locale)) return {}
+  try {
+    const filePath = path.join(process.cwd(), 'data', 'quran-translations', locale, '1.json')
+    const parsed = JSON.parse(fs.readFileSync(filePath, 'utf8')) as { ayahs: Record<string, string> }
+    return { bismillah: parsed.ayahs['1'], ayah6: parsed.ayahs['6'] }
+  } catch {
+    return {}
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -39,6 +60,7 @@ export default async function HomePage({
 }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'home' })
+  const fatihaMeaning = getFatihaMeaning(locale)
 
   const services = [
     { href: `/${locale}/live`,     icon: '📡', title: t('services.live.title'), desc: t('services.live.desc') },
@@ -86,8 +108,11 @@ export default async function HomePage({
         </div>
 
         <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-          <div className="font-arabic text-gold-300 text-3xl md:text-4xl mb-6 opacity-90">
-            {t('bismillah')}
+          <div className="mb-6">
+            <div className="font-arabic text-gold-300 text-3xl md:text-4xl opacity-90">{t('bismillah')}</div>
+            {fatihaMeaning.bismillah && (
+              <div className="text-gray-400 text-sm md:text-base mt-1 opacity-80">{fatihaMeaning.bismillah}</div>
+            )}
           </div>
 
           <h1 className="font-arabic text-white text-5xl md:text-7xl font-bold mb-4 leading-tight">
@@ -102,6 +127,9 @@ export default async function HomePage({
 
           <div className="inline-block border-x-2 border-gold-400 px-8 py-4 mb-10">
             <p className="font-arabic text-gold-200 text-xl md:text-2xl">{t('ayah')}</p>
+            {fatihaMeaning.ayah6 && (
+              <p className="text-gray-300 text-base md:text-lg mt-2">“{fatihaMeaning.ayah6}”</p>
+            )}
             <p className="text-gray-400 text-sm mt-1">{t('surahRef')}</p>
           </div>
 
@@ -120,6 +148,8 @@ export default async function HomePage({
           </svg>
         </div>
       </section>
+
+      <VoiceIntroButton />
 
       {/* ===== STATS ===== */}
       <section className="bg-islamic-green py-12">

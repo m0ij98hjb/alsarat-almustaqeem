@@ -4,6 +4,7 @@
     "siteDesc": "Una plataforma islámica integral para el Sagrado Corán, la Sunnah Profética y las ciencias islámicas"
   },
   "nav": {
+    "home": "Inicio",
     "quran": "El Sagrado Corán",
     "hadith": "Hadices",
     "adhkar": "Adhkar",
@@ -165,35 +166,43 @@
       "values": {
         "mercy": {
           "title": "Misericordia",
-          "desc": "Los musulmanes comienzan cada acto en el nombre del Clementísimo — la misericordia es central en la forma en que el Islam ve toda la creación."
+          "desc": "Los musulmanes comienzan cada acto en el nombre del Clementísimo — la misericordia es central en la forma en que el Islam ve toda la creación.",
+          "ref": "Sura Al-Anbiya — Versículo 107"
         },
         "justice": {
           "title": "Justicia",
-          "desc": "El Islam ordena la justicia incluso hacia quienes no nos agradan, y la vincula estrechamente con la piedad."
+          "desc": "El Islam ordena la justicia incluso hacia quienes no nos agradan, y la vincula estrechamente con la piedad.",
+          "ref": "Sura Al-Maidah — Versículo 8"
         },
         "compassion": {
           "title": "Compasión",
-          "desc": "El Profeta ﷺ describió a los creyentes como un solo cuerpo en su compasión mutua."
+          "desc": "El Profeta ﷺ describió a los creyentes como un solo cuerpo en su compasión mutua.",
+          "ref": "Acordado"
         },
         "knowledge": {
           "title": "Conocimiento",
-          "desc": "La primera revelación coránica fue una orden de leer — buscar conocimiento es un deber para todo musulmán."
+          "desc": "La primera revelación coránica fue una orden de leer — buscar conocimiento es un deber para todo musulmán.",
+          "ref": "Sura Al-Alaq — Versículo 1"
         },
         "family": {
           "title": "Familia",
-          "desc": "El Islam pone gran énfasis en honrar a los padres y mantener los lazos familiares."
+          "desc": "El Islam pone gran énfasis en honrar a los padres y mantener los lazos familiares.",
+          "ref": "Sura Al-Isra — Versículo 23"
         },
         "hope": {
           "title": "Esperanza",
-          "desc": "El Islam prohíbe desesperar de la misericordia de Dios, sin importar cuán grande sea la dificultad."
+          "desc": "El Islam prohíbe desesperar de la misericordia de Dios, sin importar cuán grande sea la dificultad.",
+          "ref": "Sura Az-Zumar — Versículo 53"
         },
         "peace": {
           "title": "Paz",
-          "desc": "La palabra «Islam» comparte su raíz con «paz», y los musulmanes se saludan entre sí con ella."
+          "desc": "La palabra «Islam» comparte su raíz con «paz», y los musulmanes se saludan entre sí con ella.",
+          "ref": "Sura An-Nisa — Versículo 94"
         },
         "honesty": {
           "title": "Honestidad",
-          "desc": "El Profeta ﷺ exhortó a la sinceridad hasta que eleva a la persona al rango de los veraces."
+          "desc": "El Profeta ﷺ exhortó a la sinceridad hasta que eleva a la persona al rango de los veraces.",
+          "ref": "Acordado"
         }
       }
     },
@@ -285,6 +294,12 @@
       "btnAI": "🤖 Preguntar a la IA",
       "btnVideos": "📺 Ver videos",
       "btnLearnMore": "🌟 Saber más"
+    },
+    "voiceIntro": {
+      "listen": "🔊 Escuchar una introducción",
+      "stop": "⏹ Detener",
+      "unavailable": "La narración de voz no está disponible en tu navegador para este idioma.",
+      "text": "Que la paz y las bendiciones sean contigo, y bienvenido a As-Sirat Al-Mustaqeem.\n\nEl Islam es la religión de la unicidad de Dios y la misericordia. Llama a adorar a un solo Dios, y se basa en la justicia y la compasión hacia toda la creación. Dios envió al Profeta Muhammad, la paz sea con él, como misericordia para todos los mundos.\n\nEste sitio te ofrece un recorrido completo por todo lo relacionado con tu fe, de principio a fin: el Sagrado Corán completo con tafsir y recitación, los auténticos hadices proféticos de fuentes confiables, las historias de los profetas tal como se mencionan en el Corán, la biografía completa del Profeta desde su nacimiento hasta su fallecimiento, los noventa y nueve hermosos nombres de Alá con sus significados y virtudes, y una colección completa de adhkar diarios.\n\nTambién encontrarás una sección sobre eruditos y predicadores confiables, una biblioteca de videos islámicos con propósito, una transmisión en vivo las veinticuatro horas desde las dos mezquitas sagradas, horarios de oración precisos para tu ciudad, una sección dedicada a enseñar a tus hijos los fundamentos de su fe de manera amena, y una función de búsqueda para encontrar rápidamente cualquier contenido que desees.\n\nTómate tu tiempo y explora lo que te interese, sin ninguna prisa ni presión. Esta puerta está abierta para cualquiera que quiera aprender, preguntar o simplemente reflexionar.\n\nY si te viene alguna pregunta a la mente, nuestro asistente de inteligencia artificial, Al-Rashid, está listo para responderla a partir del Corán y la Sunnah Profética, en cualquier momento.\n\nTe deseamos un viaje agradable y provechoso."
     }
   },
   "quran": {
@@ -406,7 +421,8 @@
     "age": "años de su vida ﷺ",
     "prophethood": "años de profecía",
     "battles": "batallas",
-    "closingAyahRef": "Sura Al-Ahzab — Versículo 21"
+    "closingAyahRef": "Sura Al-Ahzab — Versículo 21",
+    "closingAyah": "﴿ لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ﴾"
   },
   "ai": {
     "title": "Al-Rashid",
@@ -501,7 +517,9 @@
   "asmaAllah": {
     "searchPlaceholder": "Busca un nombre de Alá...",
     "resultsCount": "{count} de 99 nombres",
-    "noResults": "No se encontraron resultados coincidentes"
+    "noResults": "No se encontraron resultados coincidentes",
+    "description": "Los 99 hermosos nombres de Alá al completo, con significado, explicación y referencia coránica para cada nombre.",
+    "ayah": "﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾"
   },
   "prayerTimes": {
     "cityLabel": "Ciudad",

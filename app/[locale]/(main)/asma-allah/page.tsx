@@ -6,9 +6,10 @@ import { buildAlternates } from '@/lib/seo'
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'nav' })
+  const tAsma = await getTranslations({ locale, namespace: 'asmaAllah' })
   return {
     title: t('asmaAllah'),
-    description: 'أسماء الله الحسنى التسعة والتسعون كاملة مع المعنى والشرح والمرجع القرآني لكل اسم.',
+    description: tAsma('description'),
     alternates: buildAlternates(locale, 'asma-allah'),
   }
 }
@@ -16,6 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AsmaAllahPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = await getTranslations({ locale, namespace: 'nav' })
+  const tAsma = await getTranslations({ locale, namespace: 'asmaAllah' })
 
   return (
     <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy">
@@ -25,7 +27,7 @@ export default async function AsmaAllahPage({ params }: { params: Promise<{ loca
           <div className="text-5xl mb-4">✨</div>
           <h1 className="font-arabic text-white text-4xl md:text-5xl font-bold mb-3">{t('asmaAllah')}</h1>
           <p className="font-arabic text-gold-300 text-lg">
-            ﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾
+            {tAsma('ayah')}
           </p>
         </div>
       </div>

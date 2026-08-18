@@ -87,7 +87,7 @@ export default async function SeerahPage({
           <div className="absolute inset-0 pattern-overlay opacity-20" />
           <div className="relative z-10">
             <p className="font-arabic text-gold-300 text-2xl md:text-3xl leading-loose mb-4">
-              ﴿ لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ﴾
+              {t('closingAyah')}
             </p>
             <p className="text-gray-300 text-sm">{t('closingAyahRef')}</p>
           </div>

@@ -4,6 +4,7 @@
     "siteDesc": "Kutsal Kuran, Peygamber Sünneti ve İslam ilimleri için kapsamlı bir İslam platformu"
   },
   "nav": {
+    "home": "Ana Sayfa",
     "quran": "Kutsal Kuran",
     "hadith": "Hadisler",
     "adhkar": "Zikirler",
@@ -165,35 +166,43 @@
       "values": {
         "mercy": {
           "title": "Merhamet",
-          "desc": "Müslümanlar her işe Er-Rahman ve Er-Rahim olan Allah'ın adıyla başlar — merhamet, İslam'ın tüm yaratılışa bakışının merkezindedir."
+          "desc": "Müslümanlar her işe Er-Rahman ve Er-Rahim olan Allah'ın adıyla başlar — merhamet, İslam'ın tüm yaratılışa bakışının merkezindedir.",
+          "ref": "Enbiya Suresi — 107. Ayet"
         },
         "justice": {
           "title": "Adalet",
-          "desc": "İslam, hoşlanmadığımız kimselere karşı bile adaleti emreder ve onu takvaya yakın kılar."
+          "desc": "İslam, hoşlanmadığımız kimselere karşı bile adaleti emreder ve onu takvaya yakın kılar.",
+          "ref": "Maide Suresi — 8. Ayet"
         },
         "compassion": {
           "title": "Şefkat",
-          "desc": "Peygamber ﷺ, müminleri karşılıklı şefkatlerinde tek bir beden gibi tasvir etmiştir."
+          "desc": "Peygamber ﷺ, müminleri karşılıklı şefkatlerinde tek bir beden gibi tasvir etmiştir.",
+          "ref": "Müttefekun Aleyh"
         },
         "knowledge": {
           "title": "İlim",
-          "desc": "Kuran'dan ilk inen ayet okumayı emreder — ilim aramak her Müslümana farzdır."
+          "desc": "Kuran'dan ilk inen ayet okumayı emreder — ilim aramak her Müslümana farzdır.",
+          "ref": "Alak Suresi — 1. Ayet"
         },
         "family": {
           "title": "Aile",
-          "desc": "İslam, ebeveynlere hürmeti ve akrabalık bağlarını güçlü bir toplumun temeli olarak görür."
+          "desc": "İslam, ebeveynlere hürmeti ve akrabalık bağlarını güçlü bir toplumun temeli olarak görür.",
+          "ref": "İsra Suresi — 23. Ayet"
         },
         "hope": {
           "title": "Umut",
-          "desc": "İslam, sıkıntı ne kadar büyük olursa olsun Allah'ın rahmetinden ümit kesmeyi yasaklar."
+          "desc": "İslam, sıkıntı ne kadar büyük olursa olsun Allah'ın rahmetinden ümit kesmeyi yasaklar.",
+          "ref": "Zümer Suresi — 53. Ayet"
         },
         "peace": {
           "title": "Barış",
-          "desc": "\"İslam\" kelimesinin kökü \"barış\" ile aynıdır ve Müslümanlar birbirlerini bu kelimeyle selamlar."
+          "desc": "\"İslam\" kelimesinin kökü \"barış\" ile aynıdır ve Müslümanlar birbirlerini bu kelimeyle selamlar.",
+          "ref": "Nisa Suresi — 94. Ayet"
         },
         "honesty": {
           "title": "Doğruluk",
-          "desc": "Peygamber ﷺ, kişiyi sıddıklar mertebesine ulaştırana dek doğruluğu emretmiştir."
+          "desc": "Peygamber ﷺ, kişiyi sıddıklar mertebesine ulaştırana dek doğruluğu emretmiştir.",
+          "ref": "Müttefekun Aleyh"
         }
       }
     },
@@ -285,6 +294,12 @@
       "btnAI": "🤖 Yapay Zekaya Sor",
       "btnVideos": "📺 Videoları İzle",
       "btnLearnMore": "🌟 Daha Fazla Bilgi"
+    },
+    "voiceIntro": {
+      "listen": "🔊 Tanıtımı Dinle",
+      "stop": "⏹ Durdur",
+      "unavailable": "Tarayıcınızda bu dil için seslendirme kullanılamıyor.",
+      "text": "Selam ve bereket üzerinize olsun, As-Sirat Al-Mustaqeem'e hoş geldiniz.\n\nİslam, Allah'ın birliğine iman ve rahmet dinidir. Tek olan Allah'a ibadet etmeye çağırır ve tüm yaratılmışlara karşı adalet ve merhamet üzerine kuruludur. Allah, Peygamber Muhammed'i, salat ve selam üzerine olsun, âlemlere rahmet olarak göndermiştir.\n\nBu site, inancınızla ilgili her şeyde size baştan sona kapsamlı bir yolculuk sunar: tefsiri ve tilaveti ile birlikte tam Kuran-ı Kerim, güvenilir kaynaklardan sahih Peygamber hadisleri, Kuran'da anlatıldığı şekliyle peygamberlerin kıssaları, Peygamberimizin doğumundan vefatına kadar tam biyografisi, anlamları ve faziletleriyle birlikte Allah'ın doksan dokuz güzel ismi ve günlük zikirlerden oluşan kapsamlı bir derleme.\n\nAyrıca güvenilir alimler ve davetçilere ayrılmış bir bölüm, faydalı İslami videolardan oluşan bir kütüphane, iki kutsal mescitten kesintisiz canlı yayın, şehriniz için doğru namaz vakitleri, çocuklarınıza dinlerinin temellerini eğlenceli bir şekilde öğretmek için özel bir bölüm ve istediğiniz herhangi bir içeriğe hızla ulaşmanızı sağlayan bir arama özelliği bulacaksınız.\n\nAcele etmeden, hiçbir baskı hissetmeden, ilginizi çeken her şeyi kendi hızınızda keşfedin. Bu kapı, öğrenmek, sormak ya da sadece düşünmek isteyen herkese açıktır.\n\nAklınıza bir soru gelirse, yapay zeka asistanımız Er-Reşid, Kuran ve Peygamber Sünneti'nden her an cevap vermeye hazırdır.\n\nSize hoş ve faydalı bir yolculuk dileriz."
     }
   },
   "quran": {
@@ -406,7 +421,8 @@
     "age": "yıl ömrü ﷺ",
     "prophethood": "yıl nübüvvet",
     "battles": "gazveler",
-    "closingAyahRef": "Ahzab Suresi — 21. Ayet"
+    "closingAyahRef": "Ahzab Suresi — 21. Ayet",
+    "closingAyah": "﴿ لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ﴾"
   },
   "ai": {
     "title": "Er-Reşid",
@@ -501,7 +517,9 @@
   "asmaAllah": {
     "searchPlaceholder": "Allah'ın bir ismini arayın...",
     "resultsCount": "99 isimden {count}",
-    "noResults": "Eşleşen sonuç bulunamadı"
+    "noResults": "Eşleşen sonuç bulunamadı",
+    "description": "Allah'ın en güzel 99 isminin tamamı, her isim için anlam, açıklama ve Kur'an referansıyla birlikte.",
+    "ayah": "﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾"
   },
   "prayerTimes": {
     "cityLabel": "Şehir",

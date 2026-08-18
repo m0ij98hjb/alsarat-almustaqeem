@@ -4,6 +4,7 @@
     "siteDesc": "Une plateforme islamique complète pour le Saint Coran, la Sunnah Prophétique et les sciences islamiques"
   },
   "nav": {
+    "home": "Accueil",
     "quran": "Le Saint Coran",
     "hadith": "Hadiths",
     "adhkar": "Adhkar",
@@ -165,35 +166,43 @@
       "values": {
         "mercy": {
           "title": "Miséricorde",
-          "desc": "Les musulmans commencent chaque acte au nom du Tout Miséricordieux — la miséricorde est centrale dans la vision islamique de toute la création."
+          "desc": "Les musulmans commencent chaque acte au nom du Tout Miséricordieux — la miséricorde est centrale dans la vision islamique de toute la création.",
+          "ref": "Sourate Al-Anbiya — Verset 107"
         },
         "justice": {
           "title": "Justice",
-          "desc": "L'Islam commande la justice même envers ceux que nous n'aimons pas, et la lie étroitement à la piété."
+          "desc": "L'Islam commande la justice même envers ceux que nous n'aimons pas, et la lie étroitement à la piété.",
+          "ref": "Sourate Al-Maidah — Verset 8"
         },
         "compassion": {
           "title": "Compassion",
-          "desc": "Le Prophète ﷺ a décrit les croyants comme un seul corps dans leur compassion mutuelle."
+          "desc": "Le Prophète ﷺ a décrit les croyants comme un seul corps dans leur compassion mutuelle.",
+          "ref": "Unanimement rapporté"
         },
         "knowledge": {
           "title": "Savoir",
-          "desc": "La première révélation coranique fut un ordre de lire — rechercher le savoir est un devoir pour chaque musulman."
+          "desc": "La première révélation coranique fut un ordre de lire — rechercher le savoir est un devoir pour chaque musulman.",
+          "ref": "Sourate Al-Alaq — Verset 1"
         },
         "family": {
           "title": "Famille",
-          "desc": "L'Islam accorde une grande importance à honorer ses parents et à maintenir les liens familiaux."
+          "desc": "L'Islam accorde une grande importance à honorer ses parents et à maintenir les liens familiaux.",
+          "ref": "Sourate Al-Isra — Verset 23"
         },
         "hope": {
           "title": "Espoir",
-          "desc": "L'Islam interdit de désespérer de la miséricorde de Dieu, quelle que soit la gravité de l'épreuve."
+          "desc": "L'Islam interdit de désespérer de la miséricorde de Dieu, quelle que soit la gravité de l'épreuve.",
+          "ref": "Sourate Az-Zumar — Verset 53"
         },
         "peace": {
           "title": "Paix",
-          "desc": "Le mot « Islam » partage lui-même sa racine avec « paix », et les musulmans se saluent avec ce mot."
+          "desc": "Le mot « Islam » partage lui-même sa racine avec « paix », et les musulmans se saluent avec ce mot.",
+          "ref": "Sourate An-Nisa — Verset 94"
         },
         "honesty": {
           "title": "Honnêteté",
-          "desc": "Le Prophète ﷺ a exhorté à la sincérité jusqu'à ce qu'elle élève une personne au rang des véridiques."
+          "desc": "Le Prophète ﷺ a exhorté à la sincérité jusqu'à ce qu'elle élève une personne au rang des véridiques.",
+          "ref": "Unanimement rapporté"
         }
       }
     },
@@ -285,6 +294,12 @@
       "btnAI": "🤖 Demander à l'IA",
       "btnVideos": "📺 Regarder les vidéos",
       "btnLearnMore": "🌟 En savoir plus"
+    },
+    "voiceIntro": {
+      "listen": "🔊 Écouter une introduction",
+      "stop": "⏹ Arrêter",
+      "unavailable": "La lecture vocale n'est pas disponible dans votre navigateur pour cette langue.",
+      "text": "Que la paix et les bénédictions soient sur vous, et bienvenue sur As-Sirat Al-Mustaqeem.\n\nL'Islam est la religion de l'unicité de Dieu et de la miséricorde. Il appelle à adorer un Dieu unique, et il repose sur la justice et la compassion envers toute la création. Dieu a envoyé le Prophète Muhammad, paix sur lui, comme miséricorde pour tous les mondes.\n\nCe site vous propose un parcours complet sur tout ce qui concerne votre foi, du début à la fin : le Saint Coran intégral avec son exégèse et sa récitation, les authentiques hadiths prophétiques tirés de recueils fiables, les histoires des prophètes telles que rapportées dans le Coran, la biographie complète du Prophète, de sa naissance à son décès, les quatre-vingt-dix-neuf plus beaux noms d'Allah avec leurs significations et leurs vertus, ainsi qu'un recueil complet d'invocations quotidiennes (adhkar).\n\nVous y trouverez également une rubrique consacrée à des savants et prédicateurs de confiance, une bibliothèque de vidéos islamiques instructives, une diffusion en direct vingt-quatre heures sur vingt-quatre depuis les deux Lieux Saints, des horaires de prière précis pour votre ville, un espace dédié pour enseigner à vos enfants les bases de leur religion de façon ludique, ainsi qu'une fonction de recherche pour accéder rapidement à tout contenu souhaité.\n\nPrenez votre temps, et explorez ce qui vous intéresse, sans aucune pression ni précipitation. Cette porte est ouverte à quiconque souhaite apprendre, s'interroger ou simplement réfléchir.\n\nEt si une question vous vient à l'esprit, notre assistant intelligent, Al-Rachid, est prêt à y répondre à partir du Coran et de la Sunna prophétique, à tout moment.\n\nNous vous souhaitons un voyage agréable et enrichissant."
     }
   },
   "quran": {
@@ -406,7 +421,8 @@
     "age": "ans de sa vie ﷺ",
     "prophethood": "ans de prophétie",
     "battles": "batailles",
-    "closingAyahRef": "Sourate Al-Ahzab — Verset 21"
+    "closingAyahRef": "Sourate Al-Ahzab — Verset 21",
+    "closingAyah": "﴿ لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ﴾"
   },
   "ai": {
     "title": "Al-Rachid",
@@ -501,7 +517,9 @@
   "asmaAllah": {
     "searchPlaceholder": "Recherchez un nom d'Allah...",
     "resultsCount": "{count} sur 99 noms",
-    "noResults": "Aucun résultat correspondant trouvé"
+    "noResults": "Aucun résultat correspondant trouvé",
+    "description": "Les 99 plus beaux noms d'Allah au complet, avec signification, explication et référence coranique pour chaque nom.",
+    "ayah": "﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾"
   },
   "prayerTimes": {
     "cityLabel": "Ville",

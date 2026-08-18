@@ -1,10 +1,7 @@
 import type { Metadata } from 'next'
+import { getTranslations } from 'next-intl/server'
 import IslamicVideosClient from './IslamicVideosClient'
 import { buildAlternates } from '@/lib/seo'
-
-const TITLE = '📺 الفيديوهات الإسلامية'
-const DESCRIPTION =
-  'مكتبة إسلامية متكاملة تضم محاضرات ودروسًا ومقاطع دعوية موثوقة من كبار العلماء والدعاة، لتكون مرجعًا مهمًا لكل مسلم يريد تعلم دينه.'
 
 export async function generateMetadata({
   params,
@@ -12,11 +9,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }): Promise<Metadata> {
   const { locale } = await params
+  const t = await getTranslations({ locale, namespace: 'videos' })
+  const title = t('title')
+  const description = t('subtitle')
   return {
-    title: TITLE,
-    description: DESCRIPTION,
+    title,
+    description,
     alternates: buildAlternates(locale, 'islamic-videos'),
-    openGraph: { title: TITLE, description: DESCRIPTION, type: 'website' },
+    openGraph: { title, description, type: 'website' },
   }
 }
 

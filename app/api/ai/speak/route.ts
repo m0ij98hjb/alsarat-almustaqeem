@@ -3,7 +3,12 @@ import { MsEdgeTTS, OUTPUT_FORMAT } from 'msedge-tts'
 
 import { ttVoices } from '@/i18n/config'
 
-function getVoice(lang: string): string {
+// Voices callers may explicitly request in place of the per-language default
+// (currently just the single-narrator voice used for the homepage voice intro).
+const ALLOWED_VOICE_OVERRIDES = new Set(['en-US-AndrewMultilingualNeural'])
+
+function getVoice(lang: string, override: string | null): string {
+  if (override && ALLOWED_VOICE_OVERRIDES.has(override)) return override
   return ttVoices[lang as keyof typeof ttVoices] ?? ttVoices.ar
 }
 
@@ -22,7 +27,7 @@ function truncateAtSentence(text: string, maxLen: number): string {
 export async function GET(req: NextRequest) {
   const raw = req.nextUrl.searchParams.get('text')?.trim() ?? ''
   const lang = req.nextUrl.searchParams.get('lang') ?? 'ar'
-  const VOICE = getVoice(lang)
+  const VOICE = getVoice(lang, req.nextUrl.searchParams.get('voice'))
   if (!raw) return NextResponse.json({ error: 'text required' }, { status: 400 })
 
   // Clean markdown symbols and emojis
@@ -34,7 +39,7 @@ export async function GET(req: NextRequest) {
       .replace(/#+\s/g, '')
       .replace(/\n+/g, ' ')
       .trim(),
-    800,
+    2000,
   )
 
   if (!text) return NextResponse.json({ error: 'empty text' }, { status: 400 })

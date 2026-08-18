@@ -20,7 +20,7 @@ export default function AIPage() {
   const [soundEnabled, setSoundEnabled] = useState(true)
   const [speaking, setSpeaking] = useState<string | null>(null)
   const [ttsMode, setTtsMode] = useState<'server' | 'browser'>('server')
-  const bottomRef = useRef<HTMLDivElement>(null)
+  const messagesRef = useRef<HTMLDivElement>(null)
   const audioRef = useRef<HTMLAudioElement>(null)
 
   // Init greeting
@@ -33,9 +33,13 @@ export default function AIPage() {
     }])
   }, [locale]) // re-run on locale change
 
+  // Scroll the messages pane itself directly (rather than scrollIntoView on a sentinel
+  // element) so this doesn't depend on smooth-scroll animation timing/support — it's
+  // instant and immune to layout races with the just-rendered message bubble.
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    const el = messagesRef.current
+    if (el) el.scrollTop = el.scrollHeight
+  }, [messages, loading])
 
   const quickQuestions = [
     t('quickQuestions.0'),
@@ -112,7 +116,7 @@ export default function AIPage() {
   }
 
   return (
-    <div className="min-h-screen bg-islamic-cream dark:bg-islamic-navy flex flex-col">
+    <div className="h-[calc(100vh-5rem)] bg-islamic-cream dark:bg-islamic-navy flex flex-col">
       <audio ref={audioRef} hidden />
 
       {/* Header */}
@@ -164,7 +168,7 @@ export default function AIPage() {
       </div>
 
       {/* Chat */}
-      <div className="flex-1 max-w-4xl w-full mx-auto px-4 py-6 flex flex-col gap-4 overflow-y-auto">
+      <div ref={messagesRef} className="flex-1 min-h-0 max-w-4xl w-full mx-auto px-4 py-6 flex flex-col gap-4 overflow-y-auto">
         {messages.map(msg => (
           <div key={msg.id} className={`flex gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
             <div className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 text-sm font-bold ${
@@ -202,7 +206,6 @@ export default function AIPage() {
             </div>
           </div>
         )}
-        <div ref={bottomRef} />
       </div>
 
       {/* Quick questions */}

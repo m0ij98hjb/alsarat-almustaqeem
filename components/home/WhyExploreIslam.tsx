@@ -3,18 +3,17 @@ import { getTranslations } from 'next-intl/server'
 interface ValueCard {
   icon: string
   key: string
-  refText: string
 }
 
 const values: ValueCard[] = [
-  { icon: '🤲', key: 'mercy', refText: 'الأنبياء: ١٠٧' },
-  { icon: '⚖️', key: 'justice', refText: 'المائدة: ٨' },
-  { icon: '💞', key: 'compassion', refText: 'متفق عليه' },
-  { icon: '📚', key: 'knowledge', refText: 'العلق: ١' },
-  { icon: '👨‍👩‍👧', key: 'family', refText: 'الإسراء: ٢٣' },
-  { icon: '🌅', key: 'hope', refText: 'الزمر: ٥٣' },
-  { icon: '☮️', key: 'peace', refText: 'النساء: ٩٤' },
-  { icon: '🤝', key: 'honesty', refText: 'متفق عليه' },
+  { icon: '🤲', key: 'mercy' },
+  { icon: '⚖️', key: 'justice' },
+  { icon: '💞', key: 'compassion' },
+  { icon: '📚', key: 'knowledge' },
+  { icon: '👨‍👩‍👧', key: 'family' },
+  { icon: '🌅', key: 'hope' },
+  { icon: '☮️', key: 'peace' },
+  { icon: '🤝', key: 'honesty' },
 ]
 
 export async function WhyExploreIslam({ locale }: { locale: string }) {
@@ -37,7 +36,7 @@ export async function WhyExploreIslam({ locale }: { locale: string }) {
               <p className="text-gray-600 dark:text-gray-400 text-xs leading-relaxed mb-2">
                 {t(`whyExplore.values.${v.key}.desc`)}
               </p>
-              <span className="text-xs text-gold-500">{v.refText}</span>
+              <span className="text-xs text-gold-500">{t(`whyExplore.values.${v.key}.ref`)}</span>
             </div>
           ))}
         </div>

@@ -4,6 +4,7 @@
     "siteDesc": "Eine umfassende islamische Plattform für den Heiligen Koran, die prophetische Sunna und die islamischen Wissenschaften"
   },
   "nav": {
+    "home": "Startseite",
     "quran": "Der Heilige Koran",
     "hadith": "Hadithe",
     "adhkar": "Adhkar",
@@ -165,35 +166,43 @@
       "values": {
         "mercy": {
           "title": "Barmherzigkeit",
-          "desc": "Muslime beginnen jede Handlung im Namen des Allerbarmers — Barmherzigkeit ist zentral dafür, wie der Islam die gesamte Schöpfung sieht."
+          "desc": "Muslime beginnen jede Handlung im Namen des Allerbarmers — Barmherzigkeit ist zentral dafür, wie der Islam die gesamte Schöpfung sieht.",
+          "ref": "Sure Al-Anbiya — Vers 107"
         },
         "justice": {
           "title": "Gerechtigkeit",
-          "desc": "Der Islam gebietet Gerechtigkeit selbst gegenüber denen, die wir nicht mögen, und verbindet sie eng mit Frömmigkeit."
+          "desc": "Der Islam gebietet Gerechtigkeit selbst gegenüber denen, die wir nicht mögen, und verbindet sie eng mit Frömmigkeit.",
+          "ref": "Sure Al-Maidah — Vers 8"
         },
         "compassion": {
           "title": "Mitgefühl",
-          "desc": "Der Prophet ﷺ beschrieb die Gläubigen als einen Körper in ihrem gegenseitigen Mitgefühl."
+          "desc": "Der Prophet ﷺ beschrieb die Gläubigen als einen Körper in ihrem gegenseitigen Mitgefühl.",
+          "ref": "Einstimmig überliefert"
         },
         "knowledge": {
           "title": "Wissen",
-          "desc": "Die erste Offenbarung des Korans war ein Befehl zu lesen — Wissen zu suchen ist Pflicht für jeden Muslim."
+          "desc": "Die erste Offenbarung des Korans war ein Befehl zu lesen — Wissen zu suchen ist Pflicht für jeden Muslim.",
+          "ref": "Sure Al-Alaq — Vers 1"
         },
         "family": {
           "title": "Familie",
-          "desc": "Der Islam legt großen Wert auf die Ehrung der Eltern und die Pflege familiärer Bindungen."
+          "desc": "Der Islam legt großen Wert auf die Ehrung der Eltern und die Pflege familiärer Bindungen.",
+          "ref": "Sure Al-Isra — Vers 23"
         },
         "hope": {
           "title": "Hoffnung",
-          "desc": "Der Islam verbietet die Verzweiflung an Gottes Barmherzigkeit, ganz gleich wie groß die Not ist."
+          "desc": "Der Islam verbietet die Verzweiflung an Gottes Barmherzigkeit, ganz gleich wie groß die Not ist.",
+          "ref": "Sure Az-Zumar — Vers 53"
         },
         "peace": {
           "title": "Frieden",
-          "desc": "Das Wort „Islam“ selbst teilt seine Wurzel mit „Frieden“, und Muslime grüßen einander damit."
+          "desc": "Das Wort „Islam“ selbst teilt seine Wurzel mit „Frieden“, und Muslime grüßen einander damit.",
+          "ref": "Sure An-Nisa — Vers 94"
         },
         "honesty": {
           "title": "Ehrlichkeit",
-          "desc": "Der Prophet ﷺ forderte zur Wahrhaftigkeit auf, bis sie einen Menschen in den Rang der Aufrichtigen erhebt."
+          "desc": "Der Prophet ﷺ forderte zur Wahrhaftigkeit auf, bis sie einen Menschen in den Rang der Aufrichtigen erhebt.",
+          "ref": "Einstimmig überliefert"
         }
       }
     },
@@ -285,6 +294,12 @@
       "btnAI": "🤖 KI fragen",
       "btnVideos": "📺 Videos ansehen",
       "btnLearnMore": "🌟 Mehr erfahren"
+    },
+    "voiceIntro": {
+      "listen": "🔊 Einführung anhören",
+      "stop": "⏹ Stopp",
+      "unavailable": "Die Sprachausgabe ist in Ihrem Browser für diese Sprache nicht verfügbar.",
+      "text": "Friede und Segen seien mit dir, und herzlich willkommen bei As-Sirat Al-Mustaqeem.\n\nDer Islam ist die Religion der Einheit Gottes und der Barmherzigkeit. Er ruft dazu auf, den einen Gott allein anzubeten, und beruht auf Gerechtigkeit und Mitgefühl gegenüber der gesamten Schöpfung. Gott sandte den Propheten Muhammad, Friede sei mit ihm, als Barmherzigkeit für alle Welten.\n\nDiese Website bietet dir eine vollständige Reise durch alles, was deinen Glauben betrifft, von Anfang bis Ende: den gesamten Heiligen Koran mit Tafsir und Rezitation, die authentische prophetische Sunna aus vertrauenswürdigen Hadith-Sammlungen, die Geschichten der Propheten, wie sie im Koran erwähnt werden, die vollständige Biografie des Propheten von der Geburt bis zum Tod, die neunundneunzig schönsten Namen Allahs mit ihren Bedeutungen und Tugenden sowie eine umfassende Sammlung täglicher Adhkar.\n\nAußerdem findest du einen Bereich für vertrauenswürdige Gelehrte und Prediger, eine Bibliothek mit wertvollen islamischen Videos, eine rund um die Uhr laufende Live-Übertragung aus den beiden heiligen Moscheen, genaue Gebetszeiten für deine Stadt, einen eigenen Bereich, um deinen Kindern die Grundlagen ihres Glaubens auf unterhaltsame Weise zu vermitteln, sowie eine Suchfunktion, mit der du schnell jeden gewünschten Inhalt findest.\n\nNimm dir Zeit und entdecke, was dich interessiert, ganz ohne Druck oder Eile. Diese Tür steht jedem offen, der lernen, fragen oder einfach nachdenken möchte.\n\nUnd falls dir eine Frage in den Sinn kommt, steht dir unser KI-Assistent Al-Raschid jederzeit zur Verfügung, um sie aus dem Koran und der prophetischen Sunna zu beantworten.\n\nWir wünschen dir eine angenehme und bereichernde Reise."
     }
   },
   "quran": {
@@ -406,7 +421,8 @@
     "age": "Jahre seines Lebens ﷺ",
     "prophethood": "Jahre Prophetschaft",
     "battles": "Schlachten",
-    "closingAyahRef": "Sure Al-Ahzab — Vers 21"
+    "closingAyahRef": "Sure Al-Ahzab — Vers 21",
+    "closingAyah": "﴿ لَقَدْ كَانَ لَكُمْ فِي رَسُولِ اللَّهِ أُسْوَةٌ حَسَنَةٌ ﴾"
   },
   "ai": {
     "title": "Al-Raschid",
@@ -501,7 +517,9 @@
   "asmaAllah": {
     "searchPlaceholder": "Suche nach einem Namen Allahs...",
     "resultsCount": "{count} von 99 Namen",
-    "noResults": "Keine passenden Ergebnisse gefunden"
+    "noResults": "Keine passenden Ergebnisse gefunden",
+    "description": "Die vollständigen 99 schönsten Namen Allahs mit Bedeutung, Erklärung und koranischem Bezug für jeden Namen.",
+    "ayah": "﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾"
   },
   "prayerTimes": {
     "cityLabel": "Stadt",

@@ -11,6 +11,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  Home,
   BookOpen,
   ScrollText,
   Radio,
@@ -30,7 +31,7 @@ import { useTranslations, useLocale } from 'next-intl'
 import { cn } from '@/utils'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
-type NavItem = { href: string; label: string; icon: LucideIcon }
+type NavItem = { href: string; label: string; icon: LucideIcon; exact?: boolean }
 
 export function Navbar() {
   const pathname = usePathname()
@@ -40,6 +41,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const libraryRef = useRef<HTMLLIElement>(null)
   const t = useTranslations('nav')
+  const tCommon = useTranslations('common')
   const locale = useLocale()
 
   useEffect(() => {
@@ -66,6 +68,7 @@ export function Navbar() {
   }, [])
 
   const directItems: NavItem[] = [
+    { href: `/${locale}`,              label: t('home'),        icon: Home, exact: true },
     { href: `/${locale}/quran`,        label: t('quran'),       icon: BookOpen },
     { href: `/${locale}/hadith`,       label: t('hadith'),      icon: ScrollText },
     { href: `/${locale}/live`,         label: t('live'), icon: Radio },
@@ -84,8 +87,9 @@ export function Navbar() {
 
   const libraryLabel = t('library')
 
-  const isActive = (href: string) => pathname?.startsWith(href) && pathname !== `/${locale}`
-  const isLibraryActive = libraryItems.some((item) => isActive(item.href))
+  const isActive = (item: NavItem) =>
+    item.exact ? pathname === item.href : pathname?.startsWith(item.href) && pathname !== `/${locale}`
+  const isLibraryActive = libraryItems.some((item) => isActive(item))
 
   return (
     <header
@@ -104,7 +108,7 @@ export function Navbar() {
           <Link href={`/${locale}`} className="flex items-center group">
             <Image
               src="/images/Logo.png"
-              alt="الصراط المستقيم"
+              alt={tCommon('siteName')}
               width={80}
               height={80}
               priority
@@ -120,7 +124,7 @@ export function Navbar() {
                   href={item.href}
                   className={cn(
                     'nav-link inline-flex items-center gap-1.5 text-sm',
-                    isActive(item.href) && 'active'
+                    isActive(item) && 'active'
                   )}
                 >
                   <item.icon size={15} className="opacity-70" />
@@ -163,7 +167,7 @@ export function Navbar() {
                       onClick={() => setLibraryOpen(false)}
                       className={cn(
                         'flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm transition-colors',
-                        isActive(item.href)
+                        isActive(item)
                           ? 'bg-gold-400/15 text-gold-300'
                           : 'text-gray-300 hover:text-gold-300 hover:bg-white/5'
                       )}
@@ -222,7 +226,7 @@ export function Navbar() {
                       onClick={() => setMenuOpen(false)}
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors',
-                        isActive(item.href)
+                        isActive(item)
                           ? 'bg-gold-400/10 text-gold-300'
                           : 'text-gray-200 hover:text-gold-300 hover:bg-white/5'
                       )}
@@ -245,7 +249,7 @@ export function Navbar() {
                       onClick={() => setMenuOpen(false)}
                       className={cn(
                         'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors',
-                        isActive(item.href)
+                        isActive(item)
                           ? 'bg-gold-400/10 text-gold-300'
                           : 'text-gray-200 hover:text-gold-300 hover:bg-white/5'
                       )}
