@@ -66,4 +66,10 @@ export const webSpeechLang: Record<Locale, string> = {
 
 // Single multilingual Edge Neural voice used for the homepage voice intro, so every
 // locale is narrated by the same voice identity instead of a different one per language.
+// Exception: the Arabic locale uses arabicVoiceIntroVoice below instead, since this
+// voice reads Arabic with a foreign accent.
 export const voiceIntroVoice = 'en-US-AndrewMultilingualNeural'
+
+// Egyptian Arabic narrator used only for the homepage voice intro when locale === 'ar',
+// chosen over ttVoices.ar (Saudi) because it reads as a natural, non-foreign Arabic voice.
+export const arabicVoiceIntroVoice = 'ar-EG-ShakirNeural'

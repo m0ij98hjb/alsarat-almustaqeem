@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
 import { useTranslations, useLocale } from 'next-intl'
 import { Mic, Square, Loader2 } from 'lucide-react'
-import { webSpeechLang, voiceIntroVoice, isRTL, type Locale } from '@/i18n/config'
+import { webSpeechLang, voiceIntroVoice, arabicVoiceIntroVoice, isRTL, type Locale } from '@/i18n/config'
 
 function normalizeLang(lang: string): string {
   return lang.toLowerCase().replace('_', '-')
@@ -99,8 +99,12 @@ export function VoiceIntroButton() {
     const watchdog = setTimeout(() => controller.abort(), 15000)
 
     try {
+      // Arabic listeners get a dedicated Egyptian Arabic narrator instead of the
+      // English multilingual voice, so it sounds like a natural Arabic speaker
+      // rather than a foreign accent reading Arabic text.
+      const voiceParam = `&voice=${locale === 'ar' ? arabicVoiceIntroVoice : voiceIntroVoice}`
       const res = await fetch(
-        `/api/ai/speak?text=${encodeURIComponent(text)}&lang=${locale}&voice=${voiceIntroVoice}`,
+        `/api/ai/speak?text=${encodeURIComponent(text)}&lang=${locale}${voiceParam}`,
         { signal: controller.signal },
       )
       if (isStale()) return

@@ -4,8 +4,8 @@ import { MsEdgeTTS, OUTPUT_FORMAT } from 'msedge-tts'
 import { ttVoices } from '@/i18n/config'
 
 // Voices callers may explicitly request in place of the per-language default
-// (currently just the single-narrator voice used for the homepage voice intro).
-const ALLOWED_VOICE_OVERRIDES = new Set(['en-US-AndrewMultilingualNeural'])
+// (currently just the narrator voices used for the homepage voice intro).
+const ALLOWED_VOICE_OVERRIDES = new Set(['en-US-AndrewMultilingualNeural', 'ar-EG-ShakirNeural'])
 
 function getVoice(lang: string, override: string | null): string {
   if (override && ALLOWED_VOICE_OVERRIDES.has(override)) return override
